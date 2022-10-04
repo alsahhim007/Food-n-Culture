@@ -17,7 +17,7 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 variables:
-  EXECUTABLE_TO_DEPLOY: "server/target/server-0.0.1-SNAPSHOT.jar"
+  EXECUTABLE_TO_DEPLOY: "server/build/server-0.0.1-SNAPSHOT.jar"
   DESTINATION_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
     
 before_script:
@@ -31,10 +31,12 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the code..."
-    - mvn compile
+    - echo `pwd`
+    - cd server
+    - ./gradlew build
   artifacts:
     paths:
-    - server/target/
+    - server/build/
   tags:
     - grad
 
@@ -42,16 +44,10 @@ unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running unit tests... This will take about 60 seconds."
-    - mvn test
+    - echo `pwd`
+    - ./gradlew test
   tags:
     - grad
-
-#lint-test-job:   # This job also runs in the test stage.
-#  stage: test    # It can run at the same time as unit-test-job (in parallel).
-#  script:
-#    - echo "Linting code... This will take about 10 seconds."
-#  tags:
-#    - grad
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
@@ -59,10 +55,11 @@ deploy-job:      # This job runs in the deploy stage.
     - grad
   artifacts:
     paths:
-      - server/target/
+      - server/build/
   script:
-    - echo "Packaing..."
-    - mvn clean package
+    - echo "Packaging..."
+    - echo `pwd`
+    - ./gradlew assemble
     - echo "Deploying application..."
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"

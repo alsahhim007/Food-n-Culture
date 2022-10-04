@@ -21,6 +21,9 @@ variables:
   DESTINATION_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
     
 before_script:
+  # The following line is only necessary if using a docker-based runner.
+  #- apk add --no-cache openssh-client
+  - chmod +x ./gradlew
 
 stages:          # List of stages for jobs, and their order of execution
   - build

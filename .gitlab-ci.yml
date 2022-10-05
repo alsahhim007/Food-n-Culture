@@ -18,7 +18,8 @@
 
 variables:
   EXECUTABLE_TO_DEPLOY: "server/build/server-0.0.1-SNAPSHOT.jar"
-  DESTINATION_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
+  DESTINATION_SERVER_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
+  DESTINATION_CLIENT_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.apk"
     
 before_script:
   # The following line is only necessary if using a docker-based runner.
@@ -30,29 +31,57 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
+build-server-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the code..."
-    - echo `pwd`
+    - currentDir=`pwd`
     - cd server
     - ./gradlew build
+    - cd $currentDir
   artifacts:
     paths:
     - server/build/
   tags:
     - grad
-
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+    
+build-client-job:       # This job runs in the build stage, which runs first.
+  stage: build
   script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - echo `pwd`
-    - ./gradlew test
+    - echo "Compiling the code..."
+    - currentDir=`pwd`
+    - cd client
+    - ./gradlew build
+    - cd $currentDir
+  artifacts:
+    paths:
+    - client/app/build/outputs/debug/
   tags:
     - grad
 
-deploy-job:      # This job runs in the deploy stage.
+unit-test-server-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - currentDir=`pwd`
+    - cd server
+    - ./gradlew test
+    - cd $currentDir
+  tags:
+    - grad
+    
+unit-test-client-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - currentDir=`pwd`
+    - cd client
+    - ./gradlew test
+    - cd $currentDir
+  tags:
+    - grad
+
+deploy-server-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   tags:
     - grad
@@ -61,9 +90,27 @@ deploy-job:      # This job runs in the deploy stage.
       - server/build/
   script:
     - echo "Packaging..."
-    - echo `pwd`
+    - currentDir=`pwd`
     - ./gradlew assemble
     - echo "Deploying application..."
+    - cd $currentDir
     - chmod og-rwx ${DEPLOY_SSH_KEY}
-    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
-    - echo "Application successfully deployed."
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_SERVER_FILE}"
+    - echo "Server Application successfully deployed."
+    
+deploy-client-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  tags:
+    - grad
+  artifacts:
+    paths:
+      - client/app/build/outputs/debug/
+  script:
+    - echo "Packaging..."
+    - currentDir=`pwd`
+    - ./gradlew assemble
+    - echo "Deploying application..."
+    - cd $currentDir
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_CLIENT_FILE}"
+    - echo "Server Application successfully deployed."

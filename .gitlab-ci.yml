@@ -19,6 +19,8 @@
 image: jangrewe/gitlab-ci-android
 
 variables:
+  # fix git version mismatch
+  GIT_STRATEGY: clone
   EXECUTABLE_TO_DEPLOY: "server/build/server-0.0.1-SNAPSHOT.jar"
   DESTINATION_SERVER_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
   DESTINATION_CLIENT_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.apk"

@@ -16,14 +16,9 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
-image: openjdk:8-jdk
+image: jangrewe/gitlab-ci-android
 
 variables:
-  # Fix Version Mistmatch issue
-  GIT_STRATEGY: clone
-  ANDROID_COMPILE_SDK: "31"
-  ANDROID_BUILD_TOOLS: "30.0.2"
-  ANDROID_SDK_TOOLS:   "4333796"
   EXECUTABLE_TO_DEPLOY: "server/build/server-0.0.1-SNAPSHOT.jar"
   DESTINATION_SERVER_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.jar"
   DESTINATION_CLIENT_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.apk"
@@ -31,22 +26,8 @@ variables:
 before_script:
   # The following line is only necessary if using a docker-based runner.
   #- apk add --no-cache openssh-client
-  - apt-get --quiet update --yes
-  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
-  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-  - unzip -d android-sdk-linux android-sdk.zip
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
-  - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
-  - export ANDROID_HOME=$PWD/android-sdk-linux
-  - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
-  - chmod +x ./gradlew
   - chmod +x ./server/gradlew
   - chmod +x ./client/gradlew
-  # temporarily disable checking for EPIPE error and use yes to accept all licenses
-  - set +o pipefail
-  - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
-  - set -o pipefail
 
 stages:          # List of stages for jobs, and their order of execution
   - build

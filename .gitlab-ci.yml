@@ -127,7 +127,7 @@ deploy-server-job:      # This job runs in the deploy stage.
     - echo "Deploying application..."
     - cd $currentDir
     #- chmod og-rwx ${DEPLOY_SSH_KEY}
-    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_SERVER_FILE}"
+    #- scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_SERVER_FILE}"
     - echo "Server Application successfully deployed."
     
 deploy-client-job:      # This job runs in the deploy stage.
@@ -156,5 +156,5 @@ deploy-client-job:      # This job runs in the deploy stage.
     - echo "Deploying application..."
     - cd $currentDir
     #- chmod og-rwx ${DEPLOY_SSH_KEY}
-    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_CLIENT_FILE}"
+    #- scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_CLIENT_FILE}"
     - echo "Server Application successfully deployed."

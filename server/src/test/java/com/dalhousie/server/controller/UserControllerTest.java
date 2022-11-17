@@ -63,7 +63,7 @@ public class UserControllerTest extends AbstractTest {
 
     @Test
     public void updateUser() throws Exception {
-        String uri = "/api/users/1";
+        String uri = "/api/users/5";
         User user = getUser();
         String inputJson = super.mapToJson(user);
         MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();

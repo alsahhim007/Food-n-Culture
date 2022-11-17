@@ -4,36 +4,49 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
-import com.dalhousie.server.database.IConnection;
 import com.dalhousie.server.model.User;
 
+@Component
 public class UserRepository implements IUserRepository {
 
     @Autowired
-    private IConnection connection; 
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public List<User> findAll() {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM user", BeanPropertyRowMapper.newInstance(User.class));
     }
 
     @Override
-    public User save(User object) {
-        return null;
+    public int save(User user) {
+        return jdbcTemplate.update(
+                "INSERT INTO user(id, user_name, email, password, first_name, last_name, is_verified, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                null, user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
+                user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
+                user.getUpdatedAt());
     }
 
     @Override
-    public User update(User object) {
-        return null;
+    public int update(User user) {
+        return jdbcTemplate.update(
+                "UPDATE user SET user_name=?, email=?, password=?, first_name=?, last_name=?, is_verified=?, status=?, updated_at=?, created_at=? WHERE id=?",
+                user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
+                user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
+                user.getUpdatedAt(), user.getId());
     }
 
     @Override
-    public void delete(User object) {
+    public int delete(User user) {
+        return jdbcTemplate.update("DELETE FROM user WHERE id=?", user.getId());
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public int deleteById(Integer id) {
+        return jdbcTemplate.update("DELETE FROM user WHERE id=?", id);
     }
 
     @Override
@@ -43,19 +56,32 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public Optional<User> getById(Integer id) {
-        return Optional.empty();
+        try {
+            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE id=?", BeanPropertyRowMapper.newInstance(User.class), id);
+            return Optional.of(user);
+        }catch(Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override
-    public User getByName(String name) {
-        return null;
+    public Optional<User> getByUserName(String userName) {
+        try {
+            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE user_name=?", BeanPropertyRowMapper.newInstance(User.class), userName);
+            return Optional.of(user);
+        }catch(Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override
-    public User getByEmail(String email) {
-        return null;
+    public Optional<User> getByEmail(String email) {
+        try {
+            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE email=?", BeanPropertyRowMapper.newInstance(User.class), email);
+            return Optional.of(user);
+        }catch(Exception e) {
+            return Optional.empty();
+        }
     }
-
-    
 
 }

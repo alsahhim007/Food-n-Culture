@@ -28,8 +28,12 @@ public class UserController {
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody User user) {
-        userRepository.save(user);
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        if(userRepository.save(user) > 0) {
+            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/")
@@ -45,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody User user) {
         return userRepository.getById(id)
         .map(savedUser -> {
             savedUser.setFirstName(user.getFirstName());
@@ -55,8 +59,8 @@ public class UserController {
             savedUser.setUserName(user.getUserName());
             savedUser.setVerified(user.isVerified());
 
-            User updatedUser = userRepository.update(savedUser);
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+            userRepository.update(savedUser);
+            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
         })
         .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -64,6 +68,6 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         userRepository.deleteById(id);
-        return new ResponseEntity<>("User deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
     }
 }

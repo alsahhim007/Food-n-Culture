@@ -36,6 +36,12 @@ initiatives. It is important to value the community which supports you and hence
 page is supported to respect the values of inclusion and sustenance for the entire
 community and hosts.
 
+# Feature Update
+- [x] User Module
+- [ ] User Dashboard Module
+- [ ] Event Module
+- [ ] Chat Module
+- [ ] Payment Module
 
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)

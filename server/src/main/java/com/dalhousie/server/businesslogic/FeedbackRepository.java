@@ -32,9 +32,9 @@ public class FeedbackRepository implements IFeedbackRepository {
     @Override
     public int update(Feedback feedback) {
         return jdbcTemplate.update(
-                "UPDATE feedback SET id=?, member_id=?, comment=?, stars=?, created_at=?, updated_at=? WHERE id=?",
-                feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getUpdatedAt(),
-                feedback.getCreatedAt(), feedback.getId());
+                "UPDATE feedback SET member_id=?, comment=?, stars=?, created_at=?, updated_at=? WHERE id=?",
+                feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getCreatedAt(),
+                feedback.getUpdatedAt(), feedback.getId());
     }
 
     @Override

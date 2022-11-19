@@ -41,11 +41,11 @@ public class EventMember {
         this.status = status;
     }
 
-    public String getUpdateAt() {
+    public String getUpdatedAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(String updateAt) {
+    public void setUpdatedAt(String updateAt) {
         this.updateAt = updateAt;
     }
 

@@ -30,15 +30,15 @@ public class EventMemberRepository implements IEventMemberRepository {
     public int save(EventMember member) {
         return jdbcTemplate.update(
                 "INSERT INTO members(id, event_id, user_id, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?)",
-                member.getId(), member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdateAt(),
+                member.getId(), member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdatedAt(),
                 member.getCreatedAt());
     }
 
     @Override
     public int update(EventMember member) {
         return jdbcTemplate.update(
-                "UPDATE members SET event_id=?, user_id=?, status=?, updated_at=?, created_at=? WHERE id=?)",
-                member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdateAt(),
+                "UPDATE members SET event_id=?, user_id=?, status=?, updated_at=?, created_at=? WHERE id=?",
+                member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdatedAt(),
                 member.getCreatedAt(), member.getId());
     }
 

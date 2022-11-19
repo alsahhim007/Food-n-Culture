@@ -59,7 +59,7 @@ public class MemberController {
             savedMember.setEventId(member.getEventId());
             savedMember.setUserId(member.getUserId());
             savedMember.setStatus(member.getStatus());
-            savedMember.setUpdateAt(member.getUpdateAt());
+            savedMember.setUpdatedAt(member.getUpdatedAt());
             savedMember.setCreatedAt(member.getCreatedAt());
 
             eventMemberRepository.update(savedMember);

@@ -234,6 +234,13 @@ public class DonationControllerTest extends AbstractTest {
         assertEquals(200, status);
         content = result.getResponse().getContentAsString();
         assertEquals("Event deleted successfully", content);
+
+        deleteEventUri = "/api/events/100";
+        result = mvc.perform(MockMvcRequestBuilders.delete(deleteEventUri)).andReturn();
+        status = result.getResponse().getStatus();
+        assertEquals(200, status);
+        content = result.getResponse().getContentAsString();
+        assertEquals("Event deleted successfully", content);
     }
     
 }

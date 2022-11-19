@@ -30,7 +30,7 @@ public class AuthenticationRepository implements IAuthenticationRepository {
     public int save(Authentication authentication) {
         return jdbcTemplate.update(
                 "INSERT INTO authentication(id, user_id, otp, expired, created_at) VALUES(?, ?, ?, ?, ?)",
-                null, authentication.getUserId(), authentication.getOtp(), authentication.isExpired(), authentication.getCreatedAt());
+                authentication.getId(), authentication.getUserId(), authentication.getOtp(), authentication.isExpired(), authentication.getCreatedAt());
     }
 
     @Override

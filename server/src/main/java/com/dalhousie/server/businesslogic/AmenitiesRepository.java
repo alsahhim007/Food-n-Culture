@@ -23,16 +23,17 @@ public class AmenitiesRepository implements IAmenitiesRepository {
 
     @Override
     public int save(Amenities amenities) {
+        System.out.println(amenities.toString());
         return jdbcTemplate.update(
                 "INSERT INTO amenities(id, name, category, updated_at, created_at) VALUES(?, ?, ?, ?, ?)",
-                null, amenities.getName(), amenities.getCategory(), amenities.getUpdateAt(), amenities.getCreatedAt());
+                amenities.getId(), amenities.getName(), amenities.getCategory(), amenities.getUpdatedAt(), amenities.getCreatedAt());
     }
 
     @Override
     public int update(Amenities amenities) {
         return jdbcTemplate.update(
                 "UPDATE amenities SET name=?, category=?, updated_at=?, created_at=? WHERE id=?",
-                amenities.getName(), amenities.getCategory(), amenities.getUpdateAt(), amenities.getCreatedAt(), amenities.getId());
+                amenities.getName(), amenities.getCategory(), amenities.getUpdatedAt(), amenities.getCreatedAt(), amenities.getId());
     }
 
     @Override

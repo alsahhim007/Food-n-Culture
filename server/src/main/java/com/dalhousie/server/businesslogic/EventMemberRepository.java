@@ -30,7 +30,7 @@ public class EventMemberRepository implements IEventMemberRepository {
     public int save(EventMember member) {
         return jdbcTemplate.update(
                 "INSERT INTO members(id, event_id, user_id, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?)",
-                null, member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdateAt(),
+                member.getId(), member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdateAt(),
                 member.getCreatedAt());
     }
 

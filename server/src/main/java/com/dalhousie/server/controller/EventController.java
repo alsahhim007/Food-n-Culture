@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.businesslogic.EventRepository;
 import com.dalhousie.server.model.Event;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/events")
@@ -60,7 +59,7 @@ public class EventController {
             savedEvent.setEndDateTime(event.getEndDateTime());
             savedEvent.setVenue(event.getVenue());
             savedEvent.setMaxCapacity(event.getMaxCapacity());
-            savedEvent.setUpdateAt(event.getUpdateAt());
+            savedEvent.setUpdatedAt(event.getUpdatedAt());
             savedEvent.setCreatedAt(event.getCreatedAt());
 
             eventRepository.update(savedEvent);

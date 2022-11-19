@@ -23,20 +23,21 @@ public class EventRepository implements IEventRepository {
 
     @Override
     public int save(Event event) {
+        System.out.println(event.toString());
         return jdbcTemplate.update(
-                "INSERT INTO events(id, title, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                null, event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
+                "INSERT INTO events(id, titlle, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                event.getId(), event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
                 event.getStartDateTime(), event.getEndDateTime(), event.getVenue(), event.getMaxCapacity(),
-                event.getUpdateAt(), event.getCreatedAt());
+                event.getUpdatedAt(), event.getCreatedAt());
     }
 
     @Override
     public int update(Event event) {
         return jdbcTemplate.update(
-                "UPDATE events SET title=?, description=?, event_type=?, status=?, start_datetime=?, end_datetime=?, venue=?, max_capacity=?, updated_at=?, created_at=? WHERE id=?",
+                "UPDATE events SET titlle=?, description=?, event_type=?, status=?, start_datetime=?, end_datetime=?, venue=?, max_capacity=?, updated_at=?, created_at=? WHERE id=?",
                 event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
                 event.getStartDateTime(), event.getEndDateTime(), event.getVenue(), event.getMaxCapacity(),
-                event.getUpdateAt(), event.getCreatedAt(), event.getId());
+                event.getUpdatedAt(), event.getCreatedAt(), event.getId());
     }
 
     @Override

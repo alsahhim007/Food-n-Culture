@@ -7,7 +7,7 @@ public class Donation {
     private String name;
     private double amount;
     private String email;
-    private String description;
+    private String note;
     private String updatedAt;
     private String createdAt;
 
@@ -51,12 +51,12 @@ public class Donation {
         this.email = email;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String description) {
+        this.note = description;
     }
 
     public String getUpdatedAt() {

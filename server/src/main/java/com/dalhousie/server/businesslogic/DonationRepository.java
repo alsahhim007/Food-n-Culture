@@ -25,16 +25,16 @@ public class DonationRepository implements IDonationRepository {
     public int save(Donation donation) {
         return jdbcTemplate.update(
                 "INSERT INTO donations(id, event_id, name, amount, email, note, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                null, donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
-                donation.getDescription(), donation.getUpdatedAt(), donation.getCreatedAt());
+                donation.getId(), donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
+                donation.getNote(), donation.getUpdatedAt(), donation.getCreatedAt());
     }
 
     @Override
     public int update(Donation donation) {
         return jdbcTemplate.update(
-                "UPDATE donations SET event_id=?, name=?, amount=?, email=?, note=?, updated_at=?, created_at=?) WHERE id=?",
+                "UPDATE donations SET event_id=?, name=?, amount=?, email=?, note=?, updated_at=?, created_at=? WHERE id=?",
                 donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
-                donation.getDescription(), donation.getUpdatedAt(), donation.getCreatedAt(), donation.getId());
+                donation.getNote(), donation.getUpdatedAt(), donation.getCreatedAt(), donation.getId());
     }
 
     @Override

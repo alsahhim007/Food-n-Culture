@@ -25,7 +25,7 @@ public class VenueRepository implements IVenueRepository {
     public int save(Venues venue) {
         return jdbcTemplate.update(
                 "INSERT INTO venues(id, user_id, name, status, address_line1, address_line2, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                null, venue.getUserId(), venue.getName(), venue.getAddressLine1(), venue.getAddressLine2(),
+                venue.getId(), venue.getUserId(), venue.getName(), venue.getAddressLine1(), venue.getAddressLine2(),
                 venue.getUpdatedAt(), venue.getCreatedAt());
     }
 

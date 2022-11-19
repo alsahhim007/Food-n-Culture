@@ -12,7 +12,7 @@ public class Event {
     private String startDateTime;
     private String endDateTime;
     private String venue;
-    private String maxCapacity;
+    private int maxCapacity;
     private String updateAt;
     private String createdAt;
 
@@ -80,19 +80,19 @@ public class Event {
         this.venue = venue;
     }
 
-    public String getMaxCapacity() {
+    public int getMaxCapacity() {
         return maxCapacity;
     }
 
-    public void setMaxCapacity(String maxCapacity) {
+    public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 
-    public String getUpdateAt() {
+    public String getUpdatedAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(String updateAt) {
+    public void setUpdatedAt(String updateAt) {
         this.updateAt = updateAt;
     }
     
@@ -103,4 +103,13 @@ public class Event {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Event [id=" + id + ", title=" + title + ", description=" + description + ", eventType=" + eventType
+                + ", status=" + status + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
+                + ", venue=" + venue + ", maxCapacity=" + maxCapacity + ", updateAt=" + updateAt + ", createdAt="
+                + createdAt + "]";
+    }
+
 }

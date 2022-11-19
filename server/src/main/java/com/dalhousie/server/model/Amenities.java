@@ -5,7 +5,7 @@ public class Amenities {
     private int id;
     private String name;
     private String category;
-    private String updateAt;
+    private String updatedAt;
     private String createdAt;
 
     public int getId() {
@@ -32,12 +32,12 @@ public class Amenities {
         this.category = category;
     }
 
-    public String getUpdateAt() {
-        return updateAt;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(String updateAt) {
+        this.updatedAt = updateAt;
     }
 
     public String getCreatedAt() {
@@ -46,5 +46,11 @@ public class Amenities {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Amenities [id=" + id + ", name=" + name + ", category=" + category + ", updatedAt=" + updatedAt
+                + ", createdAt=" + createdAt + "]";
     }
 }

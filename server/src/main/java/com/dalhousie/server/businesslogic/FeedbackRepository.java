@@ -25,7 +25,7 @@ public class FeedbackRepository implements IFeedbackRepository {
     public int save(Feedback feedback) {
         return jdbcTemplate.update(
                 "INSERT INTO feedback(id, member_id, comment, stars, created_at, updated_at) VALUES(?, ?, ?, ?, ?, ?)",
-                null, feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getUpdatedAt(),
+                feedback.getId(), feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getUpdatedAt(),
                 feedback.getCreatedAt());
     }
 

@@ -25,7 +25,7 @@ public class UserRepository implements IUserRepository {
     public int save(User user) {
         return jdbcTemplate.update(
                 "INSERT INTO user(id, user_name, email, password, first_name, last_name, is_verified, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                null, user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
+                user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
                 user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
                 user.getUpdatedAt());
     }

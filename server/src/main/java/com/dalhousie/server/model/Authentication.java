@@ -3,7 +3,7 @@ package com.dalhousie.server.model;
 public class Authentication {
     
     private int id;
-    private String userId;
+    private int userId;
     private String otp;
     private boolean expired;
     private String createdAt;
@@ -16,11 +16,11 @@ public class Authentication {
         this.id = id;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

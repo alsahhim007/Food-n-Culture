@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dalhousie.server.businesslogic.AmenitiesRepository;
 import com.dalhousie.server.model.Amenities;
+import com.dalhousie.server.persistence.AmenitiesRepository;
 
 @RestController
 @RequestMapping("/api/amenities")

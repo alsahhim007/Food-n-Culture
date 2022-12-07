@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.dalhousie.server.businesslogic.AuthenticationRepository;
 import com.dalhousie.server.model.Authentication;
+import com.dalhousie.server.persistence.AuthenticationRepository;
 
 @RestController
 @RequestMapping("/api/authentication")

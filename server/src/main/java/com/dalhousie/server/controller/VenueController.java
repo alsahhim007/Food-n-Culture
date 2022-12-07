@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.dalhousie.server.businesslogic.VenueRepository;
 import com.dalhousie.server.model.Venues;
+import com.dalhousie.server.persistence.VenueRepository;
 
 @RestController
 @RequestMapping("/api/venues")

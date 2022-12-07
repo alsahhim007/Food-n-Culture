@@ -1,4 +1,4 @@
-package com.dalhousie.server.businesslogic;
+package com.dalhousie.server.persistence;
 
 import com.dalhousie.server.model.Event;
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dalhousie.server.businesslogic.DonationRepository;
 import com.dalhousie.server.model.Donation;
+import com.dalhousie.server.persistence.DonationRepository;
 
 @RestController
 @RequestMapping("/api/donations")

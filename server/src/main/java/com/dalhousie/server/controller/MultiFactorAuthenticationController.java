@@ -1,6 +1,7 @@
 package com.dalhousie.server.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.dalhousie.server.email.EmailServiceImplementation;
+import com.dalhousie.server.email.IEmail;
 import com.dalhousie.server.model.Authentication;
+import com.dalhousie.server.model.EmailDetails;
 import com.dalhousie.server.persistence.AuthenticationRepository;
+import com.dalhousie.server.persistence.UserRepository;
+import com.dalhousie.server.model.User;
 
 @RestController
 @RequestMapping("/api/authentication")
@@ -24,11 +30,21 @@ public class MultiFactorAuthenticationController {
     
     @Autowired
     private AuthenticationRepository authenticationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    IEmail emailService = new EmailServiceImplementation();
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createAuthentication(@RequestBody Authentication authentication) {
         if(authenticationRepository.save(authentication) > 0) {
+            Optional<User> user = userRepository.getById(authentication.getUserId());
+            if(user.isPresent() && emailService.sendMail(new EmailDetails(user.get().getEmail(), authentication.getOtp(), "FoodNCulture - Account Verification"))) {
+                return new ResponseEntity<>("Authentication created successfully", HttpStatus.CREATED);
+            }
             return new ResponseEntity<>("Authentication created successfully", HttpStatus.CREATED);
         }else{
             return ResponseEntity.badRequest().build();

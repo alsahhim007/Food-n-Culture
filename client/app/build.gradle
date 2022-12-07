@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.dalhousie.foodnculture"
         minSdkVersion 18
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -23,6 +23,9 @@ android {
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+    }
+    viewBinding {
+        enabled true
     }
 
 }

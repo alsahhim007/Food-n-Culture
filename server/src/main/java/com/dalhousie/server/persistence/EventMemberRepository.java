@@ -18,18 +18,18 @@ public class EventMemberRepository implements IEventMemberRepository {
 
     @Override
     public List<EventMember> findAll() {
-        return jdbcTemplate.query("SELECT * FROM members", BeanPropertyRowMapper.newInstance(EventMember.class));
+        return jdbcTemplate.query("CALL getAllMembers", BeanPropertyRowMapper.newInstance(EventMember.class));
     }
 
     @Override
     public List<EventMember> getMembersByEventId(Integer eventId) {
-        return jdbcTemplate.query("SELECT * FROM members WHERE event_id=?", BeanPropertyRowMapper.newInstance(EventMember.class), eventId);
+        return jdbcTemplate.query("CALL getMembersByEventId(?)", BeanPropertyRowMapper.newInstance(EventMember.class), eventId);
     }
 
     @Override
     public int save(EventMember member) {
         return jdbcTemplate.update(
-                "INSERT INTO members(id, event_id, user_id, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?)",
+                "CALL createMember(?, ?, ?, ?, ?, ?)",
                 member.getId(), member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdatedAt(),
                 member.getCreatedAt());
     }
@@ -37,19 +37,18 @@ public class EventMemberRepository implements IEventMemberRepository {
     @Override
     public int update(EventMember member) {
         return jdbcTemplate.update(
-                "UPDATE members SET event_id=?, user_id=?, status=?, updated_at=?, created_at=? WHERE id=?",
-                member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdatedAt(),
-                member.getCreatedAt(), member.getId());
+                "CALL updateMember(?, ?, ?, ?)",
+                member.getEventId(), member.getUserId(), member.getStatus(), member.getId());
     }
 
     @Override
     public int delete(EventMember member) {
-        return jdbcTemplate.update("DELETE FROM members WHERE id=?", member.getId());
+        return jdbcTemplate.update("CALL deleteMember(?)", member.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM members WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteMember(?)", id);
     }
 
     @Override
@@ -60,9 +59,9 @@ public class EventMemberRepository implements IEventMemberRepository {
     @Override
     public Optional<EventMember> getById(Integer id) {
         try {
-            EventMember member = jdbcTemplate.queryForObject("SELECT * from members WHERE id=?", BeanPropertyRowMapper.newInstance(EventMember.class), id);
+            EventMember member = jdbcTemplate.queryForObject("CALL getMemberById(?)", BeanPropertyRowMapper.newInstance(EventMember.class), id);
             return Optional.of(member);
-        }catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

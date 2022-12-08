@@ -18,13 +18,13 @@ public class DonationRepository implements IDonationRepository {
 
     @Override
     public List<Donation> findAll() {
-        return jdbcTemplate.query("SELECT * FROM donations", BeanPropertyRowMapper.newInstance(Donation.class));
+        return jdbcTemplate.query("CALL getAllDonations()", BeanPropertyRowMapper.newInstance(Donation.class));
     }
 
     @Override
     public int save(Donation donation) {
         return jdbcTemplate.update(
-                "INSERT INTO donations(id, event_id, name, amount, email, note, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                "CALL createDonation(?, ?, ?, ?, ?, ?, ?, ?)",
                 donation.getId(), donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
                 donation.getNote(), donation.getUpdatedAt(), donation.getCreatedAt());
     }
@@ -32,19 +32,19 @@ public class DonationRepository implements IDonationRepository {
     @Override
     public int update(Donation donation) {
         return jdbcTemplate.update(
-                "UPDATE donations SET event_id=?, name=?, amount=?, email=?, note=?, updated_at=?, created_at=? WHERE id=?",
+                "CALL updateDonation(?, ?, ?, ?, ?, ?)",
                 donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
-                donation.getNote(), donation.getUpdatedAt(), donation.getCreatedAt(), donation.getId());
+                donation.getNote(), donation.getId());
     }
 
     @Override
     public int delete(Donation donation) {
-        return jdbcTemplate.update("DELETE FROM donations WHERE id=?", donation.getId());
+        return jdbcTemplate.update("CALL deleteDonation(?)", donation.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM donations WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteDonation(?)", id);
     }
 
     @Override
@@ -55,16 +55,16 @@ public class DonationRepository implements IDonationRepository {
     @Override
     public Optional<Donation> getById(Integer id) {
         try {
-            Donation donation = jdbcTemplate.queryForObject("SELECT * from donations WHERE id=?", BeanPropertyRowMapper.newInstance(Donation.class), id);
+            Donation donation = jdbcTemplate.queryForObject("CALL getDonationById(?)", BeanPropertyRowMapper.newInstance(Donation.class), id);
             return Optional.of(donation);
-        }catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
     public List<Donation> getDonationsByEventId(Integer eventId) {
-        return jdbcTemplate.query("SELECT * FROM donations WHERE id=?", BeanPropertyRowMapper.newInstance(Donation.class), eventId);
+        return jdbcTemplate.query("CALL getDonationsByEventId(?)", BeanPropertyRowMapper.newInstance(Donation.class), eventId);
     }
 
 }

@@ -46,7 +46,7 @@ public class AmenitiesControllerTest extends AbstractTest {
         int status = result.getResponse().getStatus();
         assertEquals(201, status);
         String content = result.getResponse().getContentAsString();
-        assertEquals("Amenitie created successfully", content);
+        assertEquals("Amenities created successfully", content);
     }
 
     @Test

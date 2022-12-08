@@ -30,7 +30,7 @@ public class EventRepository implements IEventRepository {
     @Override
     public int update(Event event) {
         return jdbcTemplate.update(
-                "CALL updateEvent(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "CALL updateEvent(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
                 event.getStartDateTime(), event.getEndDateTime(), event.getVenue(), event.getMaxCapacity(), event.getId());
     }

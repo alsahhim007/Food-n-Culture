@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dalhousie.foodnculture.R;
+import com.dalhousie.foodnculture.activities.ErrorActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class LoginActivity extends AppCompatActivity {

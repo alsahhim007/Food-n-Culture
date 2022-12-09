@@ -1,10 +1,12 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.dalhousie.foodnculture.R;
 
 public class ErrorActivity extends AppCompatActivity {
 

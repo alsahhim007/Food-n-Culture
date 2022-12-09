@@ -1,8 +1,10 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.dalhousie.foodnculture.R;
 
 public class LoginSignupScreen extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.dalhousie.foodnculture.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

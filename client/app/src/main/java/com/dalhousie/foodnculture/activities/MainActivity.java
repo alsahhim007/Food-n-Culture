@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.dalhousie.foodnculture.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

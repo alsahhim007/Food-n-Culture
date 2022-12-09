@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.dalhousie.foodnculture.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BottomOtpSheet extends BottomSheetDialogFragment {

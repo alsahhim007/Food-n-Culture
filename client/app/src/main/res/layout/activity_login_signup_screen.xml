@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginSignupScreen"
+    tools:context=".activities.LoginSignupScreen"
     android:background="@color/white"
     tools:ignore="InvalidId"
     >

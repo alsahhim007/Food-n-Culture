@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture;
+package com.dalhousie.foodnculture.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.dalhousie.foodnculture.R;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ForgetPasswordFragment extends Fragment {

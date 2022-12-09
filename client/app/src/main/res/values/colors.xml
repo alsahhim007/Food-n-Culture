@@ -5,6 +5,7 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="black_900">#000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 <color name="gray_600">#6a707c</color>
@@ -21,4 +22,5 @@
     <color name="gray_500">#8f92a1</color>
     <color name="gray_500_6c">#6c8f92a1</color>
     <color name="gray_901">#1e232c</color>
+    <color name="bluegray_600">#3e6990</color>
 </resources>

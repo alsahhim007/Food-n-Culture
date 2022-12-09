@@ -48,7 +48,7 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody Event event) {
+    public ResponseEntity<String> updateEvent(@PathVariable Integer id, @RequestBody Event event) {
         return eventRepository.getById(id)
         .map(savedEvent -> {
             savedEvent.setTitle(event.getTitle());

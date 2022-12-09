@@ -18,13 +18,13 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> findAll() {
-        return jdbcTemplate.query("SELECT * FROM user", BeanPropertyRowMapper.newInstance(User.class));
+        return jdbcTemplate.query("CALL getAllUsers", BeanPropertyRowMapper.newInstance(User.class));
     }
 
     @Override
     public int save(User user) {
         return jdbcTemplate.update(
-                "INSERT INTO user(id, user_name, email, password, first_name, last_name, is_verified, status, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
                 user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
                 user.getUpdatedAt());
@@ -33,20 +33,19 @@ public class UserRepository implements IUserRepository {
     @Override
     public int update(User user) {
         return jdbcTemplate.update(
-                "UPDATE user SET user_name=?, email=?, password=?, first_name=?, last_name=?, is_verified=?, status=?, updated_at=?, created_at=? WHERE id=?",
-                user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
-                user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
-                user.getUpdatedAt(), user.getId());
+                "CALL updateUser(?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getId(), user.getUserName(), user.getEmail(), user.getPassword(),
+                user.getFirstName(), user.getLastName(), user.isVerified(), user.getStatus());
     }
 
     @Override
     public int delete(User user) {
-        return jdbcTemplate.update("DELETE FROM user WHERE id=?", user.getId());
+        return jdbcTemplate.update("CALL deleteUserById(?)", user.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM user WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteUserById(?)", id);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public Optional<User> getById(Integer id) {
         try {
-            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE id=?", BeanPropertyRowMapper.newInstance(User.class), id);
+            User user = jdbcTemplate.queryForObject("CALL getUserById(?)", BeanPropertyRowMapper.newInstance(User.class), id);
             return Optional.of(user);
         }catch(Exception e) {
             return Optional.empty();
@@ -67,7 +66,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public Optional<User> getByUserName(String userName) {
         try {
-            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE user_name=?", BeanPropertyRowMapper.newInstance(User.class), userName);
+            User user = jdbcTemplate.queryForObject("CALL getUserByUserName(?)", BeanPropertyRowMapper.newInstance(User.class), userName);
             return Optional.of(user);
         }catch(Exception e) {
             return Optional.empty();
@@ -77,7 +76,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public Optional<User> getByEmail(String email) {
         try {
-            User user = jdbcTemplate.queryForObject("SELECT * from user WHERE email=?", BeanPropertyRowMapper.newInstance(User.class), email);
+            User user = jdbcTemplate.queryForObject("CALL getUserByEmail(?)", BeanPropertyRowMapper.newInstance(User.class), email);
             return Optional.of(user);
         }catch(Exception e) {
             return Optional.empty();

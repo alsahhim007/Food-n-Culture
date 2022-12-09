@@ -58,6 +58,7 @@ public class UserController {
             savedUser.setStatus(user.getStatus());
             savedUser.setUserName(user.getUserName());
             savedUser.setVerified(user.isVerified());
+            savedUser.setPassword(user.getPassword());
 
             userRepository.update(savedUser);
             return new ResponseEntity<>("User updated successfully", HttpStatus.OK);

@@ -27,9 +27,9 @@ public class AmenitiesController {
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createAmenitie(@RequestBody Amenities amenities) {
+    public ResponseEntity<String> createAmenities(@RequestBody Amenities amenities) {
         if(amenitiesRepository.save(amenities) > 0) {
-            return new ResponseEntity<>("Amenitie created successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("Amenities created successfully", HttpStatus.CREATED);
         }else{
             return ResponseEntity.badRequest().build();
         }

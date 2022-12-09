@@ -27,7 +27,7 @@ public class MemberController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createUser(@RequestBody EventMember member) {
+    public ResponseEntity<String> createMember(@RequestBody EventMember member) {
         if(eventMemberRepository.save(member) > 0) {
             return new ResponseEntity<>("Member created successfully", HttpStatus.CREATED);
         }else{

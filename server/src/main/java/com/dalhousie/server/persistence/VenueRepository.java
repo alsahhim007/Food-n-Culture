@@ -24,7 +24,7 @@ public class VenueRepository implements IVenueRepository {
     @Override
     public int save(Venues venue) {
         return jdbcTemplate.update(
-                "INSERT INTO venues(id, user_id, name, status, address_line1, address_line2, updated_at, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                "CALL createVenue(?, ?, ?, ?, ?, ?, ?, ?)",
                 venue.getId(), venue.getUserId(), venue.getName(), venue.getAddressLine1(), venue.getAddressLine2(),
                 venue.getUpdatedAt(), venue.getCreatedAt());
     }
@@ -32,19 +32,19 @@ public class VenueRepository implements IVenueRepository {
     @Override
     public int update(Venues venue) {
         return jdbcTemplate.update(
-                "UPDATE venues SET user_id=?, name=?, status=?, address_line1=?, address_line2=?, updated_at=?, created_at=? WHERE id=?",
-                venue.getName(), venue.getAddressLine1(), venue.getAddressLine2(),
-                venue.getUpdatedAt(), venue.getCreatedAt(), venue.getUserId());
+                "CALL udpateVenue(?, ?, ?, ?, ?, ?)",
+                venue.getUserId(), venue.getName(), venue.getStatus(), venue.getAddressLine1(),
+                venue.getAddressLine2(), venue.getId());
     }
 
     @Override
     public int delete(Venues venue) {
-        return jdbcTemplate.update("DELETE FROM venues WHERE id=?", venue.getId());
+        return jdbcTemplate.update("CALL deleteVenue(?)", venue.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM venues WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteVenue(?)", id);
     }
 
     @Override
@@ -55,9 +55,9 @@ public class VenueRepository implements IVenueRepository {
     @Override
     public Optional<Venues> getById(Integer id) {
         try {
-            Venues venue = jdbcTemplate.queryForObject("SELECT * from venues WHERE id=?", BeanPropertyRowMapper.newInstance(Venues.class), id);
+            Venues venue = jdbcTemplate.queryForObject("CALL getVenueById(?)", BeanPropertyRowMapper.newInstance(Venues.class), id);
             return Optional.of(venue);
-        }catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

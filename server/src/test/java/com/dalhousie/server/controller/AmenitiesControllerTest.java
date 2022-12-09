@@ -26,7 +26,7 @@ public class AmenitiesControllerTest extends AbstractTest {
         super.setUp();
     }
 
-    private Amenities getAmenitie() {
+    private Amenities getAmenities() {
         Amenities amenities = new Amenities();
         amenities.setName(faker.name().firstName());
         amenities.setCategory("xyz");
@@ -39,14 +39,14 @@ public class AmenitiesControllerTest extends AbstractTest {
     @Order(1)
     public void createAmenitiesTest() throws Exception {
         String uri = "/api/amenities/";
-        Amenities amenities = getAmenitie();
+        Amenities amenities = getAmenities();
         amenities.setId(99);
         String inputJson = super.mapToJson(amenities);
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
         int status = result.getResponse().getStatus();
         assertEquals(201, status);
         String content = result.getResponse().getContentAsString();
-        assertEquals("Amenitie created successfully", content);
+        assertEquals("Amenities created successfully", content);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class AmenitiesControllerTest extends AbstractTest {
     @Order(5)
     public void updateAmenitiesTest() throws Exception {
         String createUri = "/api/amenities/";
-        Amenities createAmenities = getAmenitie();
+        Amenities createAmenities = getAmenities();
         createAmenities.setId(88);
         String inputCreateJson = super.mapToJson(createAmenities);
         MvcResult createResult = mvc.perform(MockMvcRequestBuilders.post(createUri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputCreateJson)).andReturn();
@@ -91,7 +91,7 @@ public class AmenitiesControllerTest extends AbstractTest {
         assertEquals(201, createStatus);
 
         String uri = "/api/amenities/88";
-        Amenities amenities = getAmenitie();
+        Amenities amenities = getAmenities();
         amenities.setId(88);
         String inputJson = super.mapToJson(amenities);
         MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
@@ -105,7 +105,7 @@ public class AmenitiesControllerTest extends AbstractTest {
     @Order(6)
     public void updateAmenitiesNotFoundTest() throws Exception {
         String uri = "/api/amenities/999";
-        Amenities amenities = getAmenitie();
+        Amenities amenities = getAmenities();
         String inputJson = super.mapToJson(amenities);
         MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
         int status = result.getResponse().getStatus();

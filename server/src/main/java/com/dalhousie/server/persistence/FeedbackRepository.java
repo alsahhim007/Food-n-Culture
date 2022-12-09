@@ -18,13 +18,13 @@ public class FeedbackRepository implements IFeedbackRepository {
 
     @Override
     public List<Feedback> findAll() {
-        return jdbcTemplate.query("SELECT * FROM feedback", BeanPropertyRowMapper.newInstance(Feedback.class));
+        return jdbcTemplate.query("CALL getAllFeedbacks()", BeanPropertyRowMapper.newInstance(Feedback.class));
     }
 
     @Override
     public int save(Feedback feedback) {
         return jdbcTemplate.update(
-                "INSERT INTO feedback(id, member_id, comment, stars, created_at, updated_at) VALUES(?, ?, ?, ?, ?, ?)",
+                "CALL createFeedback(?, ?, ?, ?, ?, ?)",
                 feedback.getId(), feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getUpdatedAt(),
                 feedback.getCreatedAt());
     }
@@ -32,19 +32,18 @@ public class FeedbackRepository implements IFeedbackRepository {
     @Override
     public int update(Feedback feedback) {
         return jdbcTemplate.update(
-                "UPDATE feedback SET member_id=?, comment=?, stars=?, created_at=?, updated_at=? WHERE id=?",
-                feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getCreatedAt(),
-                feedback.getUpdatedAt(), feedback.getId());
+                "CALL updateFeedback(?, ?, ?, ?)",
+                feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getId());
     }
 
     @Override
     public int delete(Feedback feedback) {
-        return jdbcTemplate.update("DELETE FROM feedback WHERE id=?", feedback.getId());
+        return jdbcTemplate.update("CALL deleteFeedback(?)", feedback.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM feedback WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteFeedback(?)", id);
     }
 
     @Override
@@ -55,16 +54,16 @@ public class FeedbackRepository implements IFeedbackRepository {
     @Override
     public Optional<Feedback> getById(Integer id) {
         try {
-            Feedback feedback = jdbcTemplate.queryForObject("SELECT * from feedback WHERE id=?", BeanPropertyRowMapper.newInstance(Feedback.class), id);
+            Feedback feedback = jdbcTemplate.queryForObject("CALL getFeedbackById(?)", BeanPropertyRowMapper.newInstance(Feedback.class), id);
             return Optional.of(feedback);
-        }catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
     public List<Feedback> getFeedbackByEventId(Integer eventId) {
-        return jdbcTemplate.query("SELECT * FROM feedback f, members m WHERE m.id = f.member_id and m.event_id=?", BeanPropertyRowMapper.newInstance(Feedback.class), eventId);
+        return jdbcTemplate.query("CALL getFeedbackByEventId(?)", BeanPropertyRowMapper.newInstance(Feedback.class), eventId);
     }
 
 }

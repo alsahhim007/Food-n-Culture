@@ -18,32 +18,32 @@ public class AmenitiesRepository implements IAmenitiesRepository {
     
     @Override
     public List<Amenities> findAll() {
-        return jdbcTemplate.query("SELECT * FROM amenities", BeanPropertyRowMapper.newInstance(Amenities.class));
+        return jdbcTemplate.query("CALL getAllAmenities()", BeanPropertyRowMapper.newInstance(Amenities.class));
     }
 
     @Override
     public int save(Amenities amenities) {
         System.out.println(amenities.toString());
         return jdbcTemplate.update(
-                "INSERT INTO amenities(id, name, category, updated_at, created_at) VALUES(?, ?, ?, ?, ?)",
-                amenities.getId(), amenities.getName(), amenities.getCategory(), amenities.getUpdatedAt(), amenities.getCreatedAt());
+                "CALL createAmenities(?, ?, ?)",
+                amenities.getId(), amenities.getName(), amenities.getCategory());
     }
 
     @Override
     public int update(Amenities amenities) {
         return jdbcTemplate.update(
-                "UPDATE amenities SET name=?, category=?, updated_at=?, created_at=? WHERE id=?",
-                amenities.getName(), amenities.getCategory(), amenities.getUpdatedAt(), amenities.getCreatedAt(), amenities.getId());
+                "CALL updateAmenities(?, ?, ?)",
+                amenities.getId(), amenities.getName(), amenities.getCategory());
     }
 
     @Override
     public int delete(Amenities amenities) {
-        return jdbcTemplate.update("DELETE FROM amenities WHERE id=?", amenities.getId());
+        return jdbcTemplate.update("CALL deleteAmenitiesById(?)", amenities.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM amenities WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteAmenitiesById(?)", id);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AmenitiesRepository implements IAmenitiesRepository {
     @Override
     public Optional<Amenities> getById(Integer id) {
         try {
-            Amenities amenities = jdbcTemplate.queryForObject("SELECT * from amenities WHERE id=?", BeanPropertyRowMapper.newInstance(Amenities.class), id);
+            Amenities amenities = jdbcTemplate.queryForObject("CALL getAmenitiesById(?)", BeanPropertyRowMapper.newInstance(Amenities.class), id);
             return Optional.of(amenities);
         }catch(Exception e) {
             return Optional.empty();
@@ -63,7 +63,7 @@ public class AmenitiesRepository implements IAmenitiesRepository {
 
     @Override
     public List<Amenities> getAllAmenitiesByVenueId(Integer venueId) {
-        return jdbcTemplate.query("SELECT * FROM amenities a, venues_has_amenities v WHERE a.id = v.amenities_id and v.venue_id=?", BeanPropertyRowMapper.newInstance(Amenities.class), venueId);
+        return jdbcTemplate.query("CALL getAllAmenitiesByVenueId(?)", BeanPropertyRowMapper.newInstance(Amenities.class), venueId);
     }
     
 }

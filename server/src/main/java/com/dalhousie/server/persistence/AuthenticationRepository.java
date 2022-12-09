@@ -18,36 +18,36 @@ public class AuthenticationRepository implements IAuthenticationRepository {
     
     @Override
     public List<Authentication> findAll() {
-        return jdbcTemplate.query("SELECT * FROM authentication", BeanPropertyRowMapper.newInstance(Authentication.class));
+        return jdbcTemplate.query("CALL getAllAuthentication()", BeanPropertyRowMapper.newInstance(Authentication.class));
     }
 
     @Override
     public List<Authentication> getOTPByUserId(Integer userId) {
-        return jdbcTemplate.query("SELECT * FROM authentication WHERE user_id=?", BeanPropertyRowMapper.newInstance(Authentication.class), userId);
+        return jdbcTemplate.query("CALL getOTPByUserId(?)", BeanPropertyRowMapper.newInstance(Authentication.class), userId);
     }
 
     @Override
     public int save(Authentication authentication) {
         return jdbcTemplate.update(
-                "INSERT INTO authentication(id, user_id, otp, expired, created_at) VALUES(?, ?, ?, ?, ?)",
-                authentication.getId(), authentication.getUserId(), authentication.getOtp(), authentication.isExpired(), authentication.getCreatedAt());
+                "CALL createAuthentication(?, ?, ?, ?)",
+                authentication.getId(), authentication.getUserId(), authentication.getOtp(), authentication.isExpired());
     }
 
     @Override
     public int update(Authentication authentication) {
         return jdbcTemplate.update(
-                "UPDATE authentication SET user_id=?, otp=?, expired=?, created_at=? WHERE id=?",
-                authentication.getUserId(), authentication.getOtp(), authentication.isExpired(), authentication.getCreatedAt(), authentication.getId());
+                "CALL updateAuthentication(?, ?, ?, ?)",
+                authentication.getId(), authentication.getUserId(), authentication.getOtp(), authentication.isExpired());
     }
 
     @Override
     public int delete(Authentication authentication) {
-        return jdbcTemplate.update("DELETE FROM authentication WHERE id=?", authentication.getId());
+        return jdbcTemplate.update("CALL deleteAuthenticationById(?)", authentication.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("DELETE FROM authentication WHERE id=?", id);
+        return jdbcTemplate.update("CALL deleteAuthenticationById(?)", id);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AuthenticationRepository implements IAuthenticationRepository {
     @Override
     public Optional<Authentication> getById(Integer id) {
         try {
-            Authentication authentication = jdbcTemplate.queryForObject("SELECT * from authentication WHERE id=?", BeanPropertyRowMapper.newInstance(Authentication.class), id);
+            Authentication authentication = jdbcTemplate.queryForObject("CALL getAuthenticationById(?)", BeanPropertyRowMapper.newInstance(Authentication.class), id);
             return Optional.of(authentication);
         }catch(Exception e) {
             return Optional.empty();

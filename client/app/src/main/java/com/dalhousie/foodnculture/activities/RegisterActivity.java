@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 //
         back_button.setOnClickListener(view -> finish());
 
+// TODO? call api to save user, and show toast on success/failure
 //        registerButton.setOnClickListener(view -> {
 //            Intent intent1 = new Intent(view.getContext(), HomePageActivity.class);
 //            startActivity(intent1);

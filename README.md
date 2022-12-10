@@ -43,6 +43,13 @@ community and hosts.
 - [ ] Chat Module
 - [ ] Payment Module
 
+# User Experience - Applicaiton Workflow
+
+
+![Login/Sign up](https://i.imgur.com/4dqIGaA.png)
+<div align="center"><i>Splash Screen + User Sign in/Login page<i></div>
+
+
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)
 

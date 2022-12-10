@@ -29,9 +29,8 @@ public class EventMemberRepository implements IEventMemberRepository {
     @Override
     public int save(EventMember member) {
         return jdbcTemplate.update(
-                "CALL createMember(?, ?, ?, ?, ?, ?)",
-                member.getId(), member.getEventId(), member.getUserId(), member.getStatus(), member.getUpdatedAt(),
-                member.getCreatedAt());
+                "CALL createMember(?, ?, ?, ?)",
+                member.getId(), member.getEventId(), member.getUserId(), member.getStatus());
     }
 
     @Override

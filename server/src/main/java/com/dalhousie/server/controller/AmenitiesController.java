@@ -53,16 +53,16 @@ public class AmenitiesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateAmenitie(@PathVariable Integer id, @RequestBody Amenities amenities) {
+    public ResponseEntity<String> updateAmenities(@PathVariable Integer id, @RequestBody Amenities amenities) {
         return amenitiesRepository.getById(id)
-        .map(savedAmenitie -> {
-            savedAmenitie.setName(amenities.getName());
-            savedAmenitie.setCategory(amenities.getCategory());
-            savedAmenitie.setUpdatedAt(amenities.getUpdatedAt());
-            savedAmenitie.setCreatedAt(amenities.getCreatedAt());
+        .map(savedAmenities -> {
+            savedAmenities.setName(amenities.getName());
+            savedAmenities.setCategory(amenities.getCategory());
+            savedAmenities.setUpdatedAt(amenities.getUpdatedAt());
+            savedAmenities.setCreatedAt(amenities.getCreatedAt());
 
-            amenitiesRepository.update(savedAmenitie);
-            return new ResponseEntity<>("Amenitie updated successfully", HttpStatus.OK);
+            amenitiesRepository.update(savedAmenities);
+            return new ResponseEntity<>("Amenities updated successfully", HttpStatus.OK);
         })
         .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -70,6 +70,6 @@ public class AmenitiesController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         amenitiesRepository.deleteById(id);
-        return new ResponseEntity<>("Amenitie deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Amenities deleted successfully", HttpStatus.OK);
     }
 }

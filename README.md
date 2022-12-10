@@ -43,6 +43,24 @@ community and hosts.
 - [ ] Chat Module
 - [ ] Payment Module
 
+# User Experience - Applicaiton Workflow
+
+
+![Login/Sign up](https://i.imgur.com/4dqIGaA.png)
+<div align="center"><i>Splash Screen + User Sign in/Login page<i></div>
+
+![Homepage](https://i.imgur.com/g556n19.png)
+<div align="center"><i>Homepage and Event Registration<i></div>
+
+![Community and Error page](https://i.imgur.com/814qHDT.png)
+<div align="center"><i>Community & Error page<i></div>
+
+![User Profile](https://i.imgur.com/XZMxdFk.png)
+<div align="center"><i>User Profile & Sub pages<i></div>
+
+![Chat functionality](https://i.imgur.com/5GNfgzx.png)
+<div align="center"><i>User chats and function<i></div>
+
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)
 

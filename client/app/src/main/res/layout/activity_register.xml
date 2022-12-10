@@ -28,10 +28,11 @@
             android:layout_width="match_parent"
             android:text="@string/msg_hello_register"
             style="@style/txtUrbanistromanbold30" tools:text="@string/msg_hello_register"/>
+
         <EditText
             android:background="@drawable/rectangle_bg_gray_50_border_indigo_50_radius_8"
-            android:ellipsize="end" android:hint="@string/lbl_username"
-            android:id="@+id/etUsernameInput" android:inputType="text"
+            android:ellipsize="end" android:hint="@string/lbl_first_name"
+            android:id="@+id/etFirstNameInput" android:inputType="text"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_22pxh"
             android:layout_marginStart="@dimen/_22pxh"
@@ -41,6 +42,38 @@
             android:paddingEnd="@dimen/_30pxh"
             android:paddingStart="@dimen/_18pxh"
             android:paddingTop="@dimen/_20pxv" android:singleLine="true"
+            android:textColorHint="@color/bluegray_400"
+            style="@style/etSolidRoundedOutline" tools:ignore="Autofill" />
+
+        <EditText
+            android:background="@drawable/rectangle_bg_gray_50_border_indigo_50_radius_8"
+            android:ellipsize="end" android:hint="@string/lbl_last_name"
+            android:id="@+id/etLastNameInput" android:inputType="text"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_22pxh"
+            android:layout_marginStart="@dimen/_22pxh"
+            android:layout_marginTop="@dimen/_12pxv"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/_21pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingStart="@dimen/_18pxh"
+            android:paddingTop="@dimen/_19pxv" android:singleLine="true"
+            android:textColorHint="@color/bluegray_400"
+            style="@style/etSolidRoundedOutline" tools:ignore="Autofill" />
+
+        <EditText
+            android:background="@drawable/rectangle_bg_gray_50_border_indigo_50_radius_8"
+            android:ellipsize="end" android:hint="@string/lbl_username"
+            android:id="@+id/etUsernameInput" android:inputType="text"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_22pxh"
+            android:layout_marginStart="@dimen/_22pxh"
+            android:layout_marginTop="@dimen/_12pxv"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/_21pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingStart="@dimen/_18pxh"
+            android:paddingTop="@dimen/_19pxv" android:singleLine="true"
             android:textColorHint="@color/bluegray_400"
             style="@style/etSolidRoundedOutline" tools:ignore="Autofill"/>
         <EditText
@@ -59,6 +92,7 @@
             android:paddingTop="@dimen/_19pxv" android:singleLine="true"
             android:textColorHint="@color/bluegray_400"
             style="@style/etSolidRoundedOutline" tools:ignore="Autofill"/>
+
         <EditText
             android:background="@drawable/rectangle_bg_gray_100_border_indigo_50_radius_8"
             android:ellipsize="end" android:hint="@string/lbl_password"

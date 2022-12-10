@@ -29,46 +29,60 @@ public class UserController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createUser(@RequestBody User user) {
-        if(userRepository.save(user) > 0) {
+        if (userRepository.save(user) > 0) {
             return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
-        }else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> get(@PathVariable Integer id) {
         return userRepository.getById(id)
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody User user) {
         return userRepository.getById(id)
-        .map(savedUser -> {
-            savedUser.setFirstName(user.getFirstName());
-            savedUser.setLastName(user.getLastName());
-            savedUser.setEmail(user.getEmail());
-            savedUser.setStatus(user.getStatus());
-            savedUser.setUserName(user.getUserName());
-            savedUser.setVerified(user.isVerified());
-            savedUser.setPassword(user.getPassword());
+                .map(savedUser -> {
+                    savedUser.setFirstName(user.getFirstName());
+                    savedUser.setLastName(user.getLastName());
+                    savedUser.setEmail(user.getEmail());
+                    savedUser.setStatus(user.getStatus());
+                    savedUser.setUserName(user.getUserName());
+                    savedUser.setVerified(user.isVerified());
+                    savedUser.setPassword(user.getPassword());
 
-            userRepository.update(savedUser);
-            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
-        })
-        .orElseGet(() -> ResponseEntity.notFound().build());
+                    userRepository.update(savedUser);
+                    return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         userRepository.deleteById(id);
         return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getByUsername(@PathVariable String username) {
+        return userRepository.getByUserName(username)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> getByEmail(@PathVariable String email) {
+        return userRepository.getByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

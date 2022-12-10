@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface ICrudOperation<T, ID> {
     List<T> findAll();
-    int save(T object);
+    int save(T object) throws Exception;
     int update(T object);
     int delete(T object);
     int deleteById(ID id);

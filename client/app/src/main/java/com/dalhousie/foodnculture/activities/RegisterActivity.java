@@ -17,16 +17,15 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        ImageButton back_button = findViewById(R.id.btnArrowleft);
+        ImageButton backButton = findViewById(R.id.btnArrowleft);
         Button registerButton = findViewById(R.id.btnRegister);
-//
-        back_button.setOnClickListener(view -> finish());
 
-// TODO? call api to save user, and show toast on success/failure
-//        registerButton.setOnClickListener(view -> {
-//            Intent intent1 = new Intent(view.getContext(), HomePageActivity.class);
-//            startActivity(intent1);
-//        });
+        backButton.setOnClickListener(view -> finish());
+
+        registerButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(view.getContext(), HomePage.class);
+            startActivity(intent1);
+        });
 
     }
 }

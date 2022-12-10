@@ -4,6 +4,8 @@
     <string name="loading">Loading…</string>
     <string name="no_internet_connection">No internet connection!</string>
     <string name="lbl_email">Email</string>
+    <string name="lbl_first_name">First Name</string>
+    <string name="lbl_last_name">Last Name</string>
     <string name="msg_already_have_an">Already have an account? Login Now</string>
     <string name="msg_hello_register">Hello! Register to get started</string>
     <string name="lbl_username">Username</string>

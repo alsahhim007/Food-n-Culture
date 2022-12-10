@@ -1,5 +1,8 @@
 package com.dalhousie.foodnculture.apifacade;
 
+import android.os.Build;
+
+import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -16,7 +19,7 @@ public class UsersApi implements IUserOperation {
         this.request = request;
     }
 
-    public int registerUser(User object) {
+    public int registerUser(User object) throws Exception {
         return save(object);
     }
 
@@ -33,14 +36,18 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public int save(User object) {
-        try {
-            StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
-            if (buffer.length() > 0) {
-                return 1;
+    public int save(User object) throws Exception {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (getByUserName(object.getUserName()).isPresent()) {
+                throw new UserAlreadyExist("User with username already exists");
+            } else if (getByEmail(object.getEmail()).isPresent()) {
+                throw new UserAlreadyExist("User with email already exists");
+            } else {
+                StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
+                if (buffer.length() > 0) {
+                    return 1;
+                }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
         return 0;
     }
@@ -72,11 +79,33 @@ public class UsersApi implements IUserOperation {
 
     @Override
     public Optional<User> getByUserName(String name) {
-        return null;
+        User user = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/username/" + name);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Optional.ofNullable(user);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Optional<User> getByEmail(String email) {
-        return null;
+        User user = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/email/" + email);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Optional.ofNullable(user);
+        } else {
+            return null;
+        }
     }
 }

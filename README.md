@@ -58,6 +58,9 @@ community and hosts.
 ![User Profile](https://i.imgur.com/XZMxdFk.png)
 <div align="center"><i>User Profile & Sub pages<i></div>
 
+![Chat functionality](https://i.imgur.com/5GNfgzx.png)
+<div align="center"><i>User chats and function<i></div>
+
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)
 

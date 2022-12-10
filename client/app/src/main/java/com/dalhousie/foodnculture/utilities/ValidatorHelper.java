@@ -1,18 +1,19 @@
 package com.dalhousie.foodnculture.utilities;
 
-import android.util.Patterns;
+import android.telephony.PhoneNumberUtils;
+import androidx.core.util.PatternsCompat;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidatorHelper {
 
     public static boolean isValidEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return PatternsCompat.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public static boolean isValidPhone(String phone) {
-        return Patterns.PHONE.matcher(phone).matches();
+        Pattern pattern = Pattern.compile("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$");
+        return pattern.matcher(phone).matches();
     }
 
 }

@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.activities.ErrorActivity;
+import com.dalhousie.foodnculture.apifacade.ApiFacade;
+import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.utilities.AESSecurity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.Optional;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         ImageButton back_button = findViewById(R.id.btnArrowleft);
         TextView forget_password = findViewById(R.id.txtForgotPassword);
         Button loginButton = findViewById(R.id.btnLogin);
+        EditText etUserEmail = findViewById(R.id.etEnteryouremail);
+        EditText etUserPassword = findViewById(R.id.etEnteryourpass);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,8 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(view -> {
-            Intent errorIntent = new Intent(view.getContext(), ErrorActivity.class);
-            startActivity(errorIntent);
+            Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(etUserEmail.getText().toString());
+            if(user.isPresent() && AESSecurity.decrypt(user.get().getPassword()).equals(etUserPassword.getText().toString())){
+                Intent homeIntent = new Intent(view.getContext(), HomePage.class);
+                startActivity(homeIntent);
+            }else{
+                Toast.makeText(getApplicationContext(),"User Not Found With Provided Email",Toast.LENGTH_LONG).show();
+            }
         });
     }
 

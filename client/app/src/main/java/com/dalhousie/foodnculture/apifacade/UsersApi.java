@@ -19,10 +19,6 @@ public class UsersApi implements IUserOperation {
         this.request = request;
     }
 
-    public int registerUser(User object) throws Exception {
-        return save(object);
-    }
-
     @Override
     public List<User> findAll() {
         User[] userList = new User[]{};

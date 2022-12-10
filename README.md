@@ -49,6 +49,10 @@ community and hosts.
 ![Login/Sign up](https://i.imgur.com/4dqIGaA.png)
 <div align="center"><i>Splash Screen + User Sign in/Login page<i></div>
 
+![Homepage](https://i.imgur.com/g556n19.png)
+<div align="center"><i>Homepage and Event Registration<i></div>
+
+
 
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)

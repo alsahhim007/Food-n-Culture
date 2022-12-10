@@ -1,39 +1,34 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.models.Event;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class UsersApi implements IUserOperation {
-
+public class EventApi implements IEventOperation {
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/users"; // TODO? find better place for me
+    private final String baseUrl = "http://localhost:8080/api/events"; // TODO? find better place for me
 
-    public UsersApi(IRequest<User> request) {
+    public EventApi(IRequest<Event> request) {
         this.request = request;
     }
 
-    public int registerUser(User object) {
-        return save(object);
-    }
-
     @Override
-    public List<User> findAll() {
-        User[] userList = new User[]{};
+    public List<Event> findAll() {
+        Event[] events = new Event[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            userList = Mapper.mapFromJson(buffer.toString(), User[].class);
+            events = Mapper.mapFromJson(buffer.toString(), Event[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(userList);
+        return Arrays.asList(events);
     }
 
     @Override
-    public int save(User object) {
+    public int save(Event object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -46,12 +41,12 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public int update(User object) {
+    public int update(Event object) {
         return 0;
     }
 
     @Override
-    public int delete(User object) {
+    public int delete(Event object) {
         return 0;
     }
 
@@ -66,17 +61,7 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public Optional<User> getById(Integer integer) {
-        return null;
-    }
-
-    @Override
-    public Optional<User> getByUserName(String name) {
-        return null;
-    }
-
-    @Override
-    public Optional<User> getByEmail(String email) {
+    public Optional<Event> getById(Integer integer) {
         return null;
     }
 }

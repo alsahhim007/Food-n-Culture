@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class HTTPHelper {
 
@@ -28,10 +29,10 @@ public class HTTPHelper {
                 in.close();
                 System.out.println(response.toString());
             }
-        }catch (Exception ex) {
-            throw ex;
-        }finally {
-            connection.disconnect();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
         return response;
     }
@@ -46,24 +47,23 @@ public class HTTPHelper {
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             OutputStream os = connection.getOutputStream();
-            os.write(jsonData.getBytes("UTF-8"));
+            os.write(jsonData.getBytes(StandardCharsets.UTF_8));
             os.close();
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();
-
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
-                System.out.println(response.toString());
+                System.out.println(response);
             }
-        }catch (Exception ex) {
-            throw ex;
-        }finally {
-            connection.disconnect();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
         return response;
     }

@@ -1,39 +1,34 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.models.Donation;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class UsersApi implements IUserOperation {
-
+public class DonationApi implements IDonationOperation {
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/users"; // TODO? find better place for me
+    private final String baseUrl = "http://localhost:8080/api/donations"; // TODO? find better place for me
 
-    public UsersApi(IRequest<User> request) {
+    public DonationApi(IRequest<Donation> request) {
         this.request = request;
     }
 
-    public int registerUser(User object) {
-        return save(object);
-    }
-
     @Override
-    public List<User> findAll() {
-        User[] userList = new User[]{};
+    public List<Donation> findAll() {
+        Donation[] donations = new Donation[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            userList = Mapper.mapFromJson(buffer.toString(), User[].class);
+            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(userList);
+        return Arrays.asList(donations);
     }
 
     @Override
-    public int save(User object) {
+    public int save(Donation object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -46,12 +41,12 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public int update(User object) {
+    public int update(Donation object) {
         return 0;
     }
 
     @Override
-    public int delete(User object) {
+    public int delete(Donation object) {
         return 0;
     }
 
@@ -66,17 +61,12 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public Optional<User> getById(Integer integer) {
-        return null;
+    public Optional<Donation> getById(Integer integer) {
+        return Optional.empty();
     }
 
     @Override
-    public Optional<User> getByUserName(String name) {
-        return null;
-    }
-
-    @Override
-    public Optional<User> getByEmail(String email) {
+    public List<Donation> getDonationsByEventId(Integer eventId) {
         return null;
     }
 }

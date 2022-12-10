@@ -1,39 +1,34 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.models.EventMember;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class UsersApi implements IUserOperation {
-
+public class EventMemberApi implements IEventMemberOperation {
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/users"; // TODO? find better place for me
+    private final String baseUrl = "http://localhost:8080/api/members"; // TODO? find better place for me
 
-    public UsersApi(IRequest<User> request) {
+    public EventMemberApi(IRequest<EventMember> request) {
         this.request = request;
     }
 
-    public int registerUser(User object) {
-        return save(object);
-    }
-
     @Override
-    public List<User> findAll() {
-        User[] userList = new User[]{};
+    public List<EventMember> findAll() {
+        EventMember[] eventMembers = new EventMember[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            userList = Mapper.mapFromJson(buffer.toString(), User[].class);
+            eventMembers = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(userList);
+        return Arrays.asList(eventMembers);
     }
 
     @Override
-    public int save(User object) {
+    public int save(EventMember object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -46,12 +41,12 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public int update(User object) {
+    public int update(EventMember object) {
         return 0;
     }
 
     @Override
-    public int delete(User object) {
+    public int delete(EventMember object) {
         return 0;
     }
 
@@ -66,17 +61,13 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public Optional<User> getById(Integer integer) {
+    public Optional<EventMember> getById(Integer integer) {
         return null;
     }
 
     @Override
-    public Optional<User> getByUserName(String name) {
+    public List<EventMember> getMembersByEventId(Integer eventId) {
         return null;
     }
 
-    @Override
-    public Optional<User> getByEmail(String email) {
-        return null;
-    }
 }

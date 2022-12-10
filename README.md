@@ -52,7 +52,8 @@ community and hosts.
 ![Homepage](https://i.imgur.com/g556n19.png)
 <div align="center"><i>Homepage and Event Registration<i></div>
 
-
+![Community and Error page](https://i.imgur.com/814qHDT.png)
+<div align="center"><i>Community & Error page<i></div>
 
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)

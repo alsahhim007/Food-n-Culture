@@ -55,6 +55,9 @@ community and hosts.
 ![Community and Error page](https://i.imgur.com/814qHDT.png)
 <div align="center"><i>Community & Error page<i></div>
 
+![User Profile](https://i.imgur.com/XZMxdFk.png)
+<div align="center"><i>User Profile & Sub pages<i></div>
+
 # Important Links
 [Swagger URL](http://localhost:8080/swagger-ui.html)
 

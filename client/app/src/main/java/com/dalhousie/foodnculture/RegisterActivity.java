@@ -20,10 +20,10 @@ public class RegisterActivity extends AppCompatActivity {
 //
         back_button.setOnClickListener(view -> finish());
 
-//        registerButton.setOnClickListener(view -> {
-//            Intent intent1 = new Intent(view.getContext(), HomePageActivity.class);
-//            startActivity(intent1);
-//        });
+        registerButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(view.getContext(), HomePage.class);
+            startActivity(intent1);
+        });
 
     }
 }

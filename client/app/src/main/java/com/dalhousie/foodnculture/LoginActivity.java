@@ -36,12 +36,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent errorIntent = new Intent(view.getContext(), ErrorActivity.class);
-                startActivity(errorIntent);
-            }
+        loginButton.setOnClickListener(view -> {
+            Intent errorIntent = new Intent(view.getContext(), ErrorActivity.class);
+            startActivity(errorIntent);
         });
     }
 
@@ -54,12 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         dg.setContentView(R.layout.bottomsheet_otp_validation);
 
         Button sendEmail = bsd.findViewById(R.id.btnSendEmail);
-        sendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bsd.cancel();
-                dg.show();
-            }
+        sendEmail.setOnClickListener(view -> {
+            bsd.cancel();
+            dg.show();
         });
     }
 

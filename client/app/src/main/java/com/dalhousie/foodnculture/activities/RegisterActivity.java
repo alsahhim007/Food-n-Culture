@@ -15,6 +15,7 @@ import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
 import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.utilities.ValidatorHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (etEmailInput.length() == 0) {
             etEmailInput.setError("Email is required");
             return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(etEmailInput.getText().toString()).matches()) {
+        } else if (!ValidatorHelper.isValidEmail(etEmailInput.getText().toString())) {
             etEmailInput.setError("Enter valid email");
             return false;
         }

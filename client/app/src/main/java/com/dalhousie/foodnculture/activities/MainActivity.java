@@ -20,24 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //set app policy to ensure HTTP requests are not blocked by the main thread
         StrictMode.ThreadPolicy appPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(appPolicy);
-//        TODO? remove be, below code only for reference
-//        List<User> users = ApiFacade.getInstance().getUserApi().findAll();
-//        for(User user : users) {
-//            System.out.println("Email = " + user.getEmail());
-//        }
-//        User user = new User();
-//        user.setUserName("rajsoni");
-//        user.setEmail("rajsoni@gmail.com");
-//        user.setPassword("edwbduwbdwid");
-//        user.setFirstName("Raj");
-//        user.setLastName("Soni");
-//        user.setVerified(false);
-//        user.setStatus("created");
-//        user.setUpdatedAt("2022-11-17 00:00:00");
-//        user.setCreatedAt("2022-11-17 00:00:00");
-//        ApiFacade.getInstance().getUserApi().save(user);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup_screen);

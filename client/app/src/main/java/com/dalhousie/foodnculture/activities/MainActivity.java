@@ -1,4 +1,5 @@
 package com.dalhousie.foodnculture.activities;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
-import com.dalhousie.foodnculture.apifacade.ApiFacade;
-import com.dalhousie.foodnculture.models.User;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

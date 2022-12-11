@@ -2,11 +2,10 @@ package com.dalhousie.foodnculture.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,16 +34,28 @@ public class RegisterActivity extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.btnArrowleft);
         Button registerButton = findViewById(R.id.btnRegister);
+        TextView alreadyHaveAnAccount = findViewById(R.id.alreadyHaveAnAccount);
+
         etFirstNameInput = findViewById(R.id.etFirstNameInput);
         etLastNameInput = findViewById(R.id.etLastNameInput);
         etUsernameInput = findViewById(R.id.etUsernameInput);
         etEmailInput = findViewById(R.id.etEmailInput);
         etPasswordInput = findViewById(R.id.etPasswordInput);
         etConfirmPassword = findViewById(R.id.etConfirmpasswor);
-//
+
         backButton.setOnClickListener(view -> finish());
 
-// TODO? call api to save user, and show toast on success/failure
+        registerButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(view.getContext(), HomePage.class);
+            startActivity(intent1);
+        });
+
+        alreadyHaveAnAccount.setOnClickListener(view -> {
+            Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+        });
+
         registerButton.setOnClickListener(view -> {
             boolean isAllValid = validateFields();
             if (isAllValid) {
@@ -67,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
 
     }
 

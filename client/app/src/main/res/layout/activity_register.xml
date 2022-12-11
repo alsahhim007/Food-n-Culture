@@ -140,5 +140,22 @@
             android:paddingTop="@dimen/_20pxv" android:singleLine="true"
             android:text="@string/lbl_register"
             android:textAllCaps="false" style="@style/btnSolidRounded" tools:text="@string/lbl_register"/>
+
+        <TextView
+            android:id="@+id/alreadyHaveAnAccount"
+            style="@style/txtUrbanistromansemibold14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_22pxh"
+            android:layout_marginTop="@dimen/_35pxv"
+            android:layout_marginEnd="@dimen/_22pxh"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="17dp"
+            android:text="@string/msg_already_have_an"
+            tools:text="@string/msg_already_have_an" />
+
     </LinearLayout>
 </layout>

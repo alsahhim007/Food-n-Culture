@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
     <data/>
     <LinearLayout android:gravity="center_horizontal"
-        android:id="@+id/linearOTPValidation"
+        android:id="@+id/linerDonationSheet"
         android:layout_height="match_parent"
         android:layout_width="match_parent" android:orientation="vertical">
         <LinearLayout android:id="@+id/linearColumnwelcomeback"
@@ -20,8 +20,8 @@
                 android:layout_width="wrap_content"
                 android:lineSpacingExtra="@dimen/_1pxh"
                 android:singleLine="true"
-                android:text="@string/lbl_otp_validation"
-                style="@style/txtUrbanistromanbold22" tools:text="@string/lbl_otp_validation"/>
+                android:text="@string/lbl_donate"
+                style="@style/txtUrbanistromanbold22" tools:text="@string/lbl_donate"/>
             <TextView android:ellipsize="end" android:gravity="start"
                 android:id="@+id/txtLogintocontin"
                 android:layout_height="wrap_content"
@@ -31,33 +31,9 @@
                 android:layout_width="match_parent"
                 android:lineSpacingExtra="@dimen/_1pxh"
                 android:singleLine="true"
-                android:text="@string/msg_enter_the_otp_r"
-                style="@style/txtUrbanistromanregular14" tools:text="@string/msg_enter_the_otp_r"/>
+                android:text="Enter the amount you want to donate"
+                style="@style/txtUrbanistromanregular14" tools:text="Enter the amount you want to donate"/>
 
-            <com.chaos.view.PinView
-                android:id="@+id/firstPinView"
-                style="@style/PinWidget.PinView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:layout_marginTop="25dp"
-                android:cursorVisible="true"
-                android:hint="@string/msg_enter_the_otp_r"
-                android:inputType="number"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:cursorColor="@color/black"
-                app:cursorWidth="2dp"
-                app:hideLineWhenFilled="true"
-                app:itemCount="4"
-                app:itemHeight="48dp"
-                app:itemRadius="4dp"
-                app:itemSpacing="15dp"
-                app:itemWidth="48dp"
-                app:lineColor="@color/teal_500"
-                app:lineWidth="2dp"
-                app:viewType="rectangle" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:ellipsize="end" android:gravity="center"

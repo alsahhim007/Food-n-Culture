@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
-import com.dalhousie.foodnculture.activities.ErrorActivity;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.AESSecurity;
@@ -32,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.btnLogin);
         EditText etUserEmail = findViewById(R.id.etEnteryouremail);
         EditText etUserPassword = findViewById(R.id.etEnteryourpass);
+        TextView dontHaveAnAccount = findViewById(R.id.dont_have_an_account_text);
+
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,15 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"User Not Found With Provided Email",Toast.LENGTH_LONG).show();
             }
         });
+
+        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(view.getContext(), RegisterActivity.class);
+                startActivity(registerIntent);
+                finish();
+            }
+        });
     }
 
     private void showBottomSheetDialog(){
@@ -72,5 +82,4 @@ public class LoginActivity extends AppCompatActivity {
             dg.show();
         });
     }
-
 }

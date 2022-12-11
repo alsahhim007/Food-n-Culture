@@ -1,16 +1,18 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MenuItem;
-
+import com.dalhousie.foodnculture.R;
+import com.dalhousie.foodnculture.fragments.CommunityList;
 import com.dalhousie.foodnculture.fragments.HomeFragment;
 import com.dalhousie.foodnculture.fragments.HostFragment;
-import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.fragments.third_frgmt;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -23,6 +25,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
         setContentView(R.layout.activity_home_page);
 
         Toolbar actionBar = findViewById(R.id.main_app_bar);
+        ImageView chatIcon = findViewById(R.id.chat_icon);
         actionBar.setTitle("");
         actionBar.setBackgroundColor(Color.WHITE);
         setSupportActionBar(actionBar);
@@ -30,13 +33,13 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener((NavigationBarView.OnItemSelectedListener) this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
     }
+
 
     HomeFragment sf = new HomeFragment();
     HostFragment ff = new HostFragment();
     third_frgmt tf =  new third_frgmt();
-
+    CommunityList cf = new CommunityList();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -45,7 +48,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
                 return true;
             case R.id.community:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, ff).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, cf).commit();
                 return true;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, tf).commit();

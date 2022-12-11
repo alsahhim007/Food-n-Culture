@@ -6,7 +6,7 @@
     <string name="lbl_email">Email</string>
     <string name="lbl_first_name">First Name</string>
     <string name="lbl_last_name">Last Name</string>
-    <string name="msg_already_have_an">Already have an account? Login Now</string>
+    <string name="msg_already_have_an">Already have an account? <font color="#04a777">Login Now</font></string>
     <string name="msg_hello_register">Hello! Register to get started</string>
     <string name="lbl_username">Username</string>
     <string name="action_settings">Action Setting</string>
@@ -22,7 +22,7 @@
     <string name="lbl_signup">Sign up</string>
     <string name="lbl_welcome_back">Welcome back!</string>
     <string name="msg_enter_your_emai">Enter your email</string>
-    <string name="msg_don_t_have_an_a">Don\u2019t have an account? Register Now</string>
+    <string name="msg_don_t_have_an_a">Don\u2019t have an account? <font color="#04a777">Register Now</font></string>
     <string name="msg_enter_your_pass">Enter your password</string>
     <string name="msg_don_t_have_an_a2">Don\u2019t have an account? </string>
     <string name="msg_forgot_password">Forgot Password?</string>
@@ -62,7 +62,39 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main2">MainActivity2</string>
-
+    <string name="lbl_10th_oct">10th Oct</string>
+    <string name="lbl_16th_oct">16th Oct</string>
+    <string name="lbl_eat_with_sam">Eat with Sam</string>
+    <string name="lbl_hello_halifax">Hello Halifax!</string>
+    <string name="msg_new_day_new_fo">New day, new food</string>
+    <string name="lbl_18th_oct">18th Oct</string>
+    <string name="lbl_my_past_events">My Past Events</string>
+    <string name="lbl_10_12">10/12</string>
+    <string name="msg_oven_stove_bo">Oven, Stove, Bowls </string>
+    <string name="lbl_utensils">Utensils</string>
+    <string name="lbl_berry_dine">Berry Dine</string>
+    <string name="lbl_20">20</string>
+    <string name="lbl_pay_with_gpay">Pay with GPay</string>
+    <string name="lbl">$</string>
+    <string name="msg_enter_the_amoun">Enter the amount you want to donate</string>
+    <string name="lbl_donate">Donate</string>
+    <string name="msg_successfully_re">Successful 🎉</string>
+    <string name="lbl_800">800</string>
+    <string name="lbl_rizal_reynaldhi">Rizal Reynaldhi</string>
+    <string name="lbl_community">Community</string>
+    <string name="msg_most_people_nev">Most people never appreciate what he does but instead they see the point of his fault for their own pleasure. </string>
+    <string name="msg_meet_sam_and_hi">Meet Sam and his friends over Berry Dine to get with the community and meet them again and again because why not? You are here to explore new cultures be part of it!</string>
+    <string name="googlepay_button_content_description">Google Pay</string>
+    <string name="add_to_googlepay_button_content_description">Add To Google Pay</string>
+    <string name="buy_with_googlepay_button_content_description">Buy With Google Pay</string>
+    <string name="checkout_with_googlepay_button_content_description">Checkout With Google Pay</string>
+    <string name="donate_with_googlepay_button_content_description">Donate With Google Pay</string>
+    <string name="order_with_googlepay_button_content_description">Order With Google Pay</string>
+    <string name="pay_with_googlepay_button_content_description">Pay With Google Pay</string>
+    <string name="book_with_googlepay_button_content_description">Book With Google Pay</string>
+    <string name="subscribe_with_googlepay_button_content_description">Subscribe With Google Pay</string>
+    <string name="text_content_description">Text for the Google Pay button</string>
+    <string name="overlay_content_description">Overlay for the Google Pay button</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.dalhousie.foodnculture.R;
+import org.json.JSONException;
 
 public class HomeFragment extends Fragment {
 

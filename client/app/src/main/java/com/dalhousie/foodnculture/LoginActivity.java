@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
         ImageButton back_button = findViewById(R.id.btnArrowleft);
         TextView forget_password = findViewById(R.id.txtForgotPassword);
         Button loginButton = findViewById(R.id.btnLogin);
+        TextView dontHaveAnAccount = findViewById(R.id.dont_have_an_account_text);
+
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,15 @@ public class LoginActivity extends AppCompatActivity {
             Intent errorIntent = new Intent(view.getContext(), ErrorActivity.class);
             startActivity(errorIntent);
         });
+
+        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(view.getContext(), RegisterActivity.class);
+                startActivity(registerIntent);
+                finish();
+            }
+        });
     }
 
     private void showBottomSheetDialog(){
@@ -56,5 +67,4 @@ public class LoginActivity extends AppCompatActivity {
             dg.show();
         });
     }
-
 }

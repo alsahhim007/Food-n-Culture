@@ -34,21 +34,23 @@ public class HostFragment extends Fragment {
         EditText capacity = v.findViewById(R.id.editMaxCapacity);
         EditText description = v.findViewById(R.id.editDescription);
 
-        String t_str = title.getText().toString();
-        String d_str = date.getText().toString();
-        String v_str = venue.getText().toString();
-        String e_str = email.getText().toString();
-        String c_str = capacity.getText().toString();
-        String des_str = description.getText().toString();
 
         Button createEventButton = v.findViewById(R.id.btnCreateEvent);
-        createEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (t_str.matches("") || d_str.matches("") || v_str.matches("") || e_str.matches("") || c_str.matches("") || des_str.matches("")){
-                    Snackbar.make(view, "All the fields are required!", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
+        createEventButton.setOnClickListener(view -> {
+
+            String t_str = title.getText().toString();
+            String d_str = date.getText().toString();
+            String v_str = venue.getText().toString();
+            String e_str = email.getText().toString();
+            String c_str = capacity.getText().toString();
+            String des_str = description.getText().toString();
+
+            if (t_str.equals("") || d_str.equals("") || v_str.equals("") || e_str.equals("") || c_str.equals("") || des_str.equals("")){
+                System.out.println(t_str);
+                Snackbar.make(view, "All the fields are required!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            else {
                 // TODO? - Clear editText fields and show snack-bar on successful request
                 Snackbar.make(view, "Event created successfully! 🎉", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

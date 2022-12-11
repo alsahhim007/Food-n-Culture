@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
+import com.dalhousie.foodnculture.utilities.ConfigProvider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //set app policy to ensure HTTP requests are not blocked by the main thread
         StrictMode.ThreadPolicy appPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(appPolicy);
+
+        //initialize application configuration
+        try{
+            new ConfigProvider().loadConfiguration(getAssets().open("application.properties"));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         sp = getSharedPreferences("login", MODE_PRIVATE);
         if (sp.getBoolean("logged", false)){

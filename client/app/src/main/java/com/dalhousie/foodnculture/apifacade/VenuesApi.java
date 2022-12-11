@@ -1,6 +1,7 @@
 package com.dalhousie.foodnculture.apifacade;
 
 import com.dalhousie.foodnculture.models.Venues;
+import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
@@ -9,10 +10,11 @@ import java.util.Optional;
 
 public class VenuesApi implements IVenueOperation {
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/venues"; // TODO? find better place for me
+    private String baseUrl = "/api/venues";
 
     public VenuesApi(IRequest<Venues> request) {
         this.request = request;
+        this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override

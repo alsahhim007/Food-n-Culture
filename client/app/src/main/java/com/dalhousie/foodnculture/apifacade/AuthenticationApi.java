@@ -1,6 +1,7 @@
 package com.dalhousie.foodnculture.apifacade;
 
 import com.dalhousie.foodnculture.models.Authentication;
+import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
@@ -10,10 +11,11 @@ import java.util.Optional;
 public class AuthenticationApi implements IAuthenticationOperation {
 
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/authentication"; // TODO? find better place for me
+    private String baseUrl = "/api/authentication";
 
     public AuthenticationApi(IRequest<Authentication> request) {
         this.request = request;
+        this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override

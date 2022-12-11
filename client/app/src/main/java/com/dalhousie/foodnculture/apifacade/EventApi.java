@@ -1,6 +1,7 @@
 package com.dalhousie.foodnculture.apifacade;
 
 import com.dalhousie.foodnculture.models.Event;
+import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
 import java.util.Arrays;
@@ -9,10 +10,11 @@ import java.util.Optional;
 
 public class EventApi implements IEventOperation {
     private final IRequest request;
-    private final String baseUrl = "http://localhost:8080/api/events"; // TODO? find better place for me
+    private String baseUrl = "/api/events";
 
     public EventApi(IRequest<Event> request) {
         this.request = request;
+        this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override

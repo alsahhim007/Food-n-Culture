@@ -2,6 +2,7 @@ package com.dalhousie.foodnculture.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -13,6 +14,13 @@ import com.dalhousie.foodnculture.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    @Override
+    public SharedPreferences getSharedPreferences(String name, int mode) {
+        return super.getSharedPreferences(name, mode);
+    }
+
+    SharedPreferences sp;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //set app policy to ensure HTTP requests are not blocked by the main thread
         StrictMode.ThreadPolicy appPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(appPolicy);
+
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if (sp.getBoolean("logged", false)){
+            Intent homeIntent = new Intent(this, HomePage.class);
+            startActivity(homeIntent);
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup_screen);

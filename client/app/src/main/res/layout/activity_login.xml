@@ -53,7 +53,6 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/black"
-            android:hint="@string/msg_enter_your_pass"
             style="@style/etSolidRoundedOutline_1"
             android:textColorHint="@color/bluegray_400"
             android:layout_marginHorizontal="25dp"

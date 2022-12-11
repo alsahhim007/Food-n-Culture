@@ -44,34 +44,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".fragments.BottomSuccessSheet"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".fragments.BottomDonationSheet"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".fragments.UpcomingEventFragment"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".fragments.PastEventFragment"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activities.HomePage"
             android:exported="false">
             <meta-data

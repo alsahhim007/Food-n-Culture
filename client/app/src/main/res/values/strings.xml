@@ -75,7 +75,7 @@
     <string name="lbl_berry_dine">Berry Dine</string>
     <string name="lbl_20">20</string>
     <string name="lbl_pay_with_gpay">Pay with GPay</string>
-    <string name="lbl">$</string>
+    <string name="lbl_dollar">$</string>
     <string name="msg_enter_the_amoun">Enter the amount you want to donate</string>
     <string name="lbl_donate">Donate</string>
     <string name="msg_successfully_re">Successful 🎉</string>
@@ -95,6 +95,36 @@
     <string name="subscribe_with_googlepay_button_content_description">Subscribe With Google Pay</string>
     <string name="text_content_description">Text for the Google Pay button</string>
     <string name="overlay_content_description">Overlay for the Google Pay button</string>
+
+    <!-- User Profile -->
+    <string name="msg_personal_detail">Personal Details</string>
+    <string name="lbl_no">No</string>
+    <string name="msg_do_you_want_to">Do you want to delete your account?</string>
+    <string name="msg_logout">Logout?</string>
+    <string name="lbl_friends">Friends</string>
+    <string name="lbl_stove">Stove</string>
+    <string name="lbl_louisaingram">\@louisaingram</string>
+    <string name="msg_edward_gmail_co">edward@gmail.com</string>
+    <string name="lbl_add_an_item">Add an item</string>
+    <string name="lbl_app_navigation">App Navigation</string>
+    <string name="lbl_edward_ford">Edward Ford</string>
+    <string name="lbl_toaster">Toaster</string>
+    <string name="lbl_refrigerator">Refrigerator</string>
+    <string name="lbl_edwardford2">\@edwardford</string>
+    <string name="lbl_host_kitchen">Host Kitchen</string>
+    <string name="msg_are_you_sure_ab">Are you sure about this?</string>
+    <string name="lbl_oven">Oven</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="logout">Logout</string>
+    <string name="msg_1129_south_park">1129 South Park Street</string>
+    <string name="lbl_user_profile">User Profile</string>
+    <string name="lbl_delete_account">Delete Account</string>
+    <string name="lbl_17777777778">+17777777778</string>
+    <string name="lbl_logan_nasser">Logan Nasser</string>
+    <string name="msg_delete_your_acc">Delete your account</string>
+    <string name="lbladd">+</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

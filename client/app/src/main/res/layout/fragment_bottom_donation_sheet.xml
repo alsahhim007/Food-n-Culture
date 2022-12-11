@@ -54,9 +54,9 @@
                     android:gravity="top"
                     android:lineSpacingExtra="@dimen/_1pxh"
                     android:singleLine="true"
-                    android:text="@string/lbl"
+                    android:text="@string/lbl_dollar"
                     android:textSize="20dp"
-                    tools:text="@string/lbl" />
+                    tools:text="@string/lbl_dollar" />
 
                 <EditText
                     android:id="@+id/txtInputDataOne"

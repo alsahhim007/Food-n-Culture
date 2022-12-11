@@ -13,7 +13,7 @@ import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.fragments.CommunityList;
 import com.dalhousie.foodnculture.fragments.HomeFragment;
 import com.dalhousie.foodnculture.fragments.HostFragment;
-import com.dalhousie.foodnculture.fragments.third_frgmt;
+import com.dalhousie.foodnculture.fragments.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -38,7 +38,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     HomeFragment sf = new HomeFragment();
     HostFragment ff = new HostFragment();
-    third_frgmt tf =  new third_frgmt();
+    UserProfileFragment tf =  new UserProfileFragment();
     CommunityList cf = new CommunityList();
 
     @Override

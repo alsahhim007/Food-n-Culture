@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:gravity="start"
+        android:id="@+id/linearColumnairplane"
+        android:layout_height="match_parent"
+
+        android:layout_width="match_parent"
+        android:orientation="vertical" style="@style/groupStylewhite_A700">
+
+        <ScrollView
+            android:id="@+id/scrollViewScrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/linearUserProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_20pxv"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearColumn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5pxv"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linearRowarrowleft"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_22pxh"
+                        android:layout_marginEnd="@dimen/_22pxh"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/linearColumnarrowleft"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.38"
+                            android:orientation="vertical">
+
+                            <ImageButton
+                                android:id="@+id/btnArrowleft"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="start"
+                                android:layout_marginEnd="@dimen/_10pxh"
+                                android:background="@drawable/rectangle_bg_white_a701_border_indigo_50_radius_12"
+                                android:paddingHorizontal="@dimen/_13pxh"
+                                android:paddingVertical="@dimen/_13pxv"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/img_arrowleft"
+                                tools:ignore="ContentDescription, SpeakableTextPresentCheck" />
+
+                            <ImageView
+                                android:id="@+id/imageImage"
+                                android:src="@drawable/img_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_108pxh"
+                                android:layout_marginStart="@dimen/_6pxh"
+                                android:layout_marginTop="@dimen/_42pxv"
+                                android:gravity="end"
+                                android:scaleType="fitXY"
+                                tools:ignore="ContentDescription" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearColumnedwardford"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18pxh"
+                            android:layout_marginTop="@dimen/_96pxv"
+                            android:layout_marginBottom="@dimen/_14pxv"
+                            android:layout_weight="0.62"
+                            android:gravity="start"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtEdwardFord"
+                                style="@style/txtUrbanistromanbold24"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:lineSpacingExtra="@dimen/_1pxh"
+                                android:singleLine="true"
+                                android:text="@string/lbl_edward_ford" />
+
+                            <TextView
+                                android:id="@+id/txtFullname"
+                                style="@style/txtUrbanistromanregular14"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5pxh"
+                                android:layout_marginTop="@dimen/_13pxv"
+                                android:layout_marginEnd="@dimen/_10pxh"
+                                android:ellipsize="end"
+                                android:lineSpacingExtra="@dimen/_1pxh"
+                                android:singleLine="true"
+                                android:text="@string/lbl_edwardford2"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/personaldetails"
+                        style="@style/txtSolidRounded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_78pxv"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_26pxh"
+                        android:paddingTop="@dimen/_17pxv"
+                        android:paddingBottom="@dimen/_18pxv"
+                        android:singleLine="true"
+                        android:clickable="true"
+                        android:text="@string/msg_personal_detail" />
+                    <TextView
+                        android:id="@+id/friends"
+                        style="@style/txtSolidRounded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5pxv"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_26pxh"
+                        android:paddingTop="@dimen/_17pxv"
+                        android:paddingBottom="@dimen/_18pxv"
+                        android:singleLine="true"
+                        android:clickable="true"
+                        android:text="@string/lbl_friends" />
+
+                    <TextView
+                        android:id="@+id/hostkitchen"
+                        style="@style/txtSolidRounded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5pxv"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_26pxh"
+                        android:paddingTop="@dimen/_17pxv"
+                        android:paddingBottom="@dimen/_18pxv"
+                        android:singleLine="true"
+                        android:clickable="true"
+                        android:text="@string/lbl_host_kitchen" />
+
+                    <TextView
+                        android:id="@+id/logoutoff"
+                        style="@style/txtSolidRounded_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7pxv"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_26pxh"
+                        android:paddingTop="@dimen/_19pxv"
+                        android:paddingBottom="@dimen/_16pxv"
+                        android:singleLine="true"
+                        android:clickable="true"
+                        android:text="@string/logout" />
+
+                    <TextView
+                        android:id="@+id/deleteaccount"
+                        style="@style/txtSolidRounded_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7pxv"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_26pxh"
+                        android:paddingTop="@dimen/_19pxv"
+                        android:paddingBottom="@dimen/_16pxv"
+                        android:singleLine="true"
+                        android:clickable="true"
+                        android:text="@string/msg_delete_your_acc" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

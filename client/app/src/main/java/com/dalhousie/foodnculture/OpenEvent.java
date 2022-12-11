@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -41,7 +42,7 @@ public class OpenEvent extends Fragment {
             final BottomSheetDialog ssd = new BottomSheetDialog(view.getContext());
             ssd.setContentView(R.layout.fragment_bottom_success_sheet);
 
-            Button gPay = bsd.findViewById(R.id.btnPayWithGpay);
+            FrameLayout gPay = bsd.findViewById(R.id.btnPayWithGpay);
             gPay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

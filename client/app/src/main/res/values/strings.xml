@@ -77,7 +77,22 @@
     <string name="msg_enter_the_amoun">Enter the amount you want to donate</string>
     <string name="lbl_donate">Donate</string>
     <string name="msg_successfully_re">Successful 🎉</string>
+    <string name="lbl_800">800</string>
+    <string name="lbl_rizal_reynaldhi">Rizal Reynaldhi</string>
+    <string name="lbl_community">Community</string>
+    <string name="msg_most_people_nev">Most people never appreciate what he does but instead they see the point of his fault for their own pleasure. </string>
     <string name="msg_meet_sam_and_hi">Meet Sam and his friends over Berry Dine to get with the community and meet them again and again because why not? You are here to explore new cultures be part of it!</string>
+    <string name="googlepay_button_content_description">Google Pay</string>
+    <string name="add_to_googlepay_button_content_description">Add To Google Pay</string>
+    <string name="buy_with_googlepay_button_content_description">Buy With Google Pay</string>
+    <string name="checkout_with_googlepay_button_content_description">Checkout With Google Pay</string>
+    <string name="donate_with_googlepay_button_content_description">Donate With Google Pay</string>
+    <string name="order_with_googlepay_button_content_description">Order With Google Pay</string>
+    <string name="pay_with_googlepay_button_content_description">Pay With Google Pay</string>
+    <string name="book_with_googlepay_button_content_description">Book With Google Pay</string>
+    <string name="subscribe_with_googlepay_button_content_description">Subscribe With Google Pay</string>
+    <string name="text_content_description">Text for the Google Pay button</string>
+    <string name="overlay_content_description">Overlay for the Google Pay button</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

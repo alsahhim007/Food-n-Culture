@@ -61,34 +61,39 @@
                 <EditText
                     android:id="@+id/txtInputDataOne"
                     style="@style/txtUrbanistromanbold25"
-                    android:inputType="number"
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="@dimen/_11pxv"
                     android:layout_marginEnd="@dimen/_19pxh"
                     android:layout_marginBottom="@dimen/_11pxv"
                     android:ellipsize="end"
+                    android:inputType="number"
                     android:lineSpacingExtra="@dimen/_1pxh"
                     android:singleLine="true" />
             </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:ellipsize="end" android:gravity="center"
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:clickable="true"
+                android:focusable="true"
                 android:id="@+id/btnPayWithGpay"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_20pxv"
-                android:layout_marginEnd="@dimen/_14pxh"
-                android:layout_marginStart="@dimen/_14pxh"
-                android:layout_marginTop="@dimen/_22pxv"
                 android:layout_width="match_parent"
-                android:paddingBottom="@dimen/_19pxv"
-                android:paddingEnd="@dimen/_30pxh"
-                android:paddingStart="@dimen/_30pxh"
-                android:paddingTop="@dimen/_19pxv"
-                android:singleLine="true"
-                android:text="@string/lbl_pay_with_gpay"
-                android:textAllCaps="false"
-                style="@style/btnSolidRoundedGpay" tools:text="@string/lbl_pay_with_gpay"/>
+                android:minWidth="267dp"
+                android:layout_marginVertical="25dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_height="48dp"
+                android:background="@drawable/googlepay_button_background_shape"
+                android:contentDescription="@string/pay_with_googlepay_button_content_description">
+                <ImageView
+                    android:contentDescription="@string/text_content_description"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="11dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/pay_with_googlepay_button_content"/>
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

@@ -38,6 +38,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
     HomeFragment sf = new HomeFragment();
     HostFragment ff = new HostFragment();
     third_frgmt tf =  new third_frgmt();
+    CommunityList cf = new CommunityList();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -46,7 +47,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
                 return true;
             case R.id.community:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, ff).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, cf).commit();
                 return true;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, tf).commit();

@@ -1,14 +1,13 @@
 package com.dalhousie.server.persistence;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.dalhousie.server.model.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.dalhousie.server.model.Authentication;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AuthenticationRepository implements IAuthenticationRepository {
@@ -22,8 +21,8 @@ public class AuthenticationRepository implements IAuthenticationRepository {
     }
 
     @Override
-    public List<Authentication> getOTPByUserId(Integer userId) {
-        return jdbcTemplate.query("CALL getOTPByUserId(?)", BeanPropertyRowMapper.newInstance(Authentication.class), userId);
+    public Authentication getOTPByUserId(Integer userId) {
+        return jdbcTemplate.queryForObject("CALL getOTPByUserId(?)", BeanPropertyRowMapper.newInstance(Authentication.class), userId);
     }
 
     @Override
@@ -63,6 +62,11 @@ public class AuthenticationRepository implements IAuthenticationRepository {
         }catch(Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public int deleteAllOTPByuserId(Integer userId) {
+        return jdbcTemplate.update("CALL deleteAllAuthenticationById(?)", userId);
     }
     
 }

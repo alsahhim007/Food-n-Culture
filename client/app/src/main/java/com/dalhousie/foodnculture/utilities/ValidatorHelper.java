@@ -1,6 +1,5 @@
 package com.dalhousie.foodnculture.utilities;
 
-import android.telephony.PhoneNumberUtils;
 import androidx.core.util.PatternsCompat;
 
 import java.util.regex.Pattern;

@@ -1,7 +1,5 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import android.os.Build;
-
 import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.Mapper;
@@ -33,16 +31,14 @@ public class UsersApi implements IUserOperation {
 
     @Override
     public int save(User object) throws Exception {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (getByUserName(object.getUserName()).isPresent()) {
-                throw new UserAlreadyExist("User with username already exists");
-            } else if (getByEmail(object.getEmail()).isPresent()) {
-                throw new UserAlreadyExist("User with email already exists");
-            } else {
-                StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
-                if (buffer.length() > 0) {
-                    return 1;
-                }
+        if (getByUserName(object.getUserName()).isPresent()) {
+            throw new UserAlreadyExist("User with username already exists");
+        } else if (getByEmail(object.getEmail()).isPresent()) {
+            throw new UserAlreadyExist("User with email already exists");
+        } else {
+            StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
             }
         }
         return 0;
@@ -82,11 +78,7 @@ public class UsersApi implements IUserOperation {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Optional.ofNullable(user);
-        } else {
-            return null;
-        }
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -98,10 +90,6 @@ public class UsersApi implements IUserOperation {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Optional.ofNullable(user);
-        } else {
-            return null;
-        }
+        return Optional.ofNullable(user);
     }
 }

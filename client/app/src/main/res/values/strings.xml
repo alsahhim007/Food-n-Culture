@@ -21,7 +21,7 @@
     <string name="lbl_login">Login</string>
     <string name="lbl_signup">Sign up</string>
     <string name="lbl_welcome_back">Welcome back!</string>
-    <string name="msg_enter_your_emai">Enter your email</string>
+    <string name="msg_enter_your_emai">Enter your email/username</string>
     <string name="msg_don_t_have_an_a">Don\u2019t have an account? <font color="#04a777">Register Now</font></string>
     <string name="msg_enter_your_pass">Enter your password</string>
     <string name="msg_don_t_have_an_a2">Don\u2019t have an account? </string>

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class AuthenticationApi implements IAuthenticationOperation{
+public class AuthenticationApi implements IAuthenticationOperation {
 
     private final IRequest request;
     private final String baseUrl = "http://localhost:8080/api/authentication"; // TODO? find better place for me
@@ -15,9 +15,17 @@ public class AuthenticationApi implements IAuthenticationOperation{
     public AuthenticationApi(IRequest<Authentication> request) {
         this.request = request;
     }
+
     @Override
-    public List<Authentication> getOTPByUserId(Integer userId) {
-        return null;
+    public Authentication getOTPByUserId(Integer userId) {
+        Authentication authentication = new Authentication();
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
+            authentication = Mapper.mapFromJson(buffer.toString(), Authentication.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return authentication;
     }
 
     @Override
@@ -33,7 +41,11 @@ public class AuthenticationApi implements IAuthenticationOperation{
     }
 
     @Override
-    public int save(Authentication object) {
+    public int save(Authentication object) throws Exception {
+        StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
+        if (buffer.length() > 0) {
+            return 1;
+        }
         return 0;
     }
 

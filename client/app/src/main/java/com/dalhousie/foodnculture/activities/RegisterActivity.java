@@ -57,58 +57,52 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         registerButton.setOnClickListener(view -> {
-            boolean isAllValid = validateFields();
-            if (isAllValid) {
+            if (validateField(etFirstNameInput) && validateField(etLastNameInput) && validateField(etUsernameInput)
+                    && validateField(etEmailInput) && validateEmail() && validateField(etPasswordInput)
+                    && validateField(etConfirmPassword) && validatePassword()) {
                 try {
-                    if(saveUser() == 1){
-                        Toast.makeText(getApplicationContext(),"User has been created successfully",Toast.LENGTH_SHORT).show();
+                    if (saveUser() == 1) {
+                        Toast.makeText(getApplicationContext(), "User has been created successfully", Toast.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(view.getContext(), LoginActivity.class);
                         startActivity(intent1);
                     } else {
-                        Toast.makeText(getApplicationContext(),"There is an error creating user",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "There is an error creating user", Toast.LENGTH_SHORT).show();
                     }
                 } catch (UserAlreadyExist e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                }catch (Exception e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             } else {
                 Snackbar.make(view, "Oops, Some field are incorrect.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     }
 
-    private boolean validateFields() {
-        if (etFirstNameInput.length() == 0) {
-            etFirstNameInput.setError("First name is required");
+    private boolean validateField(EditText checkField) {
+        if (checkField.length() == 0) {
+            checkField.setError("Required field");
             return false;
         }
-        if (etLastNameInput.length() == 0) {
-            etLastNameInput.setError("Last name is required");
-            return false;
-        }
-        if (etUsernameInput.length() == 0) {
-            etUsernameInput.setError("Username is required");
-            return false;
-        }
-        if (etEmailInput.length() == 0) {
-            etEmailInput.setError("Email is required");
-            return false;
-        } else if (!ValidatorHelper.isValidEmail(etEmailInput.getText().toString())) {
+        return true;
+    }
+
+    private boolean validateEmail() {
+        if (!ValidatorHelper.isValidEmail(etEmailInput.getText().toString())) {
             etEmailInput.setError("Enter valid email");
             return false;
         }
-        if (etPasswordInput.length() == 0) {
-            etPasswordInput.setError("Password is required");
-            return false;
-        } else if (etConfirmPassword.length() == 0) {
-            etConfirmPassword.setError("Confirm Password is required");
-            return false;
-        } else if (!etPasswordInput.getText().toString().equals(etConfirmPassword.getText().toString())) {
-            etConfirmPassword.setError("Password does not matches with confirm password");
+        return true;
+    }
+
+    private boolean validatePassword() {
+        if (!etPasswordInput.getText().toString().equals(etConfirmPassword.getText().toString())) {
+            etConfirmPassword.setError("Confirm password is not matching with Password");
             return false;
         }
         return true;

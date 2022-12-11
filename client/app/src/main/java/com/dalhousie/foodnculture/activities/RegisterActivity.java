@@ -78,10 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     }
 
     private boolean validateField(EditText checkField) {

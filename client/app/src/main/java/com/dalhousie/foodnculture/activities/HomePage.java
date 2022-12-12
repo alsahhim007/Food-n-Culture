@@ -1,5 +1,6 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -18,9 +19,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomePage extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sp = getSharedPreferences("login", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
@@ -38,12 +41,12 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     HomeFragment sf = new HomeFragment();
     HostFragment ff = new HostFragment();
-    UserProfileFragment tf =  new UserProfileFragment();
+    UserProfileFragment tf = new UserProfileFragment();
     CommunityList cf = new CommunityList();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
                 return true;
@@ -55,5 +58,15 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (sp.getBoolean("logged", false)) {
+            finishAffinity();
+            finish();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

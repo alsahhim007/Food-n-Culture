@@ -106,6 +106,8 @@ public class UserProfileFragment extends Fragment {
                                 account_delete_bsd.cancel();
                                 Intent mainIntent = new Intent(requireContext(), MainActivity.class);
                                 startActivity(mainIntent);
+                                requireActivity().finishAffinity();
+                                requireActivity().finish();
                             } else {
                                 Toast.makeText(getContext(), "There is an error while deleting user", Toast.LENGTH_SHORT).show();
                                 account_delete_bsd.cancel();
@@ -142,6 +144,8 @@ public class UserProfileFragment extends Fragment {
                         logout_bsd.cancel();
                         Intent mainIntent = new Intent(requireContext(), MainActivity.class);
                         startActivity(mainIntent);
+                        requireActivity().finishAffinity();
+                        requireActivity().finish();
                     }
                 }
             });

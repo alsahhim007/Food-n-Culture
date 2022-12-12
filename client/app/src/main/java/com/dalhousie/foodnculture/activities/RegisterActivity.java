@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(view -> {
             Intent intent1 = new Intent(view.getContext(), HomePage.class);
             startActivity(intent1);
+            finish();
         });
 
         alreadyHaveAnAccount.setOnClickListener(view -> {

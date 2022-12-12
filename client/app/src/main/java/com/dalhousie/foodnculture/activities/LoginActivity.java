@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (Objects.equals(AESSecurity.decrypt(user.get().getPassword()), etUserPassword.getText().toString())) {
                         Intent homeIntent = new Intent(view.getContext(), HomePage.class);
                         startActivity(homeIntent);
-
+                        finish();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("logged", true);
                         editor.putString("email", user.get().getEmail());
@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (authentication.getOtp().equals(pinView.getText().toString())) {
                         Intent homeIntent = new Intent(view.getContext(), HomePage.class);
                         startActivity(homeIntent);
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid OTP", Toast.LENGTH_SHORT).show();
                     }

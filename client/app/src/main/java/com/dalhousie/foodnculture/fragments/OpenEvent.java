@@ -39,24 +39,23 @@ public class OpenEvent extends Fragment {
             bsd.setContentView(R.layout.fragment_bottom_donation_sheet);
             bsd.show();
 
-            final BottomSheetDialog ssd = new BottomSheetDialog(view.getContext());
-            ssd.setContentView(R.layout.fragment_bottom_success_sheet);
+            final BottomSheetDialog success_d = new BottomSheetDialog(view.getContext());
+            success_d.setContentView(R.layout.fragment_bottom_success_sheet);
+
+            final BottomSheetDialog process_d = new BottomSheetDialog(view.getContext());
+            process_d.setContentView(R.layout.fragment_bottom_processing_sheet);
 
             FrameLayout gPay = bsd.findViewById(R.id.btnPayWithGpay);
             gPay.setOnClickListener(view1 -> {
-                requestPayment(view);
                 bsd.cancel();
-                ssd.show();
+                process_d.show();
+                // TODO? - AFTER SUCCESSFUL ENTRY SHOW SUCCESS SHEET HERE ONLY
+                // TODO? - CANCEL THE PROCESSING SHEET AND OPEN SUCCESS IN IF ELSE CONDITION
             });
         });
 
         back_button.setOnClickListener(view -> getActivity().onBackPressed());
         return v;
     }
-
-    private void requestPayment(View view) {
-
-    }
-
 
 }

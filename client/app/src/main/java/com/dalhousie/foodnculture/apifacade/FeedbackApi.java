@@ -44,31 +44,62 @@ public class FeedbackApi implements IFeedbackOperation {
 
     @Override
     public int update(Feedback object) {
+
+        try {
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(Feedback object) {
+        return deleteById(object.getId());
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        try {
+            StringBuffer buffer = this.request.doDelete(baseUrl + "/" + id);
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public int deleteById(Integer integer) {
-        return 0;
+    public boolean exists(Integer id) {
+        return getById(id).isPresent();
     }
 
     @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
-
-    @Override
-    public Optional<Feedback> getById(Integer integer) {
-        return null;
+    public Optional<Feedback> getById(Integer id) {
+        Feedback feedback = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
+            feedback = Mapper.mapFromJson(buffer.toString(), Feedback.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Optional.ofNullable(feedback);
     }
 
     @Override
     public List<Feedback> getFeedbackByEventId(Integer eventId) {
-        return null;
+        Feedback[] feedbacks = new Feedback[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
+            feedbacks = Mapper.mapFromJson(buffer.toString(), Feedback[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(feedbacks);
     }
 }

@@ -27,11 +27,6 @@ import java.util.Optional;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         EditText etUserPassword = findViewById(R.id.etEnteryourpass);
         TextView dontHaveAnAccount = findViewById(R.id.dont_have_an_account_text);
 
-        SharedPreferences sp = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
         back_button.setOnClickListener(view -> finish());
-
         forget_password.setOnClickListener(view -> showForgotPasswordDialog());
 
         loginButton.setOnClickListener(view -> {
@@ -58,8 +52,10 @@ public class LoginActivity extends AppCompatActivity {
                         Intent homeIntent = new Intent(view.getContext(), HomePage.class);
                         startActivity(homeIntent);
 
-                        sp.edit().putBoolean("logged", true).apply();
-
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("logged", true);
+                        editor.putString("email", etUserEmail.getText().toString());
+                        editor.apply();
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid password", Toast.LENGTH_SHORT).show();
                     }
@@ -92,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button sendEmail = emailDialog.findViewById(R.id.btnSendEmail);
         EditText forgetEmail = emailDialog.findViewById(R.id.etEmail);
+
         if (sendEmail != null && forgetEmail != null) {
             sendEmail.setOnClickListener(view -> {
                 if (validateField(forgetEmail) && validateEmail(forgetEmail)) {

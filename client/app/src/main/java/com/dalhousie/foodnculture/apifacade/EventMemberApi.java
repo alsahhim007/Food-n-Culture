@@ -44,32 +44,63 @@ public class EventMemberApi implements IEventMemberOperation {
 
     @Override
     public int update(EventMember object) {
+
+        try {
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(EventMember object) {
+        return deleteById(object.getId());
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        try {
+            StringBuffer buffer = this.request.doDelete(baseUrl + "/" + id);
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public int deleteById(Integer integer) {
-        return 0;
+    public boolean exists(Integer id) {
+        return getById(id).isPresent();
     }
 
     @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
-
-    @Override
-    public Optional<EventMember> getById(Integer integer) {
-        return null;
+    public Optional<EventMember> getById(Integer id) {
+        EventMember eventMember = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
+            eventMember = Mapper.mapFromJson(buffer.toString(), EventMember.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Optional.ofNullable(eventMember);
     }
 
     @Override
     public List<EventMember> getMembersByEventId(Integer eventId) {
-        return null;
+        EventMember[] members = new EventMember[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
+            members = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(members);
     }
 
 }

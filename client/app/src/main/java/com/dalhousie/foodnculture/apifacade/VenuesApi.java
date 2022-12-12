@@ -44,31 +44,62 @@ public class VenuesApi implements IVenueOperation {
 
     @Override
     public int update(Venues object) {
+
+        try {
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(Venues object) {
+        return deleteById(object.getId());
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        try {
+            StringBuffer buffer = this.request.doDelete(baseUrl + "/" + id);
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public int deleteById(Integer integer) {
-        return 0;
+    public boolean exists(Integer id) {
+        return getById(id).isPresent();
     }
 
     @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
-
-    @Override
-    public Optional<Venues> getById(Integer integer) {
-        return null;
+    public Optional<Venues> getById(Integer id) {
+        Venues venue = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
+            venue = Mapper.mapFromJson(buffer.toString(), Venues.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Optional.ofNullable(venue);
     }
 
     @Override
     public List<Venues> getVenuesByUserId(Integer userId) {
-        return null;
+        Venues[] venues = new Venues[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
+            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(venues);
     }
 }

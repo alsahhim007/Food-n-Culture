@@ -48,27 +48,50 @@ public class UsersApi implements IUserOperation {
 
     @Override
     public int update(User object) {
+        try {
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(User object) {
+        return deleteById(object.getId());
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        try {
+            StringBuffer buffer = this.request.doDelete(baseUrl + "/" + id);
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public int deleteById(Integer integer) {
-        return 0;
+    public boolean exists(Integer id) {
+        return getById(id).isPresent();
     }
 
     @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
-
-    @Override
-    public Optional<User> getById(Integer integer) {
-        return null;
+    public Optional<User> getById(Integer id) {
+        User user = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Optional.ofNullable(user);
     }
 
     @Override

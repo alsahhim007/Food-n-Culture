@@ -1,6 +1,6 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import com.dalhousie.foodnculture.models.Amenities;
+import com.dalhousie.foodnculture.models.Community;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,42 +8,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class AmenitiesApi implements IAmenityOperation {
-
+public class CommunityApi implements ICommunityOperation {
     private final IRequest request;
-    private String baseUrl = "/api/amenities";
+    private String baseUrl = "/api/community";
 
-    public AmenitiesApi(IRequest<Amenities> request) {
+    public CommunityApi(IRequest<Community> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Amenities> getAllAmenitiesByVenueId(Integer venueId) {
-        Amenities[] amenities = new Amenities[]{};
-        try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/venues/" + venueId);
-            amenities = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return Arrays.asList(amenities);
-    }
-
-    @Override
-    public List<Amenities> findAll() {
-        Amenities[] amenityList = new Amenities[]{};
+    public List<Community> findAll() {
+        Community[] communities = new Community[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            amenityList = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
+            communities = Mapper.mapFromJson(buffer.toString(), Community[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(amenityList);
+        return Arrays.asList(communities);
     }
 
     @Override
-    public int save(Amenities object) {
+    public int save(Community object) throws Exception {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -56,7 +43,7 @@ public class AmenitiesApi implements IAmenityOperation {
     }
 
     @Override
-    public int update(Amenities object) {
+    public int update(Community object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -69,7 +56,7 @@ public class AmenitiesApi implements IAmenityOperation {
     }
 
     @Override
-    public int delete(Amenities object) {
+    public int delete(Community object) {
         return deleteById(object.getId());
     }
 
@@ -92,14 +79,14 @@ public class AmenitiesApi implements IAmenityOperation {
     }
 
     @Override
-    public Optional<Amenities> getById(Integer id) {
-        Amenities amenities = null;
+    public Optional<Community> getById(Integer id) {
+        Community community = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            amenities = Mapper.mapFromJson(buffer.toString(), Amenities.class);
+            community = Mapper.mapFromJson(buffer.toString(), Community.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(amenities);
+        return Optional.ofNullable(community);
     }
 }

@@ -1,19 +1,11 @@
 package com.dalhousie.foodnculture.models;
 
-public class Friends {
-
-    public String FriendName;
-    public String Uname;
-    public int uimage;
-
-    public Friends(String friendName, String uname, int uimage) {
-        this.FriendName = friendName;
-        this.Uname = uname;
-        this.uimage = uimage;
-    }
-
+public class Messages {
+    
     private int id;
     private int userId;
+    private String content;
+    private boolean isRead;
     private String updatedAt;
     private String createdAt;
 
@@ -31,6 +23,22 @@ public class Friends {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     public String getUpdatedAt() {

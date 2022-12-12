@@ -12,6 +12,9 @@ public class ApiFacade {
     private final IEventOperation eventOperation;
     private final IFeedbackOperation feedbackOperation;
     private final IVenueOperation venueOperation;
+    private final ICommunityOperation communityOperation;
+    private final IFriendOperation friendOperation;
+    private final IMessagesOperation messagesOperation;
 
     private ApiFacade(IRequest request) {
         this.request = request;
@@ -23,6 +26,9 @@ public class ApiFacade {
         this.eventOperation = new EventApi(this.request);
         this.feedbackOperation = new FeedbackApi(this.request);
         this.venueOperation = new VenuesApi(this.request);
+        this.communityOperation = new CommunityApi(this.request);
+        this.friendOperation = new FriendsApi(this.request);
+        this.messagesOperation = new MessageApi(this.request);
     }
 
     public static ApiFacade getInstance() {
@@ -62,5 +68,17 @@ public class ApiFacade {
 
     public IVenueOperation getVenueApi() {
         return this.venueOperation;
+    }
+
+    public ICommunityOperation getCommunityApi() {
+        return this.communityOperation;
+    }
+
+    public IFriendOperation getFriendApi() {
+        return this.friendOperation;
+    }
+
+    public IMessagesOperation getMessagesApi() {
+        return this.messagesOperation;
     }
 }

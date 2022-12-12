@@ -44,31 +44,61 @@ public class DonationApi implements IDonationOperation {
 
     @Override
     public int update(Donation object) {
+        try {
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int delete(Donation object) {
+        return deleteById(object.getId());
+    }
+
+    @Override
+    public int deleteById(Integer id) {
+        try {
+            StringBuffer buffer = this.request.doDelete(baseUrl + "/" + id);
+            if (buffer.length() > 0) {
+                return 1;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public int deleteById(Integer integer) {
-        return 0;
+    public boolean exists(Integer id) {
+        return getById(id).isPresent();
     }
 
     @Override
-    public boolean exists(Integer integer) {
-        return false;
-    }
-
-    @Override
-    public Optional<Donation> getById(Integer integer) {
-        return Optional.empty();
+    public Optional<Donation> getById(Integer id) {
+        Donation donation = null;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
+            donation = Mapper.mapFromJson(buffer.toString(), Donation.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Optional.ofNullable(donation);
     }
 
     @Override
     public List<Donation> getDonationsByEventId(Integer eventId) {
-        return null;
+        Donation[] donations = new Donation[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
+            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(donations);
     }
 }

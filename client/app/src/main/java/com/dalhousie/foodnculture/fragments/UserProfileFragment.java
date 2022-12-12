@@ -71,11 +71,7 @@ public class UserProfileFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
-        logoutoff.setOnClickListener(view -> {
-            final BottomSheetDialog logout_bsd = new BottomSheetDialog(view.getContext());
-            logout_bsd.setContentView(R.layout.fragment_logout);
-            logout_bsd.show();
-        });
+        logoutoff.setOnClickListener(view -> logoutDialog());
 
         // Delete Account
         deleteaccount.setOnClickListener(view -> deleteAccount());
@@ -121,6 +117,37 @@ public class UserProfileFragment extends Fragment {
         }
         if (btnNo != null) {
             btnNo.setOnClickListener(view -> account_delete_bsd.cancel());
+        }
+    }
+
+    private void logoutDialog() {
+        final BottomSheetDialog logout_bsd = new BottomSheetDialog(this.requireContext());
+        logout_bsd.setContentView(R.layout.fragment_logout);
+        logout_bsd.show();
+
+        Button btnYes = logout_bsd.findViewById(R.id.btnYes);
+        Button btnNo = logout_bsd.findViewById(R.id.btnNo);
+
+        if (btnYes != null) {
+            btnYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+                    String email = sharedPreferences.getString("email", "");
+                    if (email.length() > 0) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("logged", false);
+                        editor.putString("email", null);
+                        editor.apply();
+                        logout_bsd.cancel();
+                        Intent mainIntent = new Intent(requireContext(), MainActivity.class);
+                        startActivity(mainIntent);
+                    }
+                }
+            });
+        }
+        if (btnNo != null) {
+            btnNo.setOnClickListener(view -> logout_bsd.cancel());
         }
     }
 }

@@ -29,9 +29,6 @@ public class AccountDeleteFragment extends Fragment {
         // Inflate the layout for this fragment
         View account_delete = inflater.inflate(R.layout.fragment_account_delete, container, false);
 
-
-
-
         return account_delete;
     }
 }

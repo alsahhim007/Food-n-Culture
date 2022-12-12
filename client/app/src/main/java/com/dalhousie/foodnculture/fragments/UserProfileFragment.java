@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.dalhousie.foodnculture.LogoutFragment;
 import com.dalhousie.foodnculture.R;
 
 public class UserProfileFragment extends Fragment {

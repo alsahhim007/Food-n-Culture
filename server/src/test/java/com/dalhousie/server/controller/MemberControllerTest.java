@@ -46,8 +46,8 @@ public class MemberControllerTest extends AbstractTest {
         event.setEventType(EventType.INDIVIDUAL);
         event.setDescription("test description");
         event.setStatus("created");
-        event.setStartDateTime("2022-11-18 00:00:00");
-        event.setEndDateTime("2022-11-18 10:00:00");
+        event.setStartDatetime("2022-11-18 00:00:00");
+        event.setEndDatetime("2022-11-18 10:00:00");
         event.setVenue("Halifax");
         event.setMaxCapacity(10);
         event.setUpdatedAt("2022-10-11 00:00:00");
@@ -115,8 +115,8 @@ public class MemberControllerTest extends AbstractTest {
         event.setEventType(EventType.INDIVIDUAL);
         event.setDescription("test description");
         event.setStatus("created");
-        event.setStartDateTime("2022-11-18 00:00:00");
-        event.setEndDateTime("2022-11-18 10:00:00");
+        event.setStartDatetime("2022-11-18 00:00:00");
+        event.setEndDatetime("2022-11-18 10:00:00");
         event.setVenue("Halifax");
         event.setMaxCapacity(10);
         event.setUpdatedAt("2022-10-11 00:00:00");
@@ -186,8 +186,8 @@ public class MemberControllerTest extends AbstractTest {
         event.setEventType(EventType.INDIVIDUAL);
         event.setDescription("test description");
         event.setStatus("created");
-        event.setStartDateTime("2022-11-18 00:00:00");
-        event.setEndDateTime("2022-11-18 10:00:00");
+        event.setStartDatetime("2022-11-18 00:00:00");
+        event.setEndDatetime("2022-11-18 10:00:00");
         event.setVenue("Halifax");
         event.setMaxCapacity(10);
         event.setUpdatedAt("2022-10-11 00:00:00");

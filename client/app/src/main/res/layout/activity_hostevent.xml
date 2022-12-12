@@ -63,7 +63,7 @@
             android:layout_marginTop="10dp"
             android:ems="10"
             android:textColorHint="@color/gray_500_6c"
-            android:hint="Date"
+            android:hint="Start Date (YYYY-MM-DD)"
             android:inputType="date"
             android:minHeight="48dp"
             android:textColor="@color/black" />
@@ -83,7 +83,7 @@
             android:textColor="@color/black" />
 
         <EditText
-            android:id="@+id/editEmailID"
+            android:id="@+id/endDate"
             android:layout_width="300dp"
             style="@style/txtUrbanistromanbold18"
             android:layout_height="wrap_content"
@@ -91,8 +91,8 @@
             android:layout_marginTop="10dp"
             android:ems="10"
             android:textColorHint="@color/gray_500_6c"
-            android:hint="Email ID"
-            android:inputType="textEmailAddress"
+            android:hint="End Date (YYYY-MM-DD)"
+            android:inputType="date"
             android:minHeight="48dp"
             android:textColor="@color/black" />
 

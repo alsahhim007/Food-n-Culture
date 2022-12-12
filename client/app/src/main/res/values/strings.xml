@@ -126,5 +126,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Friends -->
+    <string name="friend1">Logan Nasser</string>
+    <string name="friend2">Logan Naser</string>
+    <string name="friend3">Log Mas</string>
+    <string name="friend4">Mas Log</string>
+    <string name="friend5">Log Max</string>
+    <string name="friend6">Logon Maxon</string>
+
+    <string name="frienduser1">logan</string>
+    <string name="frienduser2">lou</string>
+    <string name="frienduser3">ani</string>
+    <string name="frienduser4">gramas</string>
+    <string name="frienduser5">maxlog</string>
+    <string name="frienduser6">maxonlog</string>
+
 
 </resources>

@@ -75,28 +75,17 @@
                         android:text="@string/lbl_refrigerator"
                         tools:text="@string/lbl_refrigerator" />
 
-                    <FrameLayout
-                        android:id="@+id/frameCheckmark"
-                        style="@style/groupStylebluegray_600cornerRadius"
+                    <CheckBox
                         android:layout_width="@dimen/_28pxh"
                         android:layout_height="@dimen/_28pxv"
                         android:layout_marginStart="@dimen/_174pxh"
                         android:layout_marginTop="@dimen/_23pxv"
                         android:layout_marginEnd="@dimen/_35pxh"
-                        android:layout_marginBottom="@dimen/_24pxv">
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_refri"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
 
-                        <ImageView
-                            android:id="@+id/imageCheckmark"
-                            android:layout_width="@dimen/_13pxh"
-                            android:layout_height="@dimen/_10pxh"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_7pxh"
-                            android:layout_marginTop="@dimen/_9pxv"
-                            android:layout_marginEnd="@dimen/_7pxh"
-                            android:layout_marginBottom="@dimen/_8pxv"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/img_checkmark2" />
-                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,28 +110,17 @@
                         android:text="@string/lbl_oven"
                         tools:text="@string/lbl_oven" />
 
-                    <FrameLayout
-                        android:id="@+id/frameCheckmark1"
-                        style="@style/groupStylebluegray_600cornerRadius"
+                    <CheckBox
                         android:layout_width="@dimen/_28pxh"
                         android:layout_height="@dimen/_28pxv"
-                        android:layout_marginStart="@dimen/_227pxh"
-                        android:layout_marginTop="@dimen/_24pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
                         android:layout_marginEnd="@dimen/_35pxh"
-                        android:layout_marginBottom="@dimen/_23pxv">
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_oven"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
 
-                        <ImageView
-                            android:id="@+id/imageCheckmarkOne"
-                            android:layout_width="@dimen/_13pxh"
-                            android:layout_height="@dimen/_10pxh"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_7pxh"
-                            android:layout_marginTop="@dimen/_9pxv"
-                            android:layout_marginEnd="@dimen/_7pxh"
-                            android:layout_marginBottom="@dimen/_8pxv"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/img_checkmark2" />
-                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -167,28 +145,17 @@
                         android:text="@string/lbl_stove"
                         tools:text="@string/lbl_stove" />
 
-                    <FrameLayout
-                        android:id="@+id/frameCheckmark2"
-                        style="@style/groupStylebluegray_600cornerRadius"
+                    <CheckBox
                         android:layout_width="@dimen/_28pxh"
                         android:layout_height="@dimen/_28pxv"
-                        android:layout_marginStart="@dimen/_224pxh"
-                        android:layout_marginTop="@dimen/_24pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
                         android:layout_marginEnd="@dimen/_35pxh"
-                        android:layout_marginBottom="@dimen/_23pxv">
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_stove"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
 
-                        <ImageView
-                            android:id="@+id/imageCheckmarkTwo"
-                            android:layout_width="@dimen/_13pxh"
-                            android:layout_height="@dimen/_10pxh"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_7pxh"
-                            android:layout_marginTop="@dimen/_9pxv"
-                            android:layout_marginEnd="@dimen/_7pxh"
-                            android:layout_marginBottom="@dimen/_8pxv"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/img_checkmark2" />
-                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,26 +180,17 @@
                         android:text="@string/lbl_toaster"
                         tools:text="@string/lbl_toaster" />
 
-                    <FrameLayout
-                        android:id="@+id/frameButtonIcon"
-                        style="@style/groupStylebluegray_600cornerRadius"
+                    <CheckBox
                         android:layout_width="@dimen/_28pxh"
                         android:layout_height="@dimen/_28pxv"
-                        android:layout_marginStart="@dimen/_209pxh"
-                        android:layout_marginTop="@dimen/_24pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
                         android:layout_marginEnd="@dimen/_35pxh"
-                        android:layout_marginBottom="@dimen/_23pxv">
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_toaster"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
 
-                        <ImageView
-                            android:id="@+id/imageCheckmarkThree"
-                            android:layout_width="@dimen/_14pxh"
-                            android:layout_height="@dimen/_14pxh"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/_7pxh"
-                            android:layout_marginVertical="@dimen/_7pxv"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/img_checkmark2" />
-                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -243,7 +201,7 @@
                     android:layout_marginTop="@dimen/_8pxv"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtAddanitem"
                         style="@style/txtUrbanistromanmedium18"
                         android:layout_width="0dp"
@@ -257,26 +215,19 @@
                         android:text="@string/lbl_add_an_item"
                         tools:text="@string/lbl_add_an_item" />
 
-                    <FrameLayout
-                        android:id="@+id/frameCheckmark3"
-                        style="@style/groupStylebluegray_600cornerRadius"
+                    <Button
+                        android:id="@+id/ItemAdd"
+                        android:focusable="false"
+                        android:onClick="Increment"
+                        android:text="+"
                         android:layout_width="@dimen/_28pxh"
                         android:layout_height="@dimen/_28pxv"
                         android:layout_marginStart="@dimen/_172pxh"
                         android:layout_marginTop="@dimen/_24pxv"
                         android:layout_marginEnd="@dimen/_35pxh"
-                        android:layout_marginBottom="@dimen/_23pxv">
+                        android:layout_marginBottom="@dimen/_23pxv"
+                        style="@style/groupStylebluegray_600cornerRadius"/>
 
-                        <ImageView
-                            android:id="@+id/imageGrid"
-                            android:layout_width="@dimen/_14pxh"
-                            android:layout_height="@dimen/_14pxh"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/_7pxh"
-                            android:layout_marginVertical="@dimen/_7pxv"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/img_grid" />
-                    </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

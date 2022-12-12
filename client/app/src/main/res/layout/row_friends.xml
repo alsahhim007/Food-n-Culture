@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout android:id="@+id/linearU"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" style="@style/groupStylewhite_1">
+        <LinearLayout android:id="@+id/linearU1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_19pxv"
+            android:layout_marginStart="@dimen/_18pxh"
+            android:layout_marginTop="@dimen/_19pxv"
+            android:layout_weight="0.83" android:layout_width="0dp"
+            android:orientation="horizontal" style="@style/groupStylecornerRadius_1">
+            <ImageView android:id="@+id/imageAvatar"
+                android:layout_height="@dimen/_38pxh"
+                android:layout_width="@dimen/_38pxh"
+                android:scaleType="fitXY"
+                imageRes="@drawable/img_avatar"
+                tools:ignore="ContentDescription" tools:src="@drawable/img_avatar"/>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearColumnusername"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2pxv"
+                android:layout_marginStart="@dimen/_8pxh"
+                android:layout_marginTop="@dimen/_3pxv"
+                android:layout_weight="0.71" android:layout_width="0dp" android:orientation="vertical">
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtFullnamerow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/lbl_logan_nasser"
+                    style="@style/txtUrbanistromansemibold14"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtUsername"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_9pxh"
+                    android:layout_marginTop="@dimen/_4pxv"
+                    android:layout_width="match_parent"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/lbl_louisaingram"
+                    style="@style/txtUrbanistromanregular14"/>
+            </LinearLayout>
+            <CheckBox
+                android:layout_width="@dimen/_28pxh"
+                android:layout_height="@dimen/_28pxh"
+                android:layout_marginStart="@dimen/_101pxh"
+                android:layout_marginTop="@dimen/_7pxh"
+                android:layout_marginEnd="@dimen/_19pxh"
+                android:layout_marginBottom="@dimen/_25pxv"
+                android:id="@+id/frameCheckmark_follow"
+                android:buttonTint="@color/bluegray_600"
+                android:checked="true"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</layout>

@@ -31,7 +31,7 @@ public class UserProfileFragment extends Fragment {
         back_button.setOnClickListener(view -> getActivity().onBackPressed());
 
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
-//        TextView checkfriends = v.findViewById(R.id.friends);
+        TextView checkfriends = v.findViewById(R.id.friends);
         TextView checkkitchen = v.findViewById(R.id.hostkitchen);
         TextView logoutoff = v.findViewById(R.id.logoutoff);
         TextView deleteaccount = v.findViewById(R.id.deleteaccount);
@@ -46,14 +46,14 @@ public class UserProfileFragment extends Fragment {
         });
 
 
-//        // Open Friends page
-//        checkfriends.setOnClickListener(view -> {
-//            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.linearColumnairplane, new FriendsFragment());
-//            fragmentTransaction.addToBackStack(null);
-//            fragmentTransaction.commit();
-//        });
-//
+        // Open Friends page
+        checkfriends.setOnClickListener(view -> {
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.linearColumnairplane, new FriendsFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
+
         // Open Kitchen page
         checkkitchen.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();

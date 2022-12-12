@@ -18,17 +18,10 @@ import com.dalhousie.foodnculture.adapters.CustomAdapter;
 import com.dalhousie.foodnculture.models.Friends;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class FriendsFragment extends Fragment {
 
-
-
-    //Todo: API to fetch the FriendName and Username
-//    ArrayList FriendNames = new ArrayList<>(Arrays.asList("Logan Nasser", "Logan Naser", "Log Mas", "Mas Log", "Log Max"));
-//    ArrayList Username = new ArrayList(Arrays.asList("@logan","@lou","@ani","@gramas","@maxlog"));
-//    ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.img_avatar, R.drawable.img_1, R.drawable.img_2, R.drawable.img_3, R.drawable.img_4));
 
     private RecyclerView recyclerView;
     private ArrayList<Friends> Friends_all;
@@ -42,32 +35,11 @@ public class FriendsFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        setContentView(R.layout.fragment_friends);
-//        // get the reference of RecyclerView
-//        RecyclerView recyclerView = (RecyclerView) recyclerView.findViewById(R.id.recyclerFriends);
-//        // set a LinearLayoutManager with default vertical orientation
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        // call the constructor of CustomAdapter to send the reference and data to Adapter
-//        CustomAdapter customAdapter = new CustomAdapter(.this, FriendNames,Username, personImages);
-//        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View viewfriends = inflater.inflate(R.layout.fragment_friends, container, false);
-
-//        // Add the following lines to create RecyclerView
-//        recyclerView = viewfriends.findViewById(R.id.recyclerFriends);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(viewfriends.getContext()));
-//        recyclerView.setAdapter(new CustomAdapter(FriendNames));
 
         ImageButton back_button = viewfriends.findViewById(R.id.btnArrowleft);
 

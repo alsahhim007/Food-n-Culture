@@ -55,8 +55,8 @@ public class EventController {
             savedEvent.setDescription(event.getDescription());
             savedEvent.setEventType(event.getEventType());
             savedEvent.setStatus(event.getStatus());
-            savedEvent.setStartDateTime(event.getStartDateTime());
-            savedEvent.setEndDateTime(event.getEndDateTime());
+            savedEvent.setStartDatetime(event.getStartDatetime());
+            savedEvent.setEndDatetime(event.getEndDatetime());
             savedEvent.setVenue(event.getVenue());
             savedEvent.setMaxCapacity(event.getMaxCapacity());
             savedEvent.setUpdatedAt(event.getUpdatedAt());

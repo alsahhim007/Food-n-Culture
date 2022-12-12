@@ -1,21 +1,30 @@
 package com.dalhousie.foodnculture.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import com.dalhousie.foodnculture.R;
+import com.dalhousie.foodnculture.activities.MainActivity;
+import com.dalhousie.foodnculture.apifacade.ApiFacade;
+import com.dalhousie.foodnculture.models.User;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.Optional;
 
 public class UserProfileFragment extends Fragment {
 
@@ -28,7 +37,7 @@ public class UserProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
 
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
         TextView checkfriends = v.findViewById(R.id.friends);
@@ -69,13 +78,49 @@ public class UserProfileFragment extends Fragment {
         });
 
         // Delete Account
-        deleteaccount.setOnClickListener(view -> {
-            final BottomSheetDialog account_delete_bsd = new BottomSheetDialog(view.getContext());
-            account_delete_bsd.setContentView(R.layout.fragment_account_delete);
-            account_delete_bsd.show();
-        });
+        deleteaccount.setOnClickListener(view -> deleteAccount());
 
         return v;
 
+    }
+
+    private void deleteAccount() {
+        final BottomSheetDialog account_delete_bsd = new BottomSheetDialog(this.requireContext());
+        account_delete_bsd.setContentView(R.layout.fragment_account_delete);
+        account_delete_bsd.show();
+
+        Button btnYes = account_delete_bsd.findViewById(R.id.btnYes);
+        Button btnNo = account_delete_bsd.findViewById(R.id.btnNo);
+
+        if (btnYes != null) {
+            btnYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+                    String email = sharedPreferences.getString("email", "");
+                    if (email.length() > 0) {
+                        Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
+                        if (user.isPresent()) {
+                            int status = ApiFacade.getInstance().getUserApi().delete(user.get());
+                            if (status == 1) {
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("logged", false);
+                                editor.putString("email", null);
+                                editor.apply();
+                                account_delete_bsd.cancel();
+                                Intent mainIntent = new Intent(requireContext(), MainActivity.class);
+                                startActivity(mainIntent);
+                            } else {
+                                Toast.makeText(getContext(), "There is an error while deleting user", Toast.LENGTH_SHORT).show();
+                                account_delete_bsd.cancel();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        if (btnNo != null) {
+            btnNo.setOnClickListener(view -> account_delete_bsd.cancel());
+        }
     }
 }

@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("logged", true);
-                        editor.putString("email", etUserEmail.getText().toString());
+                        editor.putString("email", user.get().getEmail());
                         editor.apply();
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid password", Toast.LENGTH_SHORT).show();

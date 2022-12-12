@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dalhousie.foodnculture.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class UserProfileFragment extends Fragment {
 
@@ -60,20 +61,18 @@ public class UserProfileFragment extends Fragment {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
-//
+
         logoutoff.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.linearColumnairplane, new LogoutFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            final BottomSheetDialog logout_bsd = new BottomSheetDialog(view.getContext());
+            logout_bsd.setContentView(R.layout.fragment_logout);
+            logout_bsd.show();
         });
-//
-//        // Delete Account
+
+        // Delete Account
         deleteaccount.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.linearColumnairplane, new AccountDeleteFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            final BottomSheetDialog account_delete_bsd = new BottomSheetDialog(view.getContext());
+            account_delete_bsd.setContentView(R.layout.fragment_account_delete);
+            account_delete_bsd.show();
         });
 
         return v;

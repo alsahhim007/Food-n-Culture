@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         if (sp.getBoolean("logged", false)) {
-            System.out.println("Hello");
         } else {
             super.onBackPressed();
             finish();

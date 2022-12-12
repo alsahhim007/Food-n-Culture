@@ -82,6 +82,7 @@ public class HostFragment extends Fragment {
         event.setTitle(title.getText().toString());
         event.setStartDateTime(startDate.getText().toString());
         event.setVenue(venue.getText().toString());
+        event.setStatus("CREATED");
         event.setEndDateTime(endDate.getText().toString());
         event.setDescription(description.getText().toString());
         event.setMaxCapacity(Integer.valueOf(capacity.getText().toString()));

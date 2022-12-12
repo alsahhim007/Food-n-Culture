@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.fragments.CommunityList;
+import com.dalhousie.foodnculture.fragments.FriendsFragment;
 import com.dalhousie.foodnculture.fragments.HomeFragment;
 import com.dalhousie.foodnculture.fragments.HostFragment;
 import com.dalhousie.foodnculture.fragments.UserProfileFragment;
@@ -36,8 +37,12 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener((NavigationBarView.OnItemSelectedListener) this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-    }
 
+        chatIcon.setOnClickListener(view -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsFragment()).commit();
+        });
+
+    }
 
     HomeFragment sf = new HomeFragment();
     HostFragment ff = new HostFragment();

@@ -1,9 +1,8 @@
 package com.dalhousie.server.persistence;
 
-import java.util.List;
-
 import com.dalhousie.server.model.Authentication;
 
-public interface IAuthenticationRepository extends ICrudRepository <Authentication, Integer> {
-    public List<Authentication> getOTPByUserId(Integer userId);
+public interface IAuthenticationRepository extends ICrudRepository<Authentication, Integer> {
+    public Authentication getOTPByUserId(Integer userId);
+    public int deleteAllOTPByuserId(Integer userId);
 }

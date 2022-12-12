@@ -98,7 +98,7 @@ public class AmenitiesControllerTest extends AbstractTest {
         int status = result.getResponse().getStatus();
         assertEquals(200, status);
         String content = result.getResponse().getContentAsString();
-        assertEquals("Amenitie updated successfully", content);
+        assertEquals("Amenities updated successfully", content);
     }
 
     @Test
@@ -120,14 +120,14 @@ public class AmenitiesControllerTest extends AbstractTest {
         int status = result.getResponse().getStatus();
         assertEquals(200, status);
         String content = result.getResponse().getContentAsString();
-        assertEquals("Amenitie deleted successfully", content);
+        assertEquals("Amenities deleted successfully", content);
 
         String deleteUri = "/api/amenities/88";
         result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
         status = result.getResponse().getStatus();
         assertEquals(200, status);
         content = result.getResponse().getContentAsString();
-        assertEquals("Amenitie deleted successfully", content);
+        assertEquals("Amenities deleted successfully", content);
     }
     
 }

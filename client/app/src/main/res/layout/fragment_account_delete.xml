@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:gravity="center_horizontal"
+        android:id="@+id/linearColumnaccount"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" android:orientation="vertical">
+        <ScrollView android:clipToPadding="false"
+            android:fillViewport="true" android:gravity="start"
+            android:id="@+id/scrollViewScrollview"
+            android:layout_height="0dp" android:layout_weight="1" android:layout_width="match_parent">
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearTitle"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical" style="@style/groupStylewhite_2">
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtConfirmation"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_28pxh"
+                    android:layout_marginStart="@dimen/_28pxh"
+                    android:layout_marginTop="@dimen/_34pxv"
+                    android:layout_width="match_parent"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/msg_are_you_sure_ab"
+                    style="@style/txtUrbanistromanbold22"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtLogintocontin"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_28pxh"
+                    android:layout_marginStart="@dimen/_28pxh"
+                    android:layout_marginTop="@dimen/_14pxv"
+                    android:layout_width="match_parent"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/msg_do_you_want_to"
+                    style="@style/txtUrbanistromanregular14"/>
+                <LinearLayout android:gravity="start"
+                    android:id="@+id/linearRowyes"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_60pxv"
+                    android:layout_marginEnd="@dimen/_24pxh"
+                    android:layout_marginStart="@dimen/_28pxh"
+                    android:layout_marginTop="@dimen/_31pxv"
+                    android:layout_width="match_parent" android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:ellipsize="end" android:gravity="center"
+                        android:id="@+id/btnYes"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:paddingBottom="@dimen/_16pxv"
+                        android:paddingEnd="@dimen/_30pxh"
+                        android:paddingStart="@dimen/_30pxh"
+                        android:paddingTop="@dimen/_16pxv"
+                        android:singleLine="true"
+                        android:text="@string/lbl_yes"
+                        android:textAllCaps="false"
+                        style="@style/btnSolidRounded" tools:text="@string/lbl_yes"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:ellipsize="end" android:gravity="center"
+                        android:id="@+id/btnNo"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14pxh"
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:paddingBottom="@dimen/_15pxv"
+                        android:paddingEnd="@dimen/_30pxh"
+                        android:paddingStart="@dimen/_30pxh"
+                        android:paddingTop="@dimen/_15pxv"
+                        android:singleLine="true"
+                        android:text="@string/lbl_no"
+                        android:textAllCaps="false"
+                        style="@style/btnSolidRounded_1" tools:text="@string/lbl_no"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

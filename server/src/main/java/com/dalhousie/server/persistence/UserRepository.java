@@ -24,10 +24,9 @@ public class UserRepository implements IUserRepository {
     @Override
     public int save(User user) {
         return jdbcTemplate.update(
-                "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), user.getFirstName(),
-                user.getLastName(), user.isVerified(), user.getStatus(), user.getCreatedAt(),
-                user.getUpdatedAt());
+                user.getLastName(), user.isVerified(), user.getStatus());
     }
 
     @Override

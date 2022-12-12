@@ -24,9 +24,8 @@ public class VenueRepository implements IVenueRepository {
     @Override
     public int save(Venues venue) {
         return jdbcTemplate.update(
-                "CALL createVenue(?, ?, ?, ?, ?, ?, ?, ?)",
-                venue.getId(), venue.getUserId(), venue.getName(), venue.getAddressLine1(), venue.getAddressLine2(),
-                venue.getUpdatedAt(), venue.getCreatedAt());
+                "CALL createVenue(?, ?, ?, ?, ?, ?)",
+                venue.getId(), venue.getUserId(), venue.getName(), venue.getAddressLine1(), venue.getAddressLine2());
     }
 
     @Override

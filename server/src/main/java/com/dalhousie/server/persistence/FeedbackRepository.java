@@ -24,9 +24,8 @@ public class FeedbackRepository implements IFeedbackRepository {
     @Override
     public int save(Feedback feedback) {
         return jdbcTemplate.update(
-                "CALL createFeedback(?, ?, ?, ?, ?, ?)",
-                feedback.getId(), feedback.getMemberId(), feedback.getComment(), feedback.getStars(), feedback.getUpdatedAt(),
-                feedback.getCreatedAt());
+                "CALL createFeedback(?, ?, ?, ?)",
+                feedback.getId(), feedback.getMemberId(), feedback.getComment(), feedback.getStars());
     }
 
     @Override

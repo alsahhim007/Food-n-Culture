@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data/>
+    <LinearLayout android:gravity="center_horizontal"
+        android:id="@+id/linearColumnwelcomeback"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" android:orientation="vertical">
+        <LinearLayout android:gravity="start"
+            android:id="@+id/linearModalMobile"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical" style="@style/groupStylewhite_A700cornerRadius">
+            <TextView android:ellipsize="end"
+                android:id="@+id/txtWelcomeBack"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_23pxh"
+                android:layout_marginStart="@dimen/_23pxh"
+                android:layout_marginTop="@dimen/_25pxv"
+                android:layout_width="wrap_content"
+                android:lineSpacingExtra="@dimen/_1pxh"
+                android:singleLine="true"
+                android:text="@string/lbl_donate"
+                style="@style/txtUrbanistromanbold22" tools:text="@string/lbl_donate"/>
+            <TextView android:ellipsize="end"
+                android:id="@+id/txtDonate"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_23pxh"
+                android:layout_marginStart="@dimen/_23pxh"
+                android:layout_marginTop="@dimen/_18pxv"
+                android:layout_width="match_parent"
+                android:lineSpacingExtra="@dimen/_1pxh"
+                android:singleLine="true"
+                android:text="@string/msg_enter_the_amoun"
+                style="@style/txtUrbanistromanregular14" tools:text="@string/msg_enter_the_amoun"/>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearRowinputdata"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_14pxh"
+                android:layout_marginStart="@dimen/_14pxh"
+                android:layout_marginTop="@dimen/_20pxv"
+                android:layout_width="match_parent"
+                android:orientation="horizontal" style="@style/groupStylecornerRadius">
+
+                <TextView
+                    android:id="@+id/txtInputData"
+                    style="@style/txtUrbanistromanregular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10pxh"
+                    android:layout_marginTop="@dimen/_10pxv"
+                    android:layout_marginBottom="@dimen/_16pxv"
+                    android:layout_weight="0.2"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/lbl_dollar"
+                    android:textSize="20dp"
+                    tools:text="@string/lbl_dollar" />
+
+                <EditText
+                    android:id="@+id/txtInputDataOne"
+                    style="@style/txtUrbanistromanbold25"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/_11pxv"
+                    android:layout_marginEnd="@dimen/_19pxh"
+                    android:layout_marginBottom="@dimen/_11pxv"
+                    android:ellipsize="end"
+                    android:inputType="number"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/btnPayWithGpay"
+                android:layout_width="match_parent"
+                android:minWidth="267dp"
+                android:layout_marginVertical="25dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_height="48dp"
+                android:background="@drawable/googlepay_button_background_shape"
+                android:contentDescription="@string/pay_with_googlepay_button_content_description">
+                <ImageView
+                    android:contentDescription="@string/text_content_description"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="11dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/pay_with_googlepay_button_content"/>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

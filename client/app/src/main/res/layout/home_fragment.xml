@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/home_fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtEvents"
+            style="@style/txtUrbanistromanbold24"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="316dp"
+            android:layout_weight="0.97"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/_1pxh"
+            android:singleLine="true"
+            android:text="@string/lbl_events"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/lbl_events" />
+
+        <LinearLayout
+            android:id="@+id/event1"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="60dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.289"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/img_19"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <LinearLayout
+                android:id="@+id/linearColumnlivewethef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12pxh"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="0.63"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtEvent1"
+                    android:clickable="true"
+                    style="@style/txtUrbanistromansemibold20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/lbl_peggy_s_dine"
+                    tools:text="@string/lbl_peggy_s_dine" />
+
+                <TextView
+                    android:id="@+id/txtPricc"
+                    style="@style/txtUrbanistromanregular15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/msg_19_00_forg"
+                    tools:text="@string/msg_19_00_forg" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/event2"
+            android:layout_marginTop="15dp"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.289"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event1">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/img_19_144x147"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <LinearLayout
+                android:id="@+id/eventinfo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12pxh"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="0.63"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/eventTitle2"
+                    style="@style/txtUrbanistromansemibold20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/lbl_merry_new_year"
+                    tools:text="@string/lbl_merry_new_year" />
+
+                <TextView
+                    android:id="@+id/eventDetails"
+                    style="@style/txtUrbanistromanregular15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/msg_21_00_latun"
+                    tools:text="@string/msg_21_00_latun" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtEvents2"
+            style="@style/txtUrbanistromanbold24"
+            android:layout_width="0dp"
+            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_weight="0.97"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/_1pxh"
+            android:paddingStart="15dp"
+            android:singleLine="true"
+            android:text="@string/lbl_past_events"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event2"
+            tools:text="@string/lbl_past_events" />
+
+        <LinearLayout
+            android:id="@+id/pastEvent1"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtEvents2">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/img_19_1"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <LinearLayout
+                android:id="@+id/linearColumnlivewethef2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12pxh"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="0.63"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtLIVEWeTheF2"
+                    style="@style/txtUrbanistromansemibold20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/lbl_peggy_s_dine"
+                    tools:text="@string/lbl_peggy_s_dine" />
+
+                <TextView
+                    android:id="@+id/txtPrice2"
+                    style="@style/txtUrbanistromanregular15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/msg_19_00_forg"
+                    tools:text="@string/msg_19_00_forg" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/event4"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pastEvent1">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/img_19_2"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <LinearLayout
+                android:id="@+id/eventinfo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12pxh"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="0.63"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/eventTitle4"
+                    style="@style/txtUrbanistromansemibold20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/lbl_merry_new_year"
+                    tools:text="@string/lbl_merry_new_year" />
+
+                <TextView
+                    android:id="@+id/eventDetails4"
+                    style="@style/txtUrbanistromanregular15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/msg_21_00_latun"
+                    tools:text="@string/msg_21_00_latun" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|center"
+            app:flow_horizontalAlign="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBeaGuest"
+                style="@style/btnSolidRounded"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingTop="@dimen/_17pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingBottom="@dimen/_17pxv"
+                android:singleLine="true"
+                android:text="@string/lbl_be_a_guest"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnHostEvent"
+                tools:text="@string/lbl_be_a_guest" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnHostEvent"
+                style="@style/btnSolidRounded"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingTop="@dimen/_17pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingBottom="@dimen/_17pxv"
+                android:singleLine="true"
+                android:text="@string/lbl_host_an_event"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnBeaGuest"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/lbl_host_an_event" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

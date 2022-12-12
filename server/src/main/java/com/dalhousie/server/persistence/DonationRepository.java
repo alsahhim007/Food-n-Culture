@@ -24,9 +24,9 @@ public class DonationRepository implements IDonationRepository {
     @Override
     public int save(Donation donation) {
         return jdbcTemplate.update(
-                "CALL createDonation(?, ?, ?, ?, ?, ?, ?, ?)",
-                donation.getId(), donation.getEventId(), donation.getName(), donation.getAmount(), donation.getEmail(),
-                donation.getNote(), donation.getUpdatedAt(), donation.getCreatedAt());
+                "CALL createDonation(?, ?, ?, ?, ?, ?)",
+                donation.getId(), donation.getEventId(), donation.getName(),
+                donation.getAmount(), donation.getEmail(), donation.getNote());
     }
 
     @Override

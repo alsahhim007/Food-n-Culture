@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data/>
+    <LinearLayout android:id="@+id/linearReminder"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
+        <View android:background="@color/bluegray_600"
+            android:id="@+id/lineLineFourOne"
+            android:layout_height="@dimen/_35pxv"
+            android:layout_marginBottom="@dimen/_9pxv"
+            android:layout_marginStart="@dimen/_18pxh"
+            android:layout_marginTop="@dimen/_9pxv"
+            android:layout_weight="0.01" android:layout_width="0dp"/>
+        <TextView android:ellipsize="end" android:id="@+id/txt16thOct"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20pxv"
+            android:layout_marginStart="@dimen/_7pxh"
+            android:layout_marginTop="@dimen/_17pxv"
+            android:layout_weight="0.28" android:layout_width="0dp"
+            android:singleLine="true"
+            android:text="@string/lbl_16th_oct"
+            style="@style/txtLeagueSpartansemibold16" tools:text="26th Jan"/>
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtNewdaynewfo"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16pxv"
+            android:layout_marginEnd="@dimen/_57pxh"
+            android:layout_marginStart="@dimen/_35pxh"
+            android:layout_marginTop="@dimen/_19pxv"
+            android:layout_weight="0.71" android:layout_width="0dp"
+            android:singleLine="true"
+            android:text="@string/msg_new_day_new_fo"
+            style="@style/txtUrbanistromanmedium18" tools:text="Eat with Jen"/>
+    </LinearLayout>
+</layout>

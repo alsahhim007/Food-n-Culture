@@ -14,7 +14,6 @@ import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.fragments.CommunityList;
 import com.dalhousie.foodnculture.fragments.FriendsFragment;
 import com.dalhousie.foodnculture.fragments.HomeFragment;
-import com.dalhousie.foodnculture.fragments.HostFragment;
 import com.dalhousie.foodnculture.fragments.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -45,7 +44,6 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
     }
 
     HomeFragment sf = new HomeFragment();
-    HostFragment ff = new HostFragment();
     UserProfileFragment tf = new UserProfileFragment();
     CommunityList cf = new CommunityList();
 
@@ -53,7 +51,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
                 return true;
             case R.id.community:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, cf).commit();
@@ -61,6 +59,8 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, tf).commit();
                 return true;
+            default:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
         }
         return false;
     }
@@ -68,8 +68,18 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
     @Override
     public void onBackPressed() {
         if (sp.getBoolean("logged", false)) {
-            finishAffinity();
-            finish();
+            getSupportFragmentManager().popBackStack();
+
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0){
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
+            }
+            String current_fragment = String.valueOf(getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT"));
+            if (current_fragment.equals("null")){
+            }else{
+                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT"){
+                    finishAffinity();
+                }
+            }
         } else {
             super.onBackPressed();
         }

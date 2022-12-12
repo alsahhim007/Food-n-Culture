@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,8 @@ import com.dalhousie.foodnculture.models.Friends;
 import java.util.ArrayList;
 
 
-public class FriendsFragment extends Fragment {
-
+public class FriendsFragment extends Fragment implements CustomAdapter.OnUserListener {
+    
 
     private RecyclerView recyclerView;
     private ArrayList<Friends> Friends_all;
@@ -59,7 +60,7 @@ public class FriendsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerFriends);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CustomAdapter adapter = new CustomAdapter(getContext(), Friends_all);
+        CustomAdapter adapter = new CustomAdapter(getContext(), Friends_all, this);
         recyclerView.setAdapter(adapter);
         
     }
@@ -99,5 +100,10 @@ public class FriendsFragment extends Fragment {
             Friends friend = new Friends(friends_name[iter],friends_username[iter],ImgResource[iter]);
             Friends_all.add(friend);
         }
+    }
+
+    @Override
+    public void onUserClick(int position) {
+
     }
 }

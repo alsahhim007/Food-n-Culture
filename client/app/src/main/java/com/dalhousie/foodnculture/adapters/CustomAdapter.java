@@ -4,6 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,16 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
 
+    private static final String TAG = "FriendsRecyclerAdapter";
     Context context;
     ArrayList<Friends> Friend_all;
+    OnUserListener monUserListener;
 
 
-    public CustomAdapter(Context context, ArrayList<Friends> friend) {
+    public CustomAdapter(Context context, ArrayList<Friends> friend, OnUserListener onUserListener) {
         this.context = context;
         this.Friend_all = friend;
+        this.monUserListener = onUserListener;
 
     }
 
@@ -33,7 +38,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View friendview = LayoutInflater.from(context).inflate(R.layout.row_friends, parent, false);
-        return new MyViewHolder(friendview);
+        return new MyViewHolder(friendview, monUserListener);
     }
 
     @Override
@@ -52,19 +57,34 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return Friend_all.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView f_name;
         TextView user_name;
         ImageView user_image;
 
+        OnUserListener onUserListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView, OnUserListener onUserListener) {
             super(itemView);
 
             f_name = itemView.findViewById(R.id.txtFullnamerow);
             user_name = itemView.findViewById(R.id.txtUsername);
             user_image = itemView.findViewById(R.id.imageAvatar);
+            this.onUserListener = onUserListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            Log.d(TAG, "onClick: " + getAdapterPosition());
+            onUserListener.onUserClick(getAdapterPosition());
+        }
+    }
+    public interface OnUserListener{
+
+        void onUserClick(int position);
+
     }
 }

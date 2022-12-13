@@ -16,7 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Event;
-import com.dalhousie.foodnculture.utilities.Formatter;
+import com.dalhousie.foodnculture.utilities.EventDateAndVenueFormatter;
+import com.dalhousie.foodnculture.utilities.IFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,28 +40,28 @@ public class HomeFragment extends Fragment {
         LinearLayout pastEvent1 = homeView.findViewById(R.id.pastEvent1);
         LinearLayout pastEvent2 = homeView.findViewById(R.id.pastEvent2);
 
-        Formatter formatter = new Formatter();
+        IFormatter formatter = new EventDateAndVenueFormatter();
 
         List<Event> currentEvents = getCurrentEvents(events);
         TextView event1Title = homeView.findViewById(R.id.eventTitle1);
         event1Title.setText(currentEvents.get(0).getTitle());
         TextView txtTimeLocation1 = homeView.findViewById(R.id.txtTimeLocation1);
-        txtTimeLocation1.setText(formatter.formatDateAndVenue(currentEvents.get(0)));
+        txtTimeLocation1.setText(formatter.format(currentEvents.get(0)));
 
         TextView event2Title = homeView.findViewById(R.id.eventTitle2);
         event2Title.setText(currentEvents.get(1).getTitle());
         TextView txtTimeLocation2 = homeView.findViewById(R.id.txtTimeLocation2);
-        txtTimeLocation2.setText(formatter.formatDateAndVenue(currentEvents.get(1)));
+        txtTimeLocation2.setText(formatter.format(currentEvents.get(1)));
 
         List<Event> pastEvents = getPastEvents(events);
         TextView pastEvent1Title = homeView.findViewById(R.id.txtPastEvent1);
         pastEvent1Title.setText(pastEvents.get(0).getTitle());
         TextView txtPastTimeLocation1 = homeView.findViewById(R.id.txtPastTimeLocation1);
-        txtPastTimeLocation1.setText(formatter.formatDateAndVenue(pastEvents.get(0)));
+        txtPastTimeLocation1.setText(formatter.format(pastEvents.get(0)));
         TextView pastEvent2Title = homeView.findViewById(R.id.txtPastEvent2);
         pastEvent2Title.setText(pastEvents.get(1).getTitle());
         TextView txtPastTimeLocation2 = homeView.findViewById(R.id.txtPastTimeLocation2);
-        txtPastTimeLocation2.setText(formatter.formatDateAndVenue(pastEvents.get(1)));
+        txtPastTimeLocation2.setText(formatter.format(pastEvents.get(1)));
 
         event1.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();

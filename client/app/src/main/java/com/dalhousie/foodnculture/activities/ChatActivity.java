@@ -81,7 +81,7 @@ public class ChatActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(message)) {
                     Toast.makeText(ChatActivity.this, "Please write a message", Toast.LENGTH_LONG).show();
                 } else {
-                    sendmessage(message);
+                    sendMessage(message);
                 }
                 msg.setText("");
             }
@@ -110,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void sendmessage(final String message) {
+    private void sendMessage(final String message) {
         Messages messages = new Messages();
         messages.setUserId(userId);
         messages.setTargetUserId(friendUserId);

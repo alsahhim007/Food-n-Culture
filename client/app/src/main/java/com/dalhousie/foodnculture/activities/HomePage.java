@@ -73,10 +73,6 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
         if (sp.getBoolean("logged", false)) {
             getSupportFragmentManager().popBackStack();
 
-            System.out.println(getClass().getSimpleName());
-
-            System.out.println(getSupportFragmentManager().getBackStackEntryCount());
-
             if (getSupportFragmentManager().getBackStackEntryCount() == 0){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment, "HOME_FRAGMENT").commit();
                 count += 1;

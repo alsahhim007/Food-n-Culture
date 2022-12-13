@@ -50,7 +50,7 @@ public class HTTPHelper {
             os.write(jsonData.getBytes(StandardCharsets.UTF_8));
             os.close();
             int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == HttpURLConnection.HTTP_CREATED || responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 response = new StringBuffer();

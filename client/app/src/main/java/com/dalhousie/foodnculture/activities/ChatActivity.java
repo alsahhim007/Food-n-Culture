@@ -1,6 +1,7 @@
 package com.dalhousie.foodnculture.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +36,16 @@ public class ChatActivity extends AppCompatActivity {
     ChatAdapter chatAdapter;
     boolean notify = false;
 
+    final Handler readMessageHandler = new Handler();
+    final int delay = 2000; // every 2 seconds
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            readMessages();
+            readMessageHandler.postDelayed(this, delay);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +55,9 @@ public class ChatActivity extends AppCompatActivity {
         userId = getIntent().getIntExtra("userId", 0);
 
         Optional<User> user = ApiFacade.getInstance().getUserApi().getById(friendUserId);
+        readMessageHandler.postDelayed(runnable, delay);
+
+        // initialise the text views and layouts
         name = findViewById(R.id.txtuserchatname);
         msg = findViewById(R.id.messaget);
         send = findViewById(R.id.sendmsg);
@@ -110,6 +124,12 @@ public class ChatActivity extends AppCompatActivity {
             ex.printStackTrace();
             Toast.makeText(ChatActivity.this, "Failed to send the message", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onDestroy () {
+        readMessageHandler.removeCallbacks(runnable);
+        super.onDestroy ();
     }
 }
 

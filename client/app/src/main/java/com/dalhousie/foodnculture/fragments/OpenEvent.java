@@ -102,6 +102,7 @@ public class OpenEvent extends Fragment {
                 try {
                     if (saveDonation(amount) == 1) {
                         success_d.show();
+                        totalDonation.setText(getTotalDonation());
                     } else {
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
@@ -122,7 +123,7 @@ public class OpenEvent extends Fragment {
         String email = sharedPreferences.getString("email", "");
 
         donation.setAmount(amount);
-        donation.setEventId(1);
+        donation.setEventId(event.getId());
         donation.setNote("Donation");
         donation.setEmail(email);
 

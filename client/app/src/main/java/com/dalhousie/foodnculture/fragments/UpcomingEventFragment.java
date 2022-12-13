@@ -49,8 +49,8 @@ public class UpcomingEventFragment extends Fragment {
 
         List<Event> events = getEvents();
         List<Event> upcomingEvents = getUpcomingEvents(events);
-        TextView event1Title = upcomingEventsView.findViewById(R.id.txtEvent1);
         if (upcomingEvents.size() > 0) {
+            TextView event1Title = upcomingEventsView.findViewById(R.id.txtEvent1);
             event1Title.setText(upcomingEvents.get(0).getTitle());
             TextView txtTimeLocation1 = upcomingEventsView.findViewById(R.id.txtDate);
             txtTimeLocation1.setText(formatter.format(upcomingEvents.get(0)));

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,22 +21,37 @@ import androidx.fragment.app.Fragment;
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Donation;
+import com.dalhousie.foodnculture.models.Event;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class OpenEvent extends Fragment {
 
+    Event event;
+
+    OpenEvent(Event event) {
+        this.event = event;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_open_event, container, false);
-        ImageButton back_button = v.findViewById(R.id.btnArrowleft);
+        View openEventView = inflater.inflate(R.layout.fragment_open_event, container, false);
+        ImageButton back_button = openEventView.findViewById(R.id.btnArrowleft);
 
-        Button registerButton = v.findViewById(R.id.btnRegister);
-        Button donateButton = v.findViewById(R.id.btnDonate);
+        Button registerButton = openEventView.findViewById(R.id.btnRegister);
+        Button donateButton = openEventView.findViewById(R.id.btnDonate);
 
-        registerButton.setOnClickListener(view ->   {
+
+        TextView eventTitle = openEventView.findViewById(R.id.txtEventTitle);
+        eventTitle.setText(event.getTitle());
+        TextView eventDate = openEventView.findViewById(R.id.txtDate);
+        eventDate.setText(event.getStartDatetime());
+        TextView eventDescription= openEventView.findViewById(R.id.txtDescriptionTwo);
+        eventDescription.setText(event.getDescription());
+
+
+        registerButton.setOnClickListener(view -> {
             final BottomSheetDialog bsd = new BottomSheetDialog(view.getContext());
             bsd.setContentView(R.layout.fragment_bottom_success_sheet);
             bsd.show();
@@ -58,12 +74,8 @@ public class OpenEvent extends Fragment {
 
                 EditText donateField = bsd.findViewById(R.id.txtInputDataOne);
                 int amount = Integer.parseInt(donateField.getText().toString());
-                System.out.println(amount);
-
                 bsd.dismiss();
-
                 Toast.makeText(getContext(), "Processing...", Toast.LENGTH_SHORT).show();
-
                 try {
                     Thread.sleep(1900);
                 } catch (InterruptedException e) {
@@ -73,8 +85,7 @@ public class OpenEvent extends Fragment {
                 try {
                     if (saveDonation(amount) == 1) {
                         success_d.show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
@@ -83,8 +94,8 @@ public class OpenEvent extends Fragment {
             });
         });
 
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
-        return v;
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
+        return openEventView;
     }
 
     int saveDonation(int amount) throws Exception {

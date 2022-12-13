@@ -53,8 +53,8 @@
                         android:ellipsize="end"
                         android:lineSpacingExtra="@dimen/_1pxh"
                         android:singleLine="true"
-                        android:text="@string/lbl_utensils"
-                        tools:text="@string/lbl_utensils" />
+                        android:text="@string/lbl_amenities"
+                        tools:text="@string/lbl_amenities" />
 
                     <TextView
                         android:id="@+id/txtLanguage"
@@ -85,7 +85,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txtGreenApple"
+                            android:id="@+id/txtEventTitle"
                             style="@style/txtUrbanistromansemibold28"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -57,16 +57,25 @@ public class UserProfileFragment extends Fragment {
 
 
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
+        TextView checkPastEvents = v.findViewById(R.id.pastEvent);
         TextView checkfriends = v.findViewById(R.id.friends);
         TextView checkkitchen = v.findViewById(R.id.hostkitchen);
         TextView logoutoff = v.findViewById(R.id.logoutoff);
         TextView deleteaccount = v.findViewById(R.id.deleteaccount);
 
 
-        //Open Profile page
+        // Open Profile page
         checkPersonalDetails.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new PersonalDetailsFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
+
+        // Open Past Events page
+        checkPastEvents.setOnClickListener(view -> {
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.linearColumnairplane, new PastEventFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });

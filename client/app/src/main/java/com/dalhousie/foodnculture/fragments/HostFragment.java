@@ -80,10 +80,10 @@ public class HostFragment extends Fragment {
     int saveEvent() throws Exception {
         Event event = new Event();
         event.setTitle(title.getText().toString());
-        event.setStartDateTime(startDate.getText().toString());
+        event.setStartDatetime(startDate.getText().toString());
         event.setVenue(venue.getText().toString());
         event.setStatus("CREATED");
-        event.setEndDateTime(endDate.getText().toString());
+        event.setEndDatetime(endDate.getText().toString());
         event.setDescription(description.getText().toString());
         event.setMaxCapacity(Integer.valueOf(capacity.getText().toString()));
         event.setEventType(EventType.COMMUNITY);

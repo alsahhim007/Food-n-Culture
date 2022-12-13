@@ -58,7 +58,7 @@
 
                     <TextView
                         android:id="@+id/txtAmenities"
-                        style="@style/txtUrbanistromanregular12"
+                        style="@style/txtUrbanistromanbold12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_11pxv"
@@ -94,7 +94,7 @@
 
                     <TextView
                         android:id="@+id/txtTotalDonation"
-                        style="@style/txtUrbanistromanregular12"
+                        style="@style/txtUrbanistromanbold12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_11pxv"
@@ -111,6 +111,23 @@
                     android:layout_height="458dp"
                     android:layout_gravity="top|center">
 
+                    <TextView
+                        android:id="@+id/btnGuestList"
+                        android:textColor="@color/teal_500"
+                        style="@style/txtUrbanistromanbold15"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="100"
+                        android:ellipsize="end"
+                        android:clickable="true"
+                        android:gravity="end"
+                        android:layout_gravity="center|end"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:singleLine="true"
+                        android:text="Guest List"
+                        android:textAllCaps="false"
+                        tools:text="Guest List" />
+
                     <LinearLayout
                         android:id="@+id/linearContent"
                         android:layout_width="370dp"
@@ -120,6 +137,8 @@
                         android:layout_marginTop="65dp"
                         android:layout_marginLeft="65dp"
                         android:orientation="vertical">
+
+
 
                         <TextView
                             android:id="@+id/txtEventTitle"

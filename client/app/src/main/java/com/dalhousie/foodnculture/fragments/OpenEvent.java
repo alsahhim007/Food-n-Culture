@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.dalhousie.foodnculture.models.EventMember;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.EventDateAndVenueFormatter;
 import com.dalhousie.foodnculture.utilities.IFormatter;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.time.LocalDateTime;
@@ -39,6 +41,7 @@ import java.util.StringJoiner;
 public class OpenEvent extends Fragment {
 
     Event event;
+    Optional<User> currentUser;
 
     OpenEvent(Event event) {
         this.event = event;
@@ -51,6 +54,8 @@ public class OpenEvent extends Fragment {
 
         View openEventView = inflater.inflate(R.layout.fragment_open_event, container, false);
         ImageButton back_button = openEventView.findViewById(R.id.btnArrowleft);
+
+        TextView guestListButton = openEventView.findViewById(R.id.btnGuestList);
 
         Button registerButton = openEventView.findViewById(R.id.btnRegister);
         Button donateButton = openEventView.findViewById(R.id.btnDonate);
@@ -73,6 +78,36 @@ public class OpenEvent extends Fragment {
         amenitiesText.setText(getAmenities());
 
         registerButton.setOnClickListener(view -> registerEvent());
+
+        guestListButton.setOnClickListener(view -> {
+            BottomSheetDialog gListD = new BottomSheetDialog(view.getContext());
+            BottomSheetBehavior<View> bottomSheetBehavior;
+            View view1 = LayoutInflater.from(requireActivity()).inflate(R.layout.guest_list_bottom_sheet, null);
+            gListD.setContentView(view1);
+            bottomSheetBehavior = BottomSheetBehavior.from((View) view1.getParent());
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            LinearLayout layout = gListD.findViewById(R.id.GuestListLayout);
+            layout.setMinimumHeight(1300);
+
+            List<User> friends;
+            TextView g1Name = view1.findViewById(R.id.Guest1txtGuestName);
+            TextView g2Name = view1.findViewById(R.id.Guest2txtGuestName);
+            TextView g3Name = view1.findViewById(R.id.Guest3txtGuestName);
+            TextView g4Name = view1.findViewById(R.id.Guest4txtGuestName);
+
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+            String email = sharedPreferences.getString("email", "");
+            currentUser = ApiFacade.getInstance().getUserApi().getByEmail(email);
+            friends = ApiFacade.getInstance().getFriendApi().getAllFriendsByUserId(currentUser.get().getId());
+
+            g1Name.setText(String.format("%s %s", friends.get(0).getFirstName(), friends.get(0).getLastName()));
+            g2Name.setText(String.format("%s %s", friends.get(1).getFirstName(), friends.get(1).getLastName()));
+            g3Name.setText(String.format("%s %s", friends.get(2).getFirstName(), friends.get(2).getLastName()));
+            g4Name.setText(String.format("%s %s", friends.get(3).getFirstName(), friends.get(3).getLastName()));
+
+            gListD.show();
+
+        });
 
         donateButton.setOnClickListener(view -> {
 

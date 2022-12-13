@@ -2,6 +2,7 @@ package com.dalhousie.foodnculture.apifacade;
 
 import com.dalhousie.foodnculture.models.Community;
 import com.dalhousie.foodnculture.models.Friends;
+import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -89,5 +90,17 @@ public class FriendsApi implements IFriendOperation {
             ex.printStackTrace();
         }
         return Optional.ofNullable(friend);
+    }
+
+    @Override
+    public List<User> getAllFriendsByUserId(Integer userId) {
+        User[] friends = new User[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/all/" + userId);
+            friends = Mapper.mapFromJson(buffer.toString(), User[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(friends);
     }
 }

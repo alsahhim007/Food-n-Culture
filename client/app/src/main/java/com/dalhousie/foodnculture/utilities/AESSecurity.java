@@ -8,14 +8,14 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-public class AESSecurity {
+public class AESSecurity implements ISecurity {
 
     private static final String SECRET_KEY = "RHAWKEY"; //TODO? please find me a better place
     private static final String ALGORITHM = "AES";
     private static byte[] key;
     private static SecretKey secret;
 
-    public static void getSecretKey(String secretKey) {
+    public void getSecretKey(String secretKey) {
         MessageDigest mdigest = null;
         try {
             key = secretKey.getBytes(StandardCharsets.UTF_8);
@@ -28,7 +28,8 @@ public class AESSecurity {
         }
     }
 
-    public static String encrypt(String text) {
+    @Override
+    public String encrypt(String text) {
         try {
             getSecretKey(SECRET_KEY);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -40,7 +41,8 @@ public class AESSecurity {
         return null;
     }
 
-    public static String decrypt(String text) {
+    @Override
+    public String decrypt(String text) {
         try {
             getSecretKey(SECRET_KEY);
             Cipher cipher = Cipher.getInstance(ALGORITHM);

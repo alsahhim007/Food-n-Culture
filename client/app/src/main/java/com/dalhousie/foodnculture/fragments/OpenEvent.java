@@ -26,7 +26,8 @@ import com.dalhousie.foodnculture.models.Donation;
 import com.dalhousie.foodnculture.models.Event;
 import com.dalhousie.foodnculture.models.EventMember;
 import com.dalhousie.foodnculture.models.User;
-import com.dalhousie.foodnculture.utilities.Formatter;
+import com.dalhousie.foodnculture.utilities.EventDateAndVenueFormatter;
+import com.dalhousie.foodnculture.utilities.IFormatter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
@@ -51,12 +52,12 @@ public class OpenEvent extends Fragment {
 
         Button registerButton = openEventView.findViewById(R.id.btnRegister);
         Button donateButton = openEventView.findViewById(R.id.btnDonate);
-        Formatter formatter = new Formatter();
+        IFormatter formatter = new EventDateAndVenueFormatter();
 
         TextView eventTitle = openEventView.findViewById(R.id.txtEventTitle);
         eventTitle.setText(event.getTitle());
         TextView eventDate = openEventView.findViewById(R.id.txtDate);
-        eventDate.setText(formatter.formatDateAndVenue(event));
+        eventDate.setText(formatter.format(event));
         TextView eventDescription = openEventView.findViewById(R.id.txtDescriptionTwo);
         eventDescription.setText(event.getDescription());
         TextView totalDonation = openEventView.findViewById(R.id.txtTotalDonation);

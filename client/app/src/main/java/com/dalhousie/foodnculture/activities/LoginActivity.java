@@ -18,6 +18,7 @@ import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Authentication;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.AESSecurity;
+import com.dalhousie.foodnculture.utilities.ISecurity;
 import com.dalhousie.foodnculture.utilities.ValidatorHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +27,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LoginActivity extends AppCompatActivity {
+
+    ISecurity security = new AESSecurity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             if (validateField(etUserEmail) && validateField(etUserPassword)) {
                 Optional<User> user = checkUser(etUserEmail.getText().toString());
                 if (user.isPresent()) {
-                    if (Objects.equals(AESSecurity.decrypt(user.get().getPassword()), etUserPassword.getText().toString())) {
+                    if (Objects.equals(security.decrypt(user.get().getPassword()), etUserPassword.getText().toString())) {
                         Intent homeIntent = new Intent(view.getContext(), HomePage.class);
                         startActivity(homeIntent);
                         finish();

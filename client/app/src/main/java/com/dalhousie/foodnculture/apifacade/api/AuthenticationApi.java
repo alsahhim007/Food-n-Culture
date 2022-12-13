@@ -1,5 +1,7 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
+import com.dalhousie.foodnculture.apifacade.contract.IAuthenticationOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
 import com.dalhousie.foodnculture.models.Authentication;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;

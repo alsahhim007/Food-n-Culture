@@ -1,6 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Community;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.apifacade.contract.IVenueOperation;
+import com.dalhousie.foodnculture.models.Venues;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,31 +10,31 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class CommunityApi implements ICommunityOperation {
+public class VenuesApi implements IVenueOperation {
     private final IRequest request;
-    private String baseUrl = "/api/community";
+    private String baseUrl = "/api/venues";
 
-    public CommunityApi(IRequest<Community> request) {
+    public VenuesApi(IRequest<Venues> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Community> findAll() {
-        Community[] communities = new Community[]{};
+    public List<Venues> findAll() {
+        Venues[] venues = new Venues[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            communities = Mapper.mapFromJson(buffer.toString(), Community[].class);
+            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(communities);
+        return Arrays.asList(venues);
     }
 
     @Override
-    public int save(Community object) throws Exception {
+    public int save(Venues object) {
         try {
-            StringBuffer buffer = this.request.doPost(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
@@ -43,9 +45,10 @@ public class CommunityApi implements ICommunityOperation {
     }
 
     @Override
-    public int update(Community object) {
+    public int update(Venues object) {
+
         try {
-            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
@@ -56,7 +59,7 @@ public class CommunityApi implements ICommunityOperation {
     }
 
     @Override
-    public int delete(Community object) {
+    public int delete(Venues object) {
         return deleteById(object.getId());
     }
 
@@ -79,14 +82,26 @@ public class CommunityApi implements ICommunityOperation {
     }
 
     @Override
-    public Optional<Community> getById(Integer id) {
-        Community community = null;
+    public Optional<Venues> getById(Integer id) {
+        Venues venue = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            community = Mapper.mapFromJson(buffer.toString(), Community.class);
+            venue = Mapper.mapFromJson(buffer.toString(), Venues.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(community);
+        return Optional.ofNullable(venue);
+    }
+
+    @Override
+    public List<Venues> getVenuesByUserId(Integer userId) {
+        Venues[] venues = new Venues[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
+            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(venues);
     }
 }

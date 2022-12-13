@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.contract;
 
 public interface IRequest<T> {
     public StringBuffer doGet(String url) throws Exception;

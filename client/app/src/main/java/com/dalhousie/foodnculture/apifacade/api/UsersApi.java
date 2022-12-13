@@ -1,6 +1,9 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Donation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.apifacade.contract.IUserOperation;
+import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
+import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,42 +11,45 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class DonationApi implements IDonationOperation {
-    private final IRequest request;
-    private String baseUrl = "/api/donations";
+public class UsersApi implements IUserOperation {
 
-    public DonationApi(IRequest<Donation> request) {
+    private final IRequest request;
+    private String baseUrl = "/api/users";
+
+    public UsersApi(IRequest<User> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Donation> findAll() {
-        Donation[] donations = new Donation[]{};
+    public List<User> findAll() {
+        User[] userList = new User[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
+            userList = Mapper.mapFromJson(buffer.toString(), User[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(donations);
+        return Arrays.asList(userList);
     }
 
     @Override
-    public int save(Donation object) {
-        try {
+    public int save(User object) throws Exception {
+        if (getByUserName(object.getUserName()).isPresent()) {
+            throw new UserAlreadyExist("User with username already exists");
+        } else if (getByEmail(object.getEmail()).isPresent()) {
+            throw new UserAlreadyExist("User with email already exists");
+        } else {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
         return 0;
     }
 
     @Override
-    public int update(Donation object) {
+    public int update(User object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -56,7 +62,7 @@ public class DonationApi implements IDonationOperation {
     }
 
     @Override
-    public int delete(Donation object) {
+    public int delete(User object) {
         return deleteById(object.getId());
     }
 
@@ -79,38 +85,38 @@ public class DonationApi implements IDonationOperation {
     }
 
     @Override
-    public Optional<Donation> getById(Integer id) {
-        Donation donation = null;
+    public Optional<User> getById(Integer id) {
+        User user = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            donation = Mapper.mapFromJson(buffer.toString(), Donation.class);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(donation);
+        return Optional.ofNullable(user);
     }
 
     @Override
-    public List<Donation> getDonationsByEventId(Integer eventId) {
-        Donation[] donations = new Donation[]{};
+    public Optional<User> getByUserName(String name) {
+        User user = null;
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
-            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/username/" + name);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(donations);
+        return Optional.ofNullable(user);
     }
 
     @Override
-    public double getTotalDonationByEventId(Integer eventId) {
-        double totalDonation = 0;
+    public Optional<User> getByEmail(String email) {
+        User user = null;
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/total/" + eventId);
-            totalDonation = Mapper.mapFromJson(buffer.toString(), Double.class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/email/" + email);
+            user = Mapper.mapFromJson(buffer.toString(), User.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return totalDonation;
+        return Optional.ofNullable(user);
     }
 }

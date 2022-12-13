@@ -1,8 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Community;
-import com.dalhousie.foodnculture.models.Friends;
-import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.apifacade.contract.IAmenityOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.Amenities;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -10,29 +10,42 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FriendsApi implements IFriendOperation {
-    private final IRequest request;
-    private String baseUrl = "/api/friends";
+public class AmenitiesApi implements IAmenityOperation {
 
-    public FriendsApi(IRequest<Community> request) {
+    private final IRequest request;
+    private String baseUrl = "/api/amenities";
+
+    public AmenitiesApi(IRequest<Amenities> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Friends> findAll() {
-        Friends[] friends = new Friends[]{};
+    public List<Amenities> getAllAmenitiesByVenueId(Integer venueId) {
+        Amenities[] amenities = new Amenities[]{};
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            friends = Mapper.mapFromJson(buffer.toString(), Friends[].class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/venues/" + venueId);
+            amenities = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(friends);
+        return Arrays.asList(amenities);
     }
 
     @Override
-    public int save(Friends object) throws Exception {
+    public List<Amenities> findAll() {
+        Amenities[] amenityList = new Amenities[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/");
+            amenityList = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(amenityList);
+    }
+
+    @Override
+    public int save(Amenities object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -45,7 +58,7 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public int update(Friends object) {
+    public int update(Amenities object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -58,7 +71,7 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public int delete(Friends object) {
+    public int delete(Amenities object) {
         return deleteById(object.getId());
     }
 
@@ -81,26 +94,14 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public Optional<Friends> getById(Integer id) {
-        Friends friend = null;
+    public Optional<Amenities> getById(Integer id) {
+        Amenities amenities = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            friend = Mapper.mapFromJson(buffer.toString(), Friends.class);
+            amenities = Mapper.mapFromJson(buffer.toString(), Amenities.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(friend);
-    }
-
-    @Override
-    public List<User> getAllFriendsByUserId(Integer userId) {
-        User[] friends = new User[]{};
-        try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/all/" + userId);
-            friends = Mapper.mapFromJson(buffer.toString(), User[].class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return Arrays.asList(friends);
+        return Optional.ofNullable(amenities);
     }
 }

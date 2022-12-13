@@ -1,6 +1,10 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Venues;
+import com.dalhousie.foodnculture.apifacade.contract.IFriendOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.Community;
+import com.dalhousie.foodnculture.models.Friends;
+import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,29 +12,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class VenuesApi implements IVenueOperation {
+public class FriendsApi implements IFriendOperation {
     private final IRequest request;
-    private String baseUrl = "/api/venues";
+    private String baseUrl = "/api/friends";
 
-    public VenuesApi(IRequest<Venues> request) {
+    public FriendsApi(IRequest<Community> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Venues> findAll() {
-        Venues[] venues = new Venues[]{};
+    public List<Friends> findAll() {
+        Friends[] friends = new Friends[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+            friends = Mapper.mapFromJson(buffer.toString(), Friends[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(venues);
+        return Arrays.asList(friends);
     }
 
     @Override
-    public int save(Venues object) {
+    public int save(Friends object) throws Exception {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -43,8 +47,7 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public int update(Venues object) {
-
+    public int update(Friends object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -57,7 +60,7 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public int delete(Venues object) {
+    public int delete(Friends object) {
         return deleteById(object.getId());
     }
 
@@ -80,26 +83,26 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public Optional<Venues> getById(Integer id) {
-        Venues venue = null;
+    public Optional<Friends> getById(Integer id) {
+        Friends friend = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            venue = Mapper.mapFromJson(buffer.toString(), Venues.class);
+            friend = Mapper.mapFromJson(buffer.toString(), Friends.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(venue);
+        return Optional.ofNullable(friend);
     }
 
     @Override
-    public List<Venues> getVenuesByUserId(Integer userId) {
-        Venues[] venues = new Venues[]{};
+    public List<User> getAllFriendsByUserId(Integer userId) {
+        User[] friends = new User[]{};
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
-            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/all/" + userId);
+            friends = Mapper.mapFromJson(buffer.toString(), User[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(venues);
+        return Arrays.asList(friends);
     }
 }

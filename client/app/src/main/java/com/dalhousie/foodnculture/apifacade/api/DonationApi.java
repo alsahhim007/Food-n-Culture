@@ -1,6 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.EventMember;
+import com.dalhousie.foodnculture.apifacade.contract.IDonationOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.Donation;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,29 +10,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class EventMemberApi implements IEventMemberOperation {
+public class DonationApi implements IDonationOperation {
     private final IRequest request;
-    private String baseUrl = "/api/members";
+    private String baseUrl = "/api/donations";
 
-    public EventMemberApi(IRequest<EventMember> request) {
+    public DonationApi(IRequest<Donation> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<EventMember> findAll() {
-        EventMember[] eventMembers = new EventMember[]{};
+    public List<Donation> findAll() {
+        Donation[] donations = new Donation[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            eventMembers = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
+            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(eventMembers);
+        return Arrays.asList(donations);
     }
 
     @Override
-    public int save(EventMember object) {
+    public int save(Donation object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -43,8 +45,7 @@ public class EventMemberApi implements IEventMemberOperation {
     }
 
     @Override
-    public int update(EventMember object) {
-
+    public int update(Donation object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -57,7 +58,7 @@ public class EventMemberApi implements IEventMemberOperation {
     }
 
     @Override
-    public int delete(EventMember object) {
+    public int delete(Donation object) {
         return deleteById(object.getId());
     }
 
@@ -80,27 +81,38 @@ public class EventMemberApi implements IEventMemberOperation {
     }
 
     @Override
-    public Optional<EventMember> getById(Integer id) {
-        EventMember eventMember = null;
+    public Optional<Donation> getById(Integer id) {
+        Donation donation = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            eventMember = Mapper.mapFromJson(buffer.toString(), EventMember.class);
+            donation = Mapper.mapFromJson(buffer.toString(), Donation.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(eventMember);
+        return Optional.ofNullable(donation);
     }
 
     @Override
-    public List<EventMember> getMembersByEventId(Integer eventId) {
-        EventMember[] members = new EventMember[]{};
+    public List<Donation> getDonationsByEventId(Integer eventId) {
+        Donation[] donations = new Donation[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
-            members = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
+            donations = Mapper.mapFromJson(buffer.toString(), Donation[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(members);
+        return Arrays.asList(donations);
     }
 
+    @Override
+    public double getTotalDonationByEventId(Integer eventId) {
+        double totalDonation = 0;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/total/" + eventId);
+            totalDonation = Mapper.mapFromJson(buffer.toString(), Double.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return totalDonation;
+    }
 }

@@ -1,10 +1,12 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class HomePage extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     SharedPreferences sp;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +70,27 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     @Override
     public void onBackPressed() {
+
         if (sp.getBoolean("logged", false)) {
             getSupportFragmentManager().popBackStack();
 
+            System.out.println(getClass().getSimpleName());
+
+            System.out.println(getSupportFragmentManager().getBackStackEntryCount());
+
             if (getSupportFragmentManager().getBackStackEntryCount() == 0){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
+                count += 1;
+                Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT);
+
             }
             String current_fragment = String.valueOf(getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT"));
             if (current_fragment.equals("null")){
             }else{
-                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT"){
+                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT" && count >= 2){
                     finishAffinity();
+                }
+                else {
                 }
             }
         } else {

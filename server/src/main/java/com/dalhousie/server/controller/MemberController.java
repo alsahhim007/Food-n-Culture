@@ -76,4 +76,10 @@ public class MemberController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/users/{id}")
+    public List<EventMember> getAllMembersByUserId(@PathVariable Integer id){
+        return eventMemberRepository.getMembersByUserId(id);
+    }
+
 }

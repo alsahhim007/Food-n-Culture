@@ -60,7 +60,7 @@ public class OpenEvent extends Fragment {
         TextView eventDescription = openEventView.findViewById(R.id.txtDescriptionTwo);
         eventDescription.setText(event.getDescription());
         TextView totalDonation = openEventView.findViewById(R.id.txtTotalDonation);
-        totalDonation.setText(Double.toString(ApiFacade.getInstance().getDonationApi().getTotalDonationByEventId(event.getId())));
+        totalDonation.setText(getTotalDonation());
 
         TextView amenitiesText = openEventView.findViewById(R.id.txtAmenities);
         amenitiesText.setText(getAmenities());
@@ -124,7 +124,6 @@ public class OpenEvent extends Fragment {
 
     private String getAmenities() {
         List<Amenities> amenities = ApiFacade.getInstance().getAmenitiesApi().findAll();
-        String amenitiesName = "";
         String delimiter = ", ";
         StringJoiner joiner = new StringJoiner(delimiter);
         amenities.forEach(item -> joiner.add(item.getName()));
@@ -137,13 +136,13 @@ public class OpenEvent extends Fragment {
         EventMember member = new EventMember();
         member.setEventId(event.getId());
         member.setStatus("Requested");
-        if (email.length() > 0) {
-            Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
-            if (user.isPresent()) {
-                member.setUserId(user.get().getId());
-            }
-        }
         try {
+            if (email.length() > 0) {
+                Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
+                if (user.isPresent()) {
+                    member.setUserId(user.get().getId());
+                }
+            }
             if (ApiFacade.getInstance().getEventMemberApi().save(member) == 1) {
                 final BottomSheetDialog bsd = new BottomSheetDialog(requireContext());
                 bsd.setContentView(R.layout.fragment_bottom_success_sheet);
@@ -154,6 +153,11 @@ public class OpenEvent extends Fragment {
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    String getTotalDonation() {
+        double totalDonation = ApiFacade.getInstance().getDonationApi().getTotalDonationByEventId(event.getId());
+        return "$" + totalDonation;
     }
 
 }

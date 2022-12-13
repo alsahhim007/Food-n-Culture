@@ -16,9 +16,11 @@ import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.adapters.ChatAdapter;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Messages;
+import com.dalhousie.foodnculture.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -41,10 +43,11 @@ public class ChatActivity extends AppCompatActivity {
         friendUserId = getIntent().getIntExtra("friendId", 0);
         userId = getIntent().getIntExtra("userId", 0);
 
-        // initialise the text views and layouts
+        Optional<User> user = ApiFacade.getInstance().getUserApi().getById(friendUserId);
         name = findViewById(R.id.txtuserchatname);
         msg = findViewById(R.id.messaget);
         send = findViewById(R.id.sendmsg);
+        name.setText(String.format("%s %s", user.get().getFirstName(), user.get().getLastName()));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -52,7 +55,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerViewChat = findViewById(R.id.chatrecycle);
         recyclerViewChat.setHasFixedSize(true);
         recyclerViewChat.setLayoutManager(linearLayoutManager);
-
 
         ImageButton backButton = findViewById(R.id.btnArrowleft);
         backButton.setOnClickListener(view -> finish());
@@ -104,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
         try {
             ApiFacade.getInstance().getMessagesApi().save(messages);
             readMessages(); // refresh messages
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(ChatActivity.this, "Failed to send the message", Toast.LENGTH_LONG).show();
         }

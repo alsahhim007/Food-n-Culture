@@ -17,14 +17,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.dalhousie.server.model.Friends;
-import com.dalhousie.server.persistence.FriendRepository;
+import com.dalhousie.server.persistence.IFriendRepository;
 
 @RestController
 @RequestMapping("/api/friends")
 public class FriendsController {
     
     @Autowired
-    private FriendRepository friendRepository;
+    private IFriendRepository friendRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,7 +63,10 @@ public class FriendsController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        friendRepository.deleteById(id);
-        return new ResponseEntity<>("Friend deleted successfully", HttpStatus.OK);
+        if(friendRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Friend deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

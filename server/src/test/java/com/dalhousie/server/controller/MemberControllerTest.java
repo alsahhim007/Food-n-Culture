@@ -1,26 +1,31 @@
 package com.dalhousie.server.controller;
 
 import com.dalhousie.server.AbstractTest;
-import com.dalhousie.server.enums.EventType;
-import com.dalhousie.server.model.Event;
 import com.dalhousie.server.model.EventMember;
-import com.dalhousie.server.model.User;
+import com.dalhousie.server.persistence.EventMemberRepository;
 
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @ActiveProfiles("test")
 public class MemberControllerTest extends AbstractTest {
+
+    @MockBean
+    EventMemberRepository eventMemberRepository;
     
     @Override
     @BeforeEach
@@ -37,290 +42,97 @@ public class MemberControllerTest extends AbstractTest {
     }
 
     @Test
-    @Order(1)
-    public void addMemberTest() throws Exception {
-        String uri = "/api/events/";
-        Event event = new Event();
-        event.setId(201);
-        event.setTitle("Test Title");
-        event.setEventType(EventType.INDIVIDUAL);
-        event.setDescription("test description");
-        event.setStatus("created");
-        event.setStartDatetime("2022-11-18 00:00:00");
-        event.setEndDatetime("2022-11-18 10:00:00");
-        event.setVenue("Halifax");
-        event.setMaxCapacity(10);
-        event.setUpdatedAt("2022-10-11 00:00:00");
-        event.setCreatedAt("2022-10-11 00:00:00");
+    void addMemberTest() throws Exception {
+        Mockito.doReturn(1).when(eventMemberRepository).save(any());
 
-        String inputJson = super.mapToJson(event);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Event created successfully", content);
-
-        uri = "/api/users/";
-        User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setVerified(false);
-        user.setStatus("created");
-        user.setUpdatedAt("2022-11-17 00:00:00");
-        user.setCreatedAt("2022-11-17 00:00:00");
-        user.setId(201);
-
-        inputJson = super.mapToJson(user);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
-
-        uri = "/api/members/";
-        EventMember member = getMember();
-        member.setId(201);
-        member.setEventId(201);
-        member.setUserId(201);
-        inputJson = super.mapToJson(member);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member created successfully", content);
+        mvc.perform(MockMvcRequestBuilders.post("/api/members/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getMember())))
+            .andExpect(status().isCreated())
+            .andExpect(content().string("Member created successfully"));
     }
 
     @Test
-    @Order(2)
-    public void getAllMembersTest() throws Exception {
-        String uri = "/api/members/";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        EventMember[] memberlist = super.mapFromJson(content, EventMember[].class);
-        assertTrue(memberlist.length >= 0);
+    void addMemberFailedTest() throws Exception {
+        Mockito.when(eventMemberRepository.save(getMember())).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/members/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getMember())))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Order(3)
-    public void getMemberTest() throws Exception {
-        String uri = "/api/events/";
-        Event event = new Event();
-        event.setId(202);
-        event.setTitle("Test Title");
-        event.setEventType(EventType.INDIVIDUAL);
-        event.setDescription("test description");
-        event.setStatus("created");
-        event.setStartDatetime("2022-11-18 00:00:00");
-        event.setEndDatetime("2022-11-18 10:00:00");
-        event.setVenue("Halifax");
-        event.setMaxCapacity(10);
-        event.setUpdatedAt("2022-10-11 00:00:00");
-        event.setCreatedAt("2022-10-11 00:00:00");
+    void getAllMembersTest() throws Exception {
+        List<EventMember> eventMembers = new ArrayList<>();
+        eventMembers.add(getMember());
+        Mockito.when(eventMemberRepository.findAll()).thenReturn(eventMembers);
 
-        String inputJson = super.mapToJson(event);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Event created successfully", content);
-
-        uri = "/api/users/";
-        User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setVerified(false);
-        user.setStatus("created");
-        user.setUpdatedAt("2022-11-17 00:00:00");
-        user.setCreatedAt("2022-11-17 00:00:00");
-        user.setId(202);
-
-        inputJson = super.mapToJson(user);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
-
-        uri = "/api/members/";
-        EventMember member = getMember();
-        member.setId(202);
-        member.setEventId(202);
-        member.setUserId(202);
-        inputJson = super.mapToJson(member);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member created successfully", content);
-
-        uri = "/api/members/202";
-        result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].status").value("active"));
     }
 
     @Test
-    @Order(4)
-    public void getMemberNotFoundTest() throws Exception {
-        String uri = "/api/members/999";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void getMemberTest() throws Exception {
+        Mockito.when(eventMemberRepository.getById(99)).thenReturn(Optional.of(getMember()));
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.status").value("active"));
     }
 
     @Test
-    @Order(5)
-    public void updateMemberTest() throws Exception {
-        String uri = "/api/events/";
-        Event event = new Event();
-        event.setId(203);
-        event.setTitle("Test Title");
-        event.setEventType(EventType.INDIVIDUAL);
-        event.setDescription("test description");
-        event.setStatus("created");
-        event.setStartDatetime("2022-11-18 00:00:00");
-        event.setEndDatetime("2022-11-18 10:00:00");
-        event.setVenue("Halifax");
-        event.setMaxCapacity(10);
-        event.setUpdatedAt("2022-10-11 00:00:00");
-        event.setCreatedAt("2022-10-11 00:00:00");
-
-        String inputJson = super.mapToJson(event);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Event created successfully", content);
-
-        uri = "/api/users/";
-        User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setVerified(false);
-        user.setStatus("created");
-        user.setUpdatedAt("2022-11-17 00:00:00");
-        user.setCreatedAt("2022-11-17 00:00:00");
-        user.setId(203);
-
-        inputJson = super.mapToJson(user);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
-
-        uri = "/api/members/";
-        EventMember member = getMember();
-        member.setId(203);
-        member.setEventId(203);
-        member.setUserId(203);
-        inputJson = super.mapToJson(member);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member created successfully", content);
-
-        uri = "/api/members/203";
-        EventMember member1 = getMember();
-        member1.setId(203);
-        member1.setEventId(203);
-        member1.setUserId(203);
-        member1.setStatus("updatedStatus");
-        inputJson = super.mapToJson(member1);
-        result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member updated successfully", content);
+    void getMemberNotFoundTest() throws Exception {
+        Mockito.when(eventMemberRepository.getById(999)).thenReturn(Optional.empty());
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
     }
 
     @Test
-    @Order(6)
-    public void updateMemberNotFoundTest() throws Exception {
-        String uri = "/api/members/999";
-        EventMember member = getMember();
-        String inputJson = super.mapToJson(member);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void updateMemberTest() throws Exception {
+        Mockito.when(eventMemberRepository.getById(99)).thenReturn(Optional.of(getMember()));
+        Mockito.when(eventMemberRepository.update(getMember())).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/members/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getMember())))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Member updated successfully"));
     }
 
     @Test
-    @Order(7)
-    public void deleteMemberTest() throws Exception {
-        String uri = "/api/members/201";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Member deleted successfully", content);
+    void updateMemberNotFoundTest() throws Exception {
+        Mockito.when(eventMemberRepository.getById(999)).thenReturn(Optional.empty());
+        Mockito.when(eventMemberRepository.update(getMember())).thenReturn(0);
 
-        String deleteUri = "/api/members/202";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.put("/api/members/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getMember())))
+            .andExpect(status().isNotFound());
+    }
 
-        deleteUri = "/api/members/203";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Member deleted successfully", content);
+    @Test
+    void deleteMemberTest() throws Exception {
+        Mockito.when(eventMemberRepository.deleteById(99)).thenReturn(1);
 
-        deleteUri = "/api/users/201";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.delete("/api/members/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Member deleted successfully"));
+    }
+    
+    @Test
+    void getMembersByEventIdTest() throws Exception {
+        List<EventMember> eventMembers = new ArrayList<>();
+        eventMembers.add(getMember());
+        Mockito.when(eventMemberRepository.getMembersByEventId(99)).thenReturn(eventMembers);
 
-        deleteUri = "/api/users/202";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
-
-        deleteUri = "/api/users/203";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
-
-        deleteUri = "/api/events/201";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Event deleted successfully", content);
-
-        deleteUri = "/api/events/202";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Event deleted successfully", content);
-
-        deleteUri = "/api/events/203";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Event deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.get("/api/members/events/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].status").value("active"));
     }
 }

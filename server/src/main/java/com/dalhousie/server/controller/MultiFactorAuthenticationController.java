@@ -5,7 +5,7 @@ import com.dalhousie.server.email.IEmail;
 import com.dalhousie.server.model.Authentication;
 import com.dalhousie.server.model.EmailDetails;
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.AuthenticationRepository;
+import com.dalhousie.server.persistence.IAuthenticationRepository;
 import com.dalhousie.server.persistence.UserRepository;
 import com.dalhousie.server.utilities.RNG;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class MultiFactorAuthenticationController {
     
     @Autowired
-    private AuthenticationRepository authenticationRepository;
+    private IAuthenticationRepository authenticationRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -82,8 +82,11 @@ public class MultiFactorAuthenticationController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        authenticationRepository.deleteById(id);
-        return new ResponseEntity<>("Authentication deleted successfully", HttpStatus.OK);
+        if(authenticationRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Authentication deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

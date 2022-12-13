@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.Donation;
-import com.dalhousie.server.persistence.DonationRepository;
+import com.dalhousie.server.persistence.IDonationRepository;
 
 @RestController
 @RequestMapping("/api/donations")
 public class DonationController {
 
     @Autowired
-    private DonationRepository donationRepository;
+    private IDonationRepository donationRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -72,7 +72,10 @@ public class DonationController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        donationRepository.deleteById(id);
-        return new ResponseEntity<>("Donation deleted successfully", HttpStatus.OK);
+        if(donationRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Donation deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

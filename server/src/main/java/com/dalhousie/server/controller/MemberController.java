@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.EventMember;
-import com.dalhousie.server.persistence.EventMemberRepository;
+import com.dalhousie.server.persistence.IEventMemberRepository;
 
 @RestController
 @RequestMapping("/api/members")
 public class MemberController {
     
     @Autowired
-    private EventMemberRepository eventMemberRepository;
+    private IEventMemberRepository eventMemberRepository;
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,7 +70,10 @@ public class MemberController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        eventMemberRepository.deleteById(id);
-        return new ResponseEntity<>("Member deleted successfully", HttpStatus.OK);
+        if(eventMemberRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Member deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.dalhousie.server.model.Venues;
-import com.dalhousie.server.persistence.VenueRepository;
+import com.dalhousie.server.persistence.IVenueRepository;
 
 @RestController
 @RequestMapping("/api/venues")
 public class VenueController {
     
     @Autowired
-    private VenueRepository venueRepository;
+    private IVenueRepository venueRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -72,8 +72,11 @@ public class VenueController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        venueRepository.deleteById(id);
-        return new ResponseEntity<>("Venue deleted successfully", HttpStatus.OK);
+        if(venueRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Venue deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

@@ -17,14 +17,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.dalhousie.server.model.Messages;
-import com.dalhousie.server.persistence.MessagesRepository;
+import com.dalhousie.server.persistence.IMessagesRepository;
 
 @RestController
 @RequestMapping("/api/messages")
 public class MessagesController {
     
     @Autowired
-    private MessagesRepository messagesRepository;
+    private IMessagesRepository messagesRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,7 +65,10 @@ public class MessagesController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        messagesRepository.deleteById(id);
-        return new ResponseEntity<>("Message deleted successfully", HttpStatus.OK);
+        if(messagesRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Message deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

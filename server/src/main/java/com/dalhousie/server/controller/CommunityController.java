@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.Community;
-import com.dalhousie.server.persistence.CommunityRepository;
+import com.dalhousie.server.persistence.ICommunityRepository;
 
 @RestController
 @RequestMapping("/api/community")
 public class CommunityController {
 
     @Autowired
-    private CommunityRepository communityRepository;
+    private ICommunityRepository communityRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,7 +63,10 @@ public class CommunityController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        communityRepository.deleteById(id);
-        return new ResponseEntity<>("Community deleted successfully", HttpStatus.OK);
+        if(communityRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Community deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

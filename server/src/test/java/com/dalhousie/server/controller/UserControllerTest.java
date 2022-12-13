@@ -1,24 +1,32 @@
 package com.dalhousie.server.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.AfterTestClass;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.User;
+import com.dalhousie.server.persistence.UserRepository;
+
 
 @SpringBootTest
 @ActiveProfiles("test")
 public class UserControllerTest extends AbstractTest {
+
+    @MockBean
+    UserRepository userRepository;
 
     @Override
     @BeforeEach
@@ -28,11 +36,12 @@ public class UserControllerTest extends AbstractTest {
 
     private User getUser() {
         User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
+        user.setId(99);
+        user.setUserName("testuser");
+        user.setEmail("test@dal.ca");
+        user.setPassword("SWHSWQIWHIQWHIQ/==");
+        user.setFirstName("Test");
+        user.setLastName("Test");
         user.setVerified(false);
         user.setStatus("created");
         user.setUpdatedAt("2022-11-17 00:00:00");
@@ -41,99 +50,132 @@ public class UserControllerTest extends AbstractTest {
     }
 
     @Test
-    @Order(1)
-    public void createUserTest() throws Exception {
-        String uri = "/api/users/";
-        User user = getUser();
-        user.setId(99);
-        String inputJson = super.mapToJson(user);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
+    void createUserTest() throws Exception {
+        Mockito.doReturn(1).when(userRepository).save(any());
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/users/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getUser())))
+            .andExpect(status().isCreated())
+            .andExpect(content().string("User created successfully"));
     }
 
     @Test
-    @Order(2)
-    public void getAllUsersTest() throws Exception {
-        String uri = "/api/users/";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        User[] userlist = super.mapFromJson(content, User[].class);
-        assertTrue(userlist.length >= 0);
+    void createUserFailedTest() throws Exception {
+        Mockito.when(userRepository.save(getUser())).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/users/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getUser())))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Order(3)
-    public void getUserTest() throws Exception {
-        String uri = "/api/users/99";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
+    void getAllUsersTest() throws Exception {
+        List<User> users = new ArrayList<>();
+        users.add(getUser());
+        Mockito.when(userRepository.findAll()).thenReturn(users);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].userName").value("testuser"));
     }
 
     @Test
-    @Order(4)
-    public void getUserNotFoundTest() throws Exception {
-        String uri = "/api/users/999";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void getUserTest() throws Exception {
+        Mockito.when(userRepository.getById(99)).thenReturn(Optional.of(getUser()));
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.userName").value("testuser"));
     }
 
     @Test
-    @Order(5)
-    public void updateUserTest() throws Exception {
-        String createUri = "/api/users/";
-        User createUser = getUser();
-        createUser.setId(88);
-        String inputCreateJson = super.mapToJson(createUser);
-        MvcResult createResult = mvc.perform(MockMvcRequestBuilders.post(createUri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputCreateJson)).andReturn();
-        int createStatus = createResult.getResponse().getStatus();
-        assertEquals(201, createStatus);
-
-        String uri = "/api/users/88";
-        User user = getUser();
-        user.setId(88);
-        String inputJson = super.mapToJson(user);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("User updated successfully", content);
+    void getUserNotFoundTest() throws Exception {
+        Mockito.when(userRepository.getById(99)).thenReturn(Optional.empty());
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
     }
 
     @Test
-    @Order(6)
-    public void updateUserWhenNotFoundTest() throws Exception {
-        String uri = "/api/users/999";
-        User user = getUser();
-        String inputJson = super.mapToJson(user);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void updateUserTest() throws Exception {
+        Mockito.when(userRepository.getById(99)).thenReturn(Optional.of(getUser()));
+        Mockito.when(userRepository.update(getUser())).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/users/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getUser())))
+            .andExpect(status().isOk())
+            .andExpect(content().string("User updated successfully"));
     }
 
     @Test
-    @Order(7)
-    @AfterTestClass
-    public void deleteUserTest() throws Exception {
-        String uri = "/api/users/99";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
+    void updateUserWhenNotFoundTest() throws Exception {
+        Mockito.when(userRepository.getById(999)).thenReturn(Optional.empty());
+        Mockito.when(userRepository.update(getUser())).thenReturn(0);
 
-        String deleteUri = "/api/users/88";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.put("/api/users/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getUser())))
+            .andExpect(status().isNotFound());
     }
 
+    @Test
+    void deleteUserTest() throws Exception {
+        Mockito.when(userRepository.deleteById(99)).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/users/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("User deleted successfully"));
+    }
+
+    @Test
+    void deleteUserWhenNotFound() throws Exception {
+        Mockito.when(userRepository.deleteById(999)).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/users/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void getByUsernameTest() throws Exception {
+        Mockito.when(userRepository.getByUserName("testuser")).thenReturn(Optional.of(getUser()));
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/username/{username}", "testuser")
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.userName").value("testuser"));
+    }
+
+    @Test
+    void getByUsernameWhenNotFoundTest() throws Exception {
+        Mockito.when(userRepository.getByUserName("test1user")).thenReturn(Optional.empty());
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/username/{username}", "test1user")
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getByEmailTest() throws Exception {
+        Mockito.when(userRepository.getByEmail("test@dal.ca")).thenReturn(Optional.of(getUser()));
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/email/{email}", "test@dal.ca")
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.email").value("test@dal.ca"));
+    }
+
+    @Test
+    void getByEmailWhenNotFoundTest() throws Exception {
+        Mockito.when(userRepository.getByEmail("test1@dal.ca")).thenReturn(Optional.empty());
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/users/email/{email}", "test1@dal.ca")
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
+    }
 }

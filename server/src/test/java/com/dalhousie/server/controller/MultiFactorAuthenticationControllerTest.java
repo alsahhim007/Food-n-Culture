@@ -2,25 +2,32 @@ package com.dalhousie.server.controller;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Authentication;
-import com.dalhousie.server.model.User;
+import com.dalhousie.server.persistence.AuthenticationRepository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.AfterTestClass;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @ActiveProfiles("test")
 public class MultiFactorAuthenticationControllerTest extends AbstractTest {
     
+    @MockBean
+    AuthenticationRepository authenticationRepository;
+
     @Override
     @BeforeEach
     public void setUp() {
@@ -36,157 +43,85 @@ public class MultiFactorAuthenticationControllerTest extends AbstractTest {
     }
 
     @Test
-    @Order(1)
-    public void createAuthTest() throws Exception {
-        String uri = "/api/users/";
-        User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setVerified(false);
-        user.setStatus("created");
-        user.setUpdatedAt("2022-11-17 00:00:00");
-        user.setCreatedAt("2022-11-17 00:00:00");
-        user.setId(1000);
+    void createAuthTest() throws Exception {
+        Mockito.doReturn(1).when(authenticationRepository).save(any());
 
-        String inputJson = super.mapToJson(user);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
-        
-        uri = "/api/authentication/";
-        Authentication auth = getAuthDetails();
-        auth.setId(1000);
-        auth.setUserId(1000);
-        inputJson = super.mapToJson(auth);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Authentication created successfully", content);
+        mvc.perform(MockMvcRequestBuilders.post("/api/authentication/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAuthDetails())))
+            .andExpect(status().isCreated())
+            .andExpect(content().string("Authentication created successfully"));
     }
 
     @Test
-    @Order(2)
-    public void getAllAuthTest() throws Exception {
-        String uri = "/api/authentication/";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        Authentication[] authlist = super.mapFromJson(content, Authentication[].class);
-        assertTrue(authlist.length >= 0);
+    void createAuthFailedTest() throws Exception {
+        Mockito.when(authenticationRepository.save(getAuthDetails())).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/authentication/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAuthDetails())))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Order(3)
-    public void getAuthTest() throws Exception {
-        String uri = "/api/authentication/1000";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
+    void getAllAuthTest() throws Exception {
+        List<Authentication> auths = new ArrayList<>();
+        auths.add(getAuthDetails());
+        Mockito.when(authenticationRepository.findAll()).thenReturn(auths);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/authentication/")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].expired").value(false));
     }
 
     @Test
-    @Order(4)
-    public void getAuthNotFoundTest() throws Exception {
-        String uri = "/api/authentication/999";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void getAuthTest() throws Exception {
+        Mockito.when(authenticationRepository.getById(99)).thenReturn(Optional.of(getAuthDetails()));
+        mvc.perform(MockMvcRequestBuilders.get("/api/authentication/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.expired").value(false));
     }
 
     @Test
-    @Order(5)
-    public void updateAuthTest() throws Exception {
-        String uri = "/api/users/";
-        User user = new User();
-        user.setUserName(faker.name().username());
-        user.setEmail(faker.internet().emailAddress());
-        user.setPassword(faker.internet().password());
-        user.setFirstName(faker.name().firstName());
-        user.setLastName(faker.name().lastName());
-        user.setVerified(false);
-        user.setStatus("created");
-        user.setUpdatedAt("2022-11-17 00:00:00");
-        user.setCreatedAt("2022-11-17 00:00:00");
-        user.setId(1001);
-
-        String inputJson = super.mapToJson(user);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("User created successfully", content);
-        
-        uri = "/api/authentication/";
-        Authentication auth = getAuthDetails();
-        auth.setId(1001);
-        auth.setUserId(1001);
-        inputJson = super.mapToJson(auth);
-        result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Authentication created successfully", content);
-
-        uri = "/api/authentication/1001";
-        auth = getAuthDetails();
-        auth.setId(1001);
-        auth.setUserId(1001);
-        inputJson = super.mapToJson(auth);
-        result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Authentication updated successfully", content);
+    void getAuthNotFoundTest() throws Exception {
+        Mockito.when(authenticationRepository.getById(999)).thenReturn(Optional.empty());
+        mvc.perform(MockMvcRequestBuilders.get("/api/authentication/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
     }
 
     @Test
-    @Order(6)
-    public void updateAuthWhenNotFoundTest() throws Exception {
-        String uri = "/api/authentication/999";
-        Authentication auth = getAuthDetails();
-        String inputJson = super.mapToJson(auth);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void updateAuthTest() throws Exception {
+        Mockito.when(authenticationRepository.getById(99)).thenReturn(Optional.of(getAuthDetails()));
+        Mockito.when(authenticationRepository.update(getAuthDetails())).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/authentication/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAuthDetails())))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Authentication updated successfully"));
     }
 
     @Test
-    @Order(7)
-    @AfterTestClass
-    public void deleteUserTest() throws Exception {
-        String uri = "/api/authentication/1000";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Authentication deleted successfully", content);
+    void updateAuthWhenNotFoundTest() throws Exception {
+        Mockito.when(authenticationRepository.getById(999)).thenReturn(Optional.empty());
+        Mockito.when(authenticationRepository.update(getAuthDetails())).thenReturn(0);
 
-        String deleteUri = "/api/authentication/1001";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Authentication deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.put("/api/authentication/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAuthDetails())))
+            .andExpect(status().isNotFound());
+    }
 
-        uri = "/api/users/1000";
-        result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
+    @Test
+    void deleteUserTest() throws Exception {
+        Mockito.when(authenticationRepository.deleteById(99)).thenReturn(1);
 
-        uri = "/api/users/1001";
-        result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("User deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.delete("/api/authentication/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Authentication deleted successfully"));
     }
 }

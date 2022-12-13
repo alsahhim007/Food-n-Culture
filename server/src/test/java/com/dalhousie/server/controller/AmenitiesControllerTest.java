@@ -1,18 +1,23 @@
 package com.dalhousie.server.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import org.junit.jupiter.api.Order;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Amenities;
+import com.dalhousie.server.persistence.AmenitiesRepository;
 
 import org.springframework.http.MediaType;
 
@@ -20,6 +25,9 @@ import org.springframework.http.MediaType;
 @ActiveProfiles("test")
 public class AmenitiesControllerTest extends AbstractTest {
     
+    @MockBean
+    AmenitiesRepository amenitiesRepository;
+
     @Override
     @BeforeEach
     public void setUp() {
@@ -28,106 +36,115 @@ public class AmenitiesControllerTest extends AbstractTest {
 
     private Amenities getAmenities() {
         Amenities amenities = new Amenities();
-        amenities.setName(faker.name().firstName());
-        amenities.setCategory("xyz");
+        amenities.setName("Stove");
+        amenities.setCategory("Utensil");
         amenities.setUpdatedAt("2022-10-11 00:00:00");
         amenities.setCreatedAt("2022-10-11 00:00:00");
         return amenities;
     }
 
     @Test
-    @Order(1)
-    public void createAmenitiesTest() throws Exception {
-        String uri = "/api/amenities/";
-        Amenities amenities = getAmenities();
-        amenities.setId(99);
-        String inputJson = super.mapToJson(amenities);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Amenities created successfully", content);
+    void createAmenitiesTest() throws Exception {
+        Mockito.doReturn(1).when(amenitiesRepository).save(any());
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/amenities/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAmenities())))
+            .andExpect(status().isCreated())
+            .andExpect(content().string("Amenities created successfully"));
     }
 
     @Test
-    @Order(2)
-    public void getAllAmenitiesTest() throws Exception {
-        String uri = "/api/amenities/";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        Amenities[] amenitieslist = super.mapFromJson(content, Amenities[].class);
-        assertTrue(amenitieslist.length >= 0);
+    void createAmenitiesFailedTest() throws Exception {
+        Mockito.when(amenitiesRepository.save(getAmenities())).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/amenities/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAmenities())))
+            .andExpect(status().isBadRequest());
     }
 
     @Test
-    @Order(3)
-    public void getAmenitiesTest() throws Exception {
-        String uri = "/api/amenities/99";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
+    void getAllAmenitiesTest() throws Exception {
+        List<Amenities> amenities = new ArrayList<>();
+        amenities.add(getAmenities());
+        Mockito.when(amenitiesRepository.findAll()).thenReturn(amenities);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/amenities/")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].name").value("Stove"));
     }
 
     @Test
-    @Order(4)
-    public void getAmenitiesNotFoundTest() throws Exception {
-        String uri = "/api/amenities/999";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void getAmenitiesTest() throws Exception {
+        Mockito.when(amenitiesRepository.getById(99)).thenReturn(Optional.of(getAmenities()));
+        mvc.perform(MockMvcRequestBuilders.get("/api/amenities/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.name").value("Stove"));
     }
 
     @Test
-    @Order(5)
-    public void updateAmenitiesTest() throws Exception {
-        String createUri = "/api/amenities/";
-        Amenities createAmenities = getAmenities();
-        createAmenities.setId(88);
-        String inputCreateJson = super.mapToJson(createAmenities);
-        MvcResult createResult = mvc.perform(MockMvcRequestBuilders.post(createUri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputCreateJson)).andReturn();
-        int createStatus = createResult.getResponse().getStatus();
-        assertEquals(201, createStatus);
-
-        String uri = "/api/amenities/88";
-        Amenities amenities = getAmenities();
-        amenities.setId(88);
-        String inputJson = super.mapToJson(amenities);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Amenities updated successfully", content);
+    void getAmenitiesNotFoundTest() throws Exception {
+        Mockito.when(amenitiesRepository.getById(99)).thenReturn(Optional.empty());
+        mvc.perform(MockMvcRequestBuilders.get("/api/amenities/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotFound());
     }
 
     @Test
-    @Order(6)
-    public void updateAmenitiesNotFoundTest() throws Exception {
-        String uri = "/api/amenities/999";
-        Amenities amenities = getAmenities();
-        String inputJson = super.mapToJson(amenities);
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(404, status);
+    void updateAmenitiesTest() throws Exception {
+        Mockito.when(amenitiesRepository.getById(99)).thenReturn(Optional.of(getAmenities()));
+        Mockito.when(amenitiesRepository.update(getAmenities())).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/amenities/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAmenities())))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Amenities updated successfully"));
     }
 
     @Test
-    @Order(7)
-    public void deleteAmenitiesTest() throws Exception {
-        String uri = "/api/amenities/99";
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-        int status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = result.getResponse().getContentAsString();
-        assertEquals("Amenities deleted successfully", content);
+    void updateAmenitiesNotFoundTest() throws Exception {
+        Mockito.when(amenitiesRepository.getById(999)).thenReturn(Optional.empty());
+        Mockito.when(amenitiesRepository.update(getAmenities())).thenReturn(0);
 
-        String deleteUri = "/api/amenities/88";
-        result = mvc.perform(MockMvcRequestBuilders.delete(deleteUri)).andReturn();
-        status = result.getResponse().getStatus();
-        assertEquals(200, status);
-        content = result.getResponse().getContentAsString();
-        assertEquals("Amenities deleted successfully", content);
+        mvc.perform(MockMvcRequestBuilders.put("/api/amenities/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(super.mapToJson(getAmenities())))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void deleteAmenitiesTest() throws Exception {
+        Mockito.when(amenitiesRepository.deleteById(99)).thenReturn(1);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/amenities/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Amenities deleted successfully"));
+    }
+
+    @Test
+    void deleteAmenitiesNotFoundTest() throws Exception {
+        Mockito.when(amenitiesRepository.deleteById(999)).thenReturn(0);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/amenities/{id}", 999)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void getAllAmenitiesByVenueIdTest() throws Exception {
+        List<Amenities> amenities = new ArrayList<>();
+        amenities.add(getAmenities());
+        
+        Mockito.when(amenitiesRepository.getAllAmenitiesByVenueId(99)).thenReturn(amenities);
+        mvc.perform(MockMvcRequestBuilders.get("/api/amenities/venues/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].name").value("Stove"));
     }
     
 }

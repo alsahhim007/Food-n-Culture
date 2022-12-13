@@ -85,7 +85,7 @@ public class HostFragment extends Fragment {
         event.setStatus("CREATED");
         event.setEndDatetime(endDate.getText().toString());
         event.setDescription(description.getText().toString());
-        event.setMaxCapacity(Integer.valueOf(capacity.getText().toString()));
+        event.setMaxCapacity(Integer.parseInt(capacity.getText().toString()));
         event.setEventType(EventType.COMMUNITY);
         return ApiFacade.getInstance().getEventApi().save(event);
     }

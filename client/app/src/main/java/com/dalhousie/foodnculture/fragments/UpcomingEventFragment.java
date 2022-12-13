@@ -21,7 +21,8 @@ import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Event;
 import com.dalhousie.foodnculture.models.EventMember;
 import com.dalhousie.foodnculture.models.User;
-import com.dalhousie.foodnculture.utilities.Formatter;
+import com.dalhousie.foodnculture.utilities.EventDateAndVenueFormatter;
+import com.dalhousie.foodnculture.utilities.IFormatter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +45,7 @@ public class UpcomingEventFragment extends Fragment {
         LinearLayout event2 = upcomingEventsView.findViewById(R.id.linearlayout2);
         LinearLayout pastEvent1 = upcomingEventsView.findViewById(R.id.linearlayout3);
         LinearLayout pastEvent2 = upcomingEventsView.findViewById(R.id.linearlayout4);
-        Formatter formatter = new Formatter();
+        IFormatter<Event> formatter = new EventDateAndVenueFormatter();
 
         List<Event> events = getEvents();
         List<Event> upcomingEvents = getUpcomingEvents(events);
@@ -52,12 +53,12 @@ public class UpcomingEventFragment extends Fragment {
         if (upcomingEvents.size() > 0) {
             event1Title.setText(upcomingEvents.get(0).getTitle());
             TextView txtTimeLocation1 = upcomingEventsView.findViewById(R.id.txtDate);
-            txtTimeLocation1.setText(formatter.formatDateAndVenue(upcomingEvents.get(0)));
+            txtTimeLocation1.setText(formatter.format(upcomingEvents.get(0)));
             if (upcomingEvents.size() > 1) {
                 TextView event2Title = upcomingEventsView.findViewById(R.id.txtEvent2);
                 event2Title.setText(upcomingEvents.get(1).getTitle());
                 TextView txtTimeLocation2 = upcomingEventsView.findViewById(R.id.txtDate2);
-                txtTimeLocation2.setText(formatter.formatDateAndVenue(upcomingEvents.get(1)));
+                txtTimeLocation2.setText(formatter.format(upcomingEvents.get(1)));
             }
         }
 
@@ -66,12 +67,12 @@ public class UpcomingEventFragment extends Fragment {
             TextView pastEvent1Title = upcomingEventsView.findViewById(R.id.txtEvent3);
             pastEvent1Title.setText(pastEvents.get(0).getTitle());
             TextView txtPastTimeLocation1 = upcomingEventsView.findViewById(R.id.txtDate3);
-            txtPastTimeLocation1.setText(formatter.formatDateAndVenue(pastEvents.get(0)));
+            txtPastTimeLocation1.setText(formatter.format(pastEvents.get(0)));
             if (pastEvents.size() > 1) {
                 TextView pastEvent2Title = upcomingEventsView.findViewById(R.id.txtEvent4);
                 pastEvent2Title.setText(pastEvents.get(1).getTitle());
                 TextView txtPastTimeLocation2 = upcomingEventsView.findViewById(R.id.txtDate4);
-                txtPastTimeLocation2.setText(formatter.formatDateAndVenue(pastEvents.get(1)));
+                txtPastTimeLocation2.setText(formatter.format(pastEvents.get(1)));
             }
         }
         if (upcomingEvents.size() > 0) {

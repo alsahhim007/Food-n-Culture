@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
@@ -127,9 +130,9 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy () {
+    public void onDestroy() {
         readMessageHandler.removeCallbacks(runnable);
-        super.onDestroy ();
+        super.onDestroy();
     }
 }
 

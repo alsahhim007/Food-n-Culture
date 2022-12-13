@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup_screen);
 
-        Button signUpButton = (Button) findViewById(R.id.signup_button);
+        Button signUpButton = findViewById(R.id.signup_button);
         signUpButton.setOnClickListener(this);
 
-        Button loginButton = (Button) findViewById(R.id.signin_button);
+        Button loginButton = findViewById(R.id.signin_button);
         loginButton.setOnClickListener(this);
 
     }

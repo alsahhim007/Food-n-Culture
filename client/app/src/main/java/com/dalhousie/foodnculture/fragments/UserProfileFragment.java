@@ -31,13 +31,30 @@ public class UserProfileFragment extends Fragment {
     public UserProfileFragment() {
     }
 
+    SharedPreferences sharedPreferences;
+    Optional<User> user;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "");
+        if (email.length() > 0) {
+            user = ApiFacade.getInstance().getUserApi().getByEmail(email);
+        }
         View v = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
         back_button.setOnClickListener(view -> requireActivity().onBackPressed());
+
+        TextView userProfileName = v.findViewById(R.id.txtUserProfileName);
+        TextView userUserName = v.findViewById(R.id.txtUserUsername);
+
+        if (user.isPresent()) {
+            userProfileName.setText(String.format("%s %s", user.get().getFirstName(), user.get().getLastName()));
+            userUserName.setText(String.format("@%s", user.get().getUserName()));
+        }
+
 
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
         TextView checkfriends = v.findViewById(R.id.friends);
@@ -89,30 +106,22 @@ public class UserProfileFragment extends Fragment {
         Button btnNo = account_delete_bsd.findViewById(R.id.btnNo);
 
         if (btnYes != null) {
-            btnYes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
-                    String email = sharedPreferences.getString("email", "");
-                    if (email.length() > 0) {
-                        Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
-                        if (user.isPresent()) {
-                            int status = ApiFacade.getInstance().getUserApi().delete(user.get());
-                            if (status == 1) {
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean("logged", false);
-                                editor.putString("email", null);
-                                editor.apply();
-                                account_delete_bsd.cancel();
-                                Intent mainIntent = new Intent(requireContext(), MainActivity.class);
-                                startActivity(mainIntent);
-                                requireActivity().finishAffinity();
-                                requireActivity().finish();
-                            } else {
-                                Toast.makeText(getContext(), "There is an error while deleting user", Toast.LENGTH_SHORT).show();
-                                account_delete_bsd.cancel();
-                            }
-                        }
+            btnYes.setOnClickListener(view -> {
+                if (user.isPresent()) {
+                    int status = ApiFacade.getInstance().getUserApi().delete(user.get());
+                    if (status == 1) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("logged", false);
+                        editor.putString("email", null);
+                        editor.apply();
+                        account_delete_bsd.cancel();
+                        Intent mainIntent = new Intent(requireContext(), MainActivity.class);
+                        startActivity(mainIntent);
+                        requireActivity().finishAffinity();
+                        requireActivity().finish();
+                    } else {
+                        Toast.makeText(getContext(), "There is an error while deleting user", Toast.LENGTH_SHORT).show();
+                        account_delete_bsd.cancel();
                     }
                 }
             });
@@ -131,22 +140,19 @@ public class UserProfileFragment extends Fragment {
         Button btnNo = logout_bsd.findViewById(R.id.btnNo);
 
         if (btnYes != null) {
-            btnYes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
-                    String email = sharedPreferences.getString("email", "");
-                    if (email.length() > 0) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("logged", false);
-                        editor.putString("email", null);
-                        editor.apply();
-                        logout_bsd.cancel();
-                        Intent mainIntent = new Intent(requireContext(), MainActivity.class);
-                        startActivity(mainIntent);
-                        requireActivity().finishAffinity();
-                        requireActivity().finish();
-                    }
+            btnYes.setOnClickListener(view -> {
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+                String email = sharedPreferences.getString("email", "");
+                if (email.length() > 0) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("logged", false);
+                    editor.putString("email", null);
+                    editor.apply();
+                    logout_bsd.cancel();
+                    Intent mainIntent = new Intent(requireContext(), MainActivity.class);
+                    startActivity(mainIntent);
+                    requireActivity().finishAffinity();
+                    requireActivity().finish();
                 }
             });
         }

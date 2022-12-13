@@ -26,8 +26,8 @@ public class PersonalDetailsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_personal_details, container, false);
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
 
-        EditText EditName = v.findViewById(R.id.txtName);
-        EditText EditEmail = v.findViewById(R.id.txtEmail);
+        EditText EditName = v.findViewById(R.id.txtProfileName);
+        EditText EditEmail = v.findViewById(R.id.txtProfileEmail);
 
         back_button.setOnClickListener(view -> getActivity().onBackPressed());
 

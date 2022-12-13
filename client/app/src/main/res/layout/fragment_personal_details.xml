@@ -39,7 +39,7 @@
             android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
 
             <EditText
-                android:id="@+id/txtName"
+                android:id="@+id/txtProfileName"
                 style="@style/txtUrbanistromanmedium18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtProfileEmail"
                 style="@style/txtUrbanistromanmedium18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

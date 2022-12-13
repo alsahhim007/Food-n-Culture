@@ -83,7 +83,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/txtEdwardFord"
+                                android:id="@+id/txtUserProfileName"
                                 style="@style/txtUrbanistromanbold24"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                                 android:text="@string/lbl_edward_ford" />
 
                             <TextView
-                                android:id="@+id/txtFullname"
+                                android:id="@+id/txtUserUsername"
                                 style="@style/txtUrbanistromanregular14"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

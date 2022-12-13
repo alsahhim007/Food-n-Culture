@@ -90,4 +90,16 @@ public class MessageApi implements IMessagesOperation {
         }
         return Optional.ofNullable(message);
     }
+
+    @Override
+    public List<Messages> getAllMessagesBetweenUsers(Integer user1, Integer user2) {
+        Messages[] messages = new Messages[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/chats/" + user1 + "/" + user2);
+            messages = Mapper.mapFromJson(buffer.toString(), Messages[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(messages);
+    }
 }

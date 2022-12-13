@@ -26,9 +26,7 @@ public class PersonalDetailsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     Optional<User> user;
 
-    public PersonalDetailsFragment() {
-        // Required empty public constructor
-    }
+    public PersonalDetailsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +38,6 @@ public class PersonalDetailsFragment extends Fragment {
             user = ApiFacade.getInstance().getUserApi().getByEmail(email);
         }
 
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_personal_details, container, false);
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
 
@@ -61,10 +58,7 @@ public class PersonalDetailsFragment extends Fragment {
         updateFirstNameButton.setOnClickListener(view -> {
             if (user.isPresent()){
                 String updatedName = EditFirstName.getText().toString();
-
-                System.out.println(updatedName);
                 user.get().setFirstName(updatedName);
-
                 if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
                     Toast.makeText(getContext(), "First Name updated", Toast.LENGTH_SHORT).show();
                 }
@@ -77,10 +71,7 @@ public class PersonalDetailsFragment extends Fragment {
         updateLastNameButton.setOnClickListener(view -> {
             if (user.isPresent()){
                 String updatedName = EditLastName.getText().toString();
-
-                System.out.println(updatedName);
                 user.get().setLastName(updatedName);
-
                 if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
                     Toast.makeText(getContext(), "Last Name updated", Toast.LENGTH_SHORT).show();
                 }
@@ -93,9 +84,7 @@ public class PersonalDetailsFragment extends Fragment {
         updateEmailButton.setOnClickListener(view -> {
             if (user.isPresent()){
                 String updatedEmail = EditFirstName.getText().toString();
-
                 user.get().setEmail(updatedEmail);
-
                 if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
                     Toast.makeText(getContext(), "Email updated", Toast.LENGTH_SHORT).show();
                 }
@@ -104,9 +93,7 @@ public class PersonalDetailsFragment extends Fragment {
                 }
             }
         });
-
         back_button.setOnClickListener(view -> getActivity().onBackPressed());
-
         return v;
     }
 }

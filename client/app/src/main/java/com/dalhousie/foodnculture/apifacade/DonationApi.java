@@ -101,4 +101,16 @@ public class DonationApi implements IDonationOperation {
         }
         return Arrays.asList(donations);
     }
+
+    @Override
+    public double getTotalDonationByEventId(Integer eventId) {
+        double totalDonation = 0;
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/" + eventId);
+            totalDonation = Mapper.mapFromJson(buffer.toString(), Double.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return totalDonation;
+    }
 }

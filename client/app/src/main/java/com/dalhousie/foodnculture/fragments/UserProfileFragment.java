@@ -33,12 +33,13 @@ public class UserProfileFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
     Optional<User> user;
+    String email;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
-        String email = sharedPreferences.getString("email", "");
+        email = sharedPreferences.getString("email", "");
         if (email.length() > 0) {
             user = ApiFacade.getInstance().getUserApi().getByEmail(email);
         }
@@ -57,16 +58,25 @@ public class UserProfileFragment extends Fragment {
 
 
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
+        TextView checkPastEvents = v.findViewById(R.id.pastEvent);
         TextView checkfriends = v.findViewById(R.id.friends);
         TextView checkkitchen = v.findViewById(R.id.hostkitchen);
         TextView logoutoff = v.findViewById(R.id.logoutoff);
         TextView deleteaccount = v.findViewById(R.id.deleteaccount);
 
 
-        //Open Profile page
+        // Open Profile page
         checkPersonalDetails.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new PersonalDetailsFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
+
+        // Open Past Events page
+        checkPastEvents.setOnClickListener(view -> {
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.linearColumnairplane, new PastEventFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
@@ -74,7 +84,7 @@ public class UserProfileFragment extends Fragment {
 
         // Open Friends page
         checkfriends.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new FriendsFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
@@ -82,7 +92,7 @@ public class UserProfileFragment extends Fragment {
 
         // Open Kitchen page
         checkkitchen.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new HostKitchenFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
@@ -141,8 +151,6 @@ public class UserProfileFragment extends Fragment {
 
         if (btnYes != null) {
             btnYes.setOnClickListener(view -> {
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
-                String email = sharedPreferences.getString("email", "");
                 if (email.length() > 0) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("logged", false);

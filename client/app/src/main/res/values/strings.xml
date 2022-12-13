@@ -71,7 +71,9 @@
     <string name="lbl_my_past_events">My Past Events</string>
     <string name="lbl_10_12">10/12</string>
     <string name="msg_oven_stove_bo">Oven, Stove, Bowls </string>
-    <string name="lbl_utensils">Utensils</string>
+    <string name="total_donation">$1500</string>
+    <string name="lbl_amenities">Amenities</string>
+    <string name="lbl_donations">Donations</string>
     <string name="lbl_berry_dine">Berry Dine</string>
     <string name="lbl_20">20</string>
     <string name="lbl_pay_with_gpay">Pay with GPay</string>

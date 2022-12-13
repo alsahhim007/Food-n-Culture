@@ -1,6 +1,5 @@
 package com.dalhousie.foodnculture.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,24 +45,24 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     }
 
-    HomeFragment sf = new HomeFragment();
-    UserProfileFragment tf = new UserProfileFragment();
-    CommunityList cf = new CommunityList();
+    HomeFragment homeFragment = new HomeFragment();
+    UserProfileFragment userProfileFragment = new UserProfileFragment();
+    CommunityList communityList = new CommunityList();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                 return true;
             case R.id.community:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, cf).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, communityList).commit();
                 return true;
             case R.id.profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, tf).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, userProfileFragment).commit();
                 return true;
             default:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
         }
         return false;
     }
@@ -79,7 +78,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
             System.out.println(getSupportFragmentManager().getBackStackEntryCount());
 
             if (getSupportFragmentManager().getBackStackEntryCount() == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment, "HOME_FRAGMENT").commit();
                 count += 1;
                 Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT);
 

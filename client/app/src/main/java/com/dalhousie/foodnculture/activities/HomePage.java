@@ -1,6 +1,5 @@
 package com.dalhousie.foodnculture.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -79,7 +78,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
             System.out.println(getSupportFragmentManager().getBackStackEntryCount());
 
             if (getSupportFragmentManager().getBackStackEntryCount() == 0){
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, sf, "HOME_FRAGMENT").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment, "HOME_FRAGMENT").commit();
                 count += 1;
                 Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT);
 

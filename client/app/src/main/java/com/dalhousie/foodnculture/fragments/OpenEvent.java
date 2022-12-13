@@ -2,6 +2,7 @@ package com.dalhousie.foodnculture.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,9 +21,14 @@ import androidx.fragment.app.Fragment;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
+import com.dalhousie.foodnculture.models.Amenities;
 import com.dalhousie.foodnculture.models.Donation;
 import com.dalhousie.foodnculture.models.Event;
+import com.dalhousie.foodnculture.utilities.Formatter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.List;
+import java.util.StringJoiner;
 
 public class OpenEvent extends Fragment {
 
@@ -32,6 +38,7 @@ public class OpenEvent extends Fragment {
         this.event = event;
     }
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,19 +48,24 @@ public class OpenEvent extends Fragment {
 
         Button registerButton = openEventView.findViewById(R.id.btnRegister);
         Button donateButton = openEventView.findViewById(R.id.btnDonate);
-
+        Formatter formatter = new Formatter();
 
         TextView eventTitle = openEventView.findViewById(R.id.txtEventTitle);
         eventTitle.setText(event.getTitle());
         TextView eventDate = openEventView.findViewById(R.id.txtDate);
-        eventDate.setText(event.getStartDatetime());
-        TextView eventDescription= openEventView.findViewById(R.id.txtDescriptionTwo);
+        eventDate.setText(formatter.formatDateAndVenue(event));
+        TextView eventDescription = openEventView.findViewById(R.id.txtDescriptionTwo);
         eventDescription.setText(event.getDescription());
+        TextView totalDonation = openEventView.findViewById(R.id.txtTotalDonation);
+        totalDonation.setText(Double.toString(ApiFacade.getInstance().getDonationApi().getTotalDonationByEventId(event.getId())));
 
+        TextView amenitiesText = openEventView.findViewById(R.id.txtAmenities);
+        amenitiesText.setText(getAmenities());
 
         registerButton.setOnClickListener(view -> {
             final BottomSheetDialog bsd = new BottomSheetDialog(view.getContext());
             bsd.setContentView(R.layout.fragment_bottom_success_sheet);
+
             bsd.show();
         });
 
@@ -110,6 +122,15 @@ public class OpenEvent extends Fragment {
         donation.setEmail(email);
 
         return ApiFacade.getInstance().getDonationApi().save(donation);
+    }
+
+    String getAmenities() {
+        List<Amenities> amenities = ApiFacade.getInstance().getAmenitiesApi().findAll();
+        String amenitiesName = "";
+        String delimiter = ", ";
+        StringJoiner joiner = new StringJoiner(delimiter);
+        amenities.forEach(item -> joiner.add(item.getName()));
+        return joiner.toString();
     }
 
 }

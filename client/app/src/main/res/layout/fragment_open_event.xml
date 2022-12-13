@@ -57,7 +57,7 @@
                         tools:text="@string/lbl_amenities" />
 
                     <TextView
-                        android:id="@+id/txtLanguage"
+                        android:id="@+id/txtAmenities"
                         style="@style/txtUrbanistromanregular12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,6 +67,42 @@
                         android:singleLine="true"
                         android:text="@string/msg_oven_stove_bo"
                         tools:text="@string/msg_oven_stove_bo" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearDonation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginStart="@dimen/_180pxh"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="@dimen/_24pxh"
+                    android:layout_marginBottom="@dimen/_4pxv"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtDonation"
+                        style="@style/txtUrbanistromanregular16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10pxh"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="@dimen/_1pxh"
+                        android:singleLine="true"
+                        android:text="@string/lbl_donations"
+                        tools:text="@string/lbl_donations" />
+
+                    <TextView
+                        android:id="@+id/txtTotalDonation"
+                        style="@style/txtUrbanistromanregular12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_11pxv"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="@dimen/_1pxh"
+                        android:singleLine="true"
+                        android:text="@string/total_donation"
+                        tools:text="@string/total_donation" />
                 </LinearLayout>
 
                 <FrameLayout
@@ -82,6 +118,7 @@
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="@dimen/_15pxh"
                         android:layout_marginTop="65dp"
+                        android:layout_marginLeft="65dp"
                         android:orientation="vertical">
 
                         <TextView

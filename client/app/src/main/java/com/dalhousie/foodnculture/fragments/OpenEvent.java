@@ -24,10 +24,13 @@ import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.models.Amenities;
 import com.dalhousie.foodnculture.models.Donation;
 import com.dalhousie.foodnculture.models.Event;
+import com.dalhousie.foodnculture.models.EventMember;
+import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.Formatter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 public class OpenEvent extends Fragment {
@@ -62,12 +65,7 @@ public class OpenEvent extends Fragment {
         TextView amenitiesText = openEventView.findViewById(R.id.txtAmenities);
         amenitiesText.setText(getAmenities());
 
-        registerButton.setOnClickListener(view -> {
-            final BottomSheetDialog bsd = new BottomSheetDialog(view.getContext());
-            bsd.setContentView(R.layout.fragment_bottom_success_sheet);
-
-            bsd.show();
-        });
+        registerButton.setOnClickListener(view -> registerEvent());
 
         donateButton.setOnClickListener(view -> {
 
@@ -124,13 +122,38 @@ public class OpenEvent extends Fragment {
         return ApiFacade.getInstance().getDonationApi().save(donation);
     }
 
-    String getAmenities() {
+    private String getAmenities() {
         List<Amenities> amenities = ApiFacade.getInstance().getAmenitiesApi().findAll();
         String amenitiesName = "";
         String delimiter = ", ";
         StringJoiner joiner = new StringJoiner(delimiter);
         amenities.forEach(item -> joiner.add(item.getName()));
         return joiner.toString();
+    }
+
+    void registerEvent() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "");
+        EventMember member = new EventMember();
+        member.setEventId(event.getId());
+        member.setStatus("Requested");
+        if (email.length() > 0) {
+            Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
+            if (user.isPresent()) {
+                member.setUserId(user.get().getId());
+            }
+        }
+        try {
+            if (ApiFacade.getInstance().getEventMemberApi().save(member) == 1) {
+                final BottomSheetDialog bsd = new BottomSheetDialog(requireContext());
+                bsd.setContentView(R.layout.fragment_bottom_success_sheet);
+                bsd.show();
+            } else {
+                Toast.makeText(getContext(), "There is an error while registering to event", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 
 }

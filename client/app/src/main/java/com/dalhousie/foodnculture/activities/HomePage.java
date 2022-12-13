@@ -42,7 +42,6 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
         chatIcon.setOnClickListener(view -> {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new FriendsFragment()).commit();
         });
-
     }
 
     HomeFragment homeFragment = new HomeFragment();
@@ -69,23 +68,25 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     @Override
     public void onBackPressed() {
-
         if (sp.getBoolean("logged", false)) {
             getSupportFragmentManager().popBackStack();
 
-            if (getSupportFragmentManager().getBackStackEntryCount() == 0){
+            System.out.println(getClass().getSimpleName());
+
+            System.out.println(getSupportFragmentManager().getBackStackEntryCount());
+
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment, "HOME_FRAGMENT").commit();
                 count += 1;
                 Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT);
 
             }
             String current_fragment = String.valueOf(getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT"));
-            if (current_fragment.equals("null")){
-            }else{
-                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT" && count >= 2){
+            if (current_fragment.equals("null")) {
+            } else {
+                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT" && count >= 2) {
                     finishAffinity();
-                }
-                else {
+                } else {
                 }
             }
         } else {

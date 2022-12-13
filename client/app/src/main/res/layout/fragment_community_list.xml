@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout android:gravity="start"
         android:id="@+id/linearCommunity"
         android:layout_height="match_parent"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:layout_width="match_parent"
         android:orientation="vertical" style="@style/groupStylewhite_A700">
@@ -15,7 +15,7 @@
             style="@style/txtUrbanistromanbold24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="55dp"
             android:layout_marginEnd="272dp"
             android:layout_marginTop="2dp"
             android:ellipsize="end"
@@ -77,19 +77,20 @@
 
                 <ImageView
                     android:id="@+id/imageVector"
-                    android:layout_width="@dimen/_9pxh"
-                    android:layout_height="@dimen/_9pxh"
+                    android:layout_width="@dimen/_12pxh"
+                    android:layout_height="@dimen/_12pxh"
                     android:layout_marginTop="@dimen/_1pxv"
                     android:layout_marginBottom="@dimen/_1pxv"
                     android:scaleType="fitXY"
                     android:src="@drawable/img_vector"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_vector" />
+                    tools:src="@drawable/img_user" />
 
                 <TextView
                     android:id="@+id/txtEightHundred"
                     style="@style/txtInterregular9"
                     android:layout_width="0dp"
+                    android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3pxh"
                     android:layout_weight="0.65"
@@ -150,19 +151,20 @@
 
                 <ImageView
                     android:id="@+id/imageVector2"
-                    android:layout_width="@dimen/_9pxh"
-                    android:layout_height="@dimen/_9pxh"
+                    android:layout_width="@dimen/_12pxh"
+                    android:layout_height="@dimen/_12pxh"
                     android:layout_marginTop="@dimen/_1pxv"
                     android:layout_marginBottom="@dimen/_1pxv"
                     android:scaleType="fitXY"
                     android:src="@drawable/img_vector"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_vector" />
+                    tools:src="@drawable/img_user" />
 
                 <TextView
                     android:id="@+id/txtEightHundred2"
                     style="@style/txtInterregular9"
                     android:layout_width="0dp"
+                    android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3pxh"
                     android:layout_weight="0.65"
@@ -223,19 +225,20 @@
 
                 <ImageView
                     android:id="@+id/imageVector3"
-                    android:layout_width="@dimen/_9pxh"
-                    android:layout_height="@dimen/_9pxh"
+                    android:layout_width="@dimen/_12pxh"
+                    android:layout_height="@dimen/_12pxh"
                     android:layout_marginTop="@dimen/_1pxv"
                     android:layout_marginBottom="@dimen/_1pxv"
                     android:scaleType="fitXY"
                     android:src="@drawable/img_vector"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_vector" />
+                    tools:src="@drawable/img_user" />
 
                 <TextView
                     android:id="@+id/txtEightHundred3"
                     style="@style/txtInterregular9"
                     android:layout_width="0dp"
+                    android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3pxh"
                     android:layout_weight="0.65"

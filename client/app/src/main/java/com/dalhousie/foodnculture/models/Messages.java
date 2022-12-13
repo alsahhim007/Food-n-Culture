@@ -4,6 +4,7 @@ public class Messages {
     
     private int id;
     private int userId;
+    private int targetUserId;
     private String content;
     private boolean isRead;
     private String updatedAt;
@@ -23,6 +24,14 @@ public class Messages {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getTargetUserId() {
+        return targetUserId;
+    }
+
+    public void setTargetUserId(int targetUserId) {
+        this.targetUserId = targetUserId;
     }
 
     public String getContent() {

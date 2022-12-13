@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.dalhousie.server.model.Friends;
+import com.dalhousie.server.model.User;
 import com.dalhousie.server.persistence.IFriendRepository;
 
 @RestController
@@ -54,6 +55,7 @@ public class FriendsController {
         .map(savedFriend -> {
             savedFriend.setId(friends.getId());
             savedFriend.setUserId(friends.getUserId());
+            savedFriend.setTargetUserId(friends.getTargetUserId());
 
             friendRepository.update(savedFriend);
             return new ResponseEntity<>("Friend updated successfully", HttpStatus.OK);
@@ -68,5 +70,10 @@ public class FriendsController {
         }else{
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/all/{id}")
+    public List<User> getAllFriends(@PathVariable Integer id){
+        return friendRepository.getAllFriendsByUserId(id);
     }
 }

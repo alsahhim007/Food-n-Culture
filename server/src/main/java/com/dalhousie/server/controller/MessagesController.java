@@ -54,6 +54,7 @@ public class MessagesController {
         .map(savedMessage -> {
             savedMessage.setId(messages.getId());
             savedMessage.setUserId(messages.getUserId());
+            savedMessage.setTargetUserId(messages.getTargetUserId());
             savedMessage.setContent(messages.getContent());
             savedMessage.setRead(messages.isRead());
 
@@ -70,5 +71,10 @@ public class MessagesController {
         }else{
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/chats/{user1}/{user2}")
+    public List<Messages> getAllMessagesBetweenUsers(@PathVariable Integer user1, @PathVariable Integer user2){
+        return messagesRepository.getAllMessagesBetweenUsers(user1, user2);
     }
 }

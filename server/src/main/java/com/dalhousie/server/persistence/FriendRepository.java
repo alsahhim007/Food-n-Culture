@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.dalhousie.server.model.Friends;
+import com.dalhousie.server.model.User;
 
 @Component
 public class FriendRepository implements IFriendRepository {
@@ -24,15 +25,15 @@ public class FriendRepository implements IFriendRepository {
     @Override
     public int save(Friends friends) {
         return jdbcTemplate.update(
-                "CALL createFriend(?, ?)",
-                friends.getId(), friends.getUserId());
+                "CALL createFriend(?, ?, ?)",
+                friends.getId(), friends.getUserId(), friends.getTargetUserId());
     }
 
     @Override
     public int update(Friends friends) {
         return jdbcTemplate.update(
-                "CALL updateFriend(?, ?)",
-                friends.getId(), friends.getUserId());
+                "CALL updateFriend(?, ?, ?)",
+                friends.getId(), friends.getUserId(), friends.getTargetUserId());
     }
 
     @Override
@@ -58,6 +59,11 @@ public class FriendRepository implements IFriendRepository {
         }catch(Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public List<User> getAllFriendsByUserId(Integer userId) {
+        return jdbcTemplate.query("CALL getAllFriendsByUserId(?)", BeanPropertyRowMapper.newInstance(User.class), userId);
     }
     
 }

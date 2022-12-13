@@ -143,5 +143,7 @@
     <string name="frienduser5">maxlog</string>
     <string name="frienduser6">maxonlog</string>
 
+    <!-- Chat name -->
+    <string name="lbl_richard_alves">Richard Alves</string>
 
 </resources>

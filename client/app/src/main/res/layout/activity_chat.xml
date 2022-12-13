@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:background="#fffffa">
+
+    <FrameLayout android:id="@+id/frameChat"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearColumnarrowleft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|start"
+            android:layout_marginTop="@dimen/_23pxv"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_22pxh"
+                android:layout_marginEnd="@dimen/_14pxh"
+                app:contentInsetStart="0dp">
+
+                <LinearLayout
+                    android:id="@+id/linearRowarrowleft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnArrowleft"
+                        android:layout_width="@dimen/_41pxh"
+                        android:layout_height="@dimen/_41pxh"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="@dimen/_61pxv"
+                        android:layout_marginEnd="@dimen/_22pxh"
+                        android:background="@drawable/rectangle_bg_white_a701_border_indigo_50_radius_12"
+                        android:paddingHorizontal="@dimen/_12pxh"
+                        android:paddingVertical="@dimen/_12pxv"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/img_arrowleft"
+                        tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                    <TextView
+                        android:id="@+id/txtuserchatname"
+                        style="@style/txtUrbanistromanbold18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_45pxh"
+                        android:layout_marginTop="@dimen/_14pxv"
+                        android:layout_marginBottom="@dimen/_6pxv"
+                        android:layout_weight="0.75"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_richard_alves"
+                        tools:text="@string/lbl_richard_alves" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chatrecycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/chatlayout"
+                android:layout_below="@id/toolbarToolbar"
+                tools:ignore="NotSibling" />
+
+            <LinearLayout
+                android:id="@+id/chatlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/messaget"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/black"
+                    android:hint="Start Typing"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:padding="15dp" />
+
+                <ImageButton
+                    android:id="@+id/sendmsg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_send_black_24dp"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

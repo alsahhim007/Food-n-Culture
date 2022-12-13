@@ -1,5 +1,6 @@
 package com.dalhousie.foodnculture.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.dalhousie.foodnculture.R;
+import com.dalhousie.foodnculture.activities.ChatActivity;
 import com.dalhousie.foodnculture.adapters.CustomAdapter;
 import com.dalhousie.foodnculture.models.Friends;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 
 public class FriendsFragment extends Fragment implements CustomAdapter.OnUserListener {
-    
+
 
     private RecyclerView recyclerView;
     private ArrayList<Friends> Friends_all;
@@ -104,6 +106,7 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
 
     @Override
     public void onUserClick(int position) {
-
+        Intent intent = new Intent(this.getActivity(), ChatActivity.class);
+        startActivity(intent);
     }
 }

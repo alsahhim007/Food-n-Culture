@@ -1,6 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Venues;
+import com.dalhousie.foodnculture.apifacade.contract.IAmenityOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.Amenities;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,29 +10,42 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class VenuesApi implements IVenueOperation {
-    private final IRequest request;
-    private String baseUrl = "/api/venues";
+public class AmenitiesApi implements IAmenityOperation {
 
-    public VenuesApi(IRequest<Venues> request) {
+    private final IRequest request;
+    private String baseUrl = "/api/amenities";
+
+    public AmenitiesApi(IRequest<Amenities> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Venues> findAll() {
-        Venues[] venues = new Venues[]{};
+    public List<Amenities> getAllAmenitiesByVenueId(Integer venueId) {
+        Amenities[] amenities = new Amenities[]{};
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/venues/" + venueId);
+            amenities = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(venues);
+        return Arrays.asList(amenities);
     }
 
     @Override
-    public int save(Venues object) {
+    public List<Amenities> findAll() {
+        Amenities[] amenityList = new Amenities[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/");
+            amenityList = Mapper.mapFromJson(buffer.toString(), Amenities[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(amenityList);
+    }
+
+    @Override
+    public int save(Amenities object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -43,8 +58,7 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public int update(Venues object) {
-
+    public int update(Amenities object) {
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -57,7 +71,7 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public int delete(Venues object) {
+    public int delete(Amenities object) {
         return deleteById(object.getId());
     }
 
@@ -80,26 +94,14 @@ public class VenuesApi implements IVenueOperation {
     }
 
     @Override
-    public Optional<Venues> getById(Integer id) {
-        Venues venue = null;
+    public Optional<Amenities> getById(Integer id) {
+        Amenities amenities = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            venue = Mapper.mapFromJson(buffer.toString(), Venues.class);
+            amenities = Mapper.mapFromJson(buffer.toString(), Amenities.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(venue);
-    }
-
-    @Override
-    public List<Venues> getVenuesByUserId(Integer userId) {
-        Venues[] venues = new Venues[]{};
-        try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
-            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return Arrays.asList(venues);
+        return Optional.ofNullable(amenities);
     }
 }

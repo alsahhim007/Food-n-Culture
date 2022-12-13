@@ -1,5 +1,6 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
 import com.dalhousie.foodnculture.utilities.HTTPHelper;
 
 /*

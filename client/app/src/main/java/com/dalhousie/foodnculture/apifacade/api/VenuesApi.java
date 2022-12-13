@@ -1,6 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Authentication;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.apifacade.contract.IVenueOperation;
+import com.dalhousie.foodnculture.models.Venues;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -8,42 +10,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class AuthenticationApi implements IAuthenticationOperation {
-
+public class VenuesApi implements IVenueOperation {
     private final IRequest request;
-    private String baseUrl = "/api/authentication";
+    private String baseUrl = "/api/venues";
 
-    public AuthenticationApi(IRequest<Authentication> request) {
+    public VenuesApi(IRequest<Venues> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public Authentication getOTPByUserId(Integer userId) {
-        Authentication authentication = new Authentication();
-        try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
-            authentication = Mapper.mapFromJson(buffer.toString(), Authentication.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return authentication;
-    }
-
-    @Override
-    public List<Authentication> findAll() {
-        Authentication[] authentications = new Authentication[]{};
+    public List<Venues> findAll() {
+        Venues[] venues = new Venues[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            authentications = Mapper.mapFromJson(buffer.toString(), Authentication[].class);
+            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(authentications);
+        return Arrays.asList(venues);
     }
 
     @Override
-    public int save(Authentication object) throws Exception {
+    public int save(Venues object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -56,7 +45,8 @@ public class AuthenticationApi implements IAuthenticationOperation {
     }
 
     @Override
-    public int update(Authentication object) {
+    public int update(Venues object) {
+
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -69,7 +59,7 @@ public class AuthenticationApi implements IAuthenticationOperation {
     }
 
     @Override
-    public int delete(Authentication object) {
+    public int delete(Venues object) {
         return deleteById(object.getId());
     }
 
@@ -92,14 +82,26 @@ public class AuthenticationApi implements IAuthenticationOperation {
     }
 
     @Override
-    public Optional<Authentication> getById(Integer id) {
-        Authentication authentication = null;
+    public Optional<Venues> getById(Integer id) {
+        Venues venue = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            authentication = Mapper.mapFromJson(buffer.toString(), Authentication.class);
+            venue = Mapper.mapFromJson(buffer.toString(), Venues.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(authentication);
+        return Optional.ofNullable(venue);
+    }
+
+    @Override
+    public List<Venues> getVenuesByUserId(Integer userId) {
+        Venues[] venues = new Venues[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
+            venues = Mapper.mapFromJson(buffer.toString(), Venues[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(venues);
     }
 }

@@ -1,7 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.models.Community;
-import com.dalhousie.foodnculture.models.Friends;
+import com.dalhousie.foodnculture.apifacade.contract.IFeedbackOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.Feedback;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -9,29 +10,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FriendsApi implements IFriendOperation {
+public class FeedbackApi implements IFeedbackOperation {
     private final IRequest request;
-    private String baseUrl = "/api/friends";
+    private String baseUrl = "/api/feedbacks";
 
-    public FriendsApi(IRequest<Community> request) {
+    public FeedbackApi(IRequest<Feedback> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Friends> findAll() {
-        Friends[] friends = new Friends[]{};
+    public List<Feedback> findAll() {
+        Feedback[] feedbacks = new Feedback[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            friends = Mapper.mapFromJson(buffer.toString(), Friends[].class);
+            feedbacks = Mapper.mapFromJson(buffer.toString(), Feedback[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(friends);
+        return Arrays.asList(feedbacks);
     }
 
     @Override
-    public int save(Friends object) throws Exception {
+    public int save(Feedback object) {
         try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -44,7 +45,8 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public int update(Friends object) {
+    public int update(Feedback object) {
+
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -57,7 +59,7 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public int delete(Friends object) {
+    public int delete(Feedback object) {
         return deleteById(object.getId());
     }
 
@@ -80,14 +82,26 @@ public class FriendsApi implements IFriendOperation {
     }
 
     @Override
-    public Optional<Friends> getById(Integer id) {
-        Friends friend = null;
+    public Optional<Feedback> getById(Integer id) {
+        Feedback feedback = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            friend = Mapper.mapFromJson(buffer.toString(), Friends.class);
+            feedback = Mapper.mapFromJson(buffer.toString(), Feedback.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(friend);
+        return Optional.ofNullable(feedback);
+    }
+
+    @Override
+    public List<Feedback> getFeedbackByEventId(Integer eventId) {
+        Feedback[] feedbacks = new Feedback[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
+            feedbacks = Mapper.mapFromJson(buffer.toString(), Feedback[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(feedbacks);
     }
 }

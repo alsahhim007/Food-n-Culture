@@ -1,7 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
-import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
-import com.dalhousie.foodnculture.models.User;
+import com.dalhousie.foodnculture.apifacade.contract.IEventMemberOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.models.EventMember;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -9,45 +10,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class UsersApi implements IUserOperation {
-
+public class EventMemberApi implements IEventMemberOperation {
     private final IRequest request;
-    private String baseUrl = "/api/users";
+    private String baseUrl = "/api/members";
 
-    public UsersApi(IRequest<User> request) {
+    public EventMemberApi(IRequest<EventMember> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<User> findAll() {
-        User[] userList = new User[]{};
+    public List<EventMember> findAll() {
+        EventMember[] eventMembers = new EventMember[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            userList = Mapper.mapFromJson(buffer.toString(), User[].class);
+            eventMembers = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(userList);
+        return Arrays.asList(eventMembers);
     }
 
     @Override
-    public int save(User object) throws Exception {
-        if (getByUserName(object.getUserName()).isPresent()) {
-            throw new UserAlreadyExist("User with username already exists");
-        } else if (getByEmail(object.getEmail()).isPresent()) {
-            throw new UserAlreadyExist("User with email already exists");
-        } else {
+    public int save(EventMember object) {
+        try {
             StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return 0;
     }
 
     @Override
-    public int update(User object) {
+    public int update(EventMember object) {
+
         try {
             StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
@@ -60,7 +59,7 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public int delete(User object) {
+    public int delete(EventMember object) {
         return deleteById(object.getId());
     }
 
@@ -83,38 +82,27 @@ public class UsersApi implements IUserOperation {
     }
 
     @Override
-    public Optional<User> getById(Integer id) {
-        User user = null;
+    public Optional<EventMember> getById(Integer id) {
+        EventMember eventMember = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            user = Mapper.mapFromJson(buffer.toString(), User.class);
+            eventMember = Mapper.mapFromJson(buffer.toString(), EventMember.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(user);
+        return Optional.ofNullable(eventMember);
     }
 
     @Override
-    public Optional<User> getByUserName(String name) {
-        User user = null;
+    public List<EventMember> getMembersByEventId(Integer eventId) {
+        EventMember[] members = new EventMember[]{};
         try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/username/" + name);
-            user = Mapper.mapFromJson(buffer.toString(), User.class);
+            StringBuffer buffer = this.request.doGet(baseUrl + "/events/" + eventId);
+            members = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(user);
+        return Arrays.asList(members);
     }
 
-    @Override
-    public Optional<User> getByEmail(String email) {
-        User user = null;
-        try {
-            StringBuffer buffer = this.request.doGet(baseUrl + "/email/" + email);
-            user = Mapper.mapFromJson(buffer.toString(), User.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return Optional.ofNullable(user);
-    }
 }

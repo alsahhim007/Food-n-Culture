@@ -1,4 +1,4 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.contract;
 
 import com.dalhousie.foodnculture.models.Authentication;
 

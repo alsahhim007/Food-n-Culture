@@ -1,5 +1,8 @@
 package com.dalhousie.foodnculture.apifacade;
 
+import com.dalhousie.foodnculture.apifacade.api.*;
+import com.dalhousie.foodnculture.apifacade.contract.*;
+
 public class ApiFacade {
 
     private static ApiFacade apiFacade;

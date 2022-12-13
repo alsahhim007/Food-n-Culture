@@ -1,5 +1,7 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
+import com.dalhousie.foodnculture.apifacade.contract.IEventOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
 import com.dalhousie.foodnculture.models.Event;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;

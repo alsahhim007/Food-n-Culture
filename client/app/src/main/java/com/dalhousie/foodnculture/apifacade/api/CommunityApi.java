@@ -1,7 +1,8 @@
-package com.dalhousie.foodnculture.apifacade;
+package com.dalhousie.foodnculture.apifacade.api;
 
+import com.dalhousie.foodnculture.apifacade.contract.ICommunityOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
 import com.dalhousie.foodnculture.models.Community;
-import com.dalhousie.foodnculture.models.Messages;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
 
@@ -9,31 +10,31 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class MessageApi implements IMessagesOperation {
+public class CommunityApi implements ICommunityOperation {
     private final IRequest request;
-    private String baseUrl = "/api/messages";
+    private String baseUrl = "/api/community";
 
-    public MessageApi(IRequest<Community> request) {
+    public CommunityApi(IRequest<Community> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }
 
     @Override
-    public List<Messages> findAll() {
-        Messages[] messages = new Messages[]{};
+    public List<Community> findAll() {
+        Community[] communities = new Community[]{};
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/");
-            messages = Mapper.mapFromJson(buffer.toString(), Messages[].class);
+            communities = Mapper.mapFromJson(buffer.toString(), Community[].class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Arrays.asList(messages);
+        return Arrays.asList(communities);
     }
 
     @Override
-    public int save(Messages object) throws Exception {
+    public int save(Community object) throws Exception {
         try {
-            StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPost(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
@@ -44,9 +45,9 @@ public class MessageApi implements IMessagesOperation {
     }
 
     @Override
-    public int update(Messages object) {
+    public int update(Community object) {
         try {
-            StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }
@@ -57,7 +58,7 @@ public class MessageApi implements IMessagesOperation {
     }
 
     @Override
-    public int delete(Messages object) {
+    public int delete(Community object) {
         return deleteById(object.getId());
     }
 
@@ -80,14 +81,14 @@ public class MessageApi implements IMessagesOperation {
     }
 
     @Override
-    public Optional<Messages> getById(Integer id) {
-        Messages message = null;
+    public Optional<Community> getById(Integer id) {
+        Community community = null;
         try {
             StringBuffer buffer = this.request.doGet(baseUrl + "/" + id);
-            message = Mapper.mapFromJson(buffer.toString(), Messages.class);
+            community = Mapper.mapFromJson(buffer.toString(), Community.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return Optional.ofNullable(message);
+        return Optional.ofNullable(community);
     }
 }

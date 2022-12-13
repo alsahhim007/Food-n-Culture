@@ -21,11 +21,9 @@ import com.dalhousie.foodnculture.utilities.IFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class HomeFragment extends Fragment {
-
-    public HomeFragment() {
-    }
 
     @Nullable
     @Override
@@ -34,24 +32,23 @@ public class HomeFragment extends Fragment {
         View homeView = inflater.inflate(R.layout.home_fragment, container, false);
 
         Button hostEvent = homeView.findViewById(R.id.btnHostEvent);
-        Button beaGuest = homeView.findViewById(R.id.btnBeaGuest);
+        Button myEvents = homeView.findViewById(R.id.btnMyEvents);
         LinearLayout event1 = homeView.findViewById(R.id.event1);
         LinearLayout event2 = homeView.findViewById(R.id.event2);
         LinearLayout pastEvent1 = homeView.findViewById(R.id.pastEvent1);
         LinearLayout pastEvent2 = homeView.findViewById(R.id.pastEvent2);
 
-        IFormatter formatter = new EventDateAndVenueFormatter();
+        IFormatter<Event> formatter = new EventDateAndVenueFormatter();
 
-        List<Event> currentEvents = getCurrentEvents(events);
         TextView event1Title = homeView.findViewById(R.id.eventTitle1);
-        event1Title.setText(currentEvents.get(0).getTitle());
+        event1Title.setText(events.get(0).getTitle());
         TextView txtTimeLocation1 = homeView.findViewById(R.id.txtTimeLocation1);
-        txtTimeLocation1.setText(formatter.format(currentEvents.get(0)));
+        txtTimeLocation1.setText(formatter.format(events.get(0)));
 
         TextView event2Title = homeView.findViewById(R.id.eventTitle2);
-        event2Title.setText(currentEvents.get(1).getTitle());
+        event2Title.setText(events.get(1).getTitle());
         TextView txtTimeLocation2 = homeView.findViewById(R.id.txtTimeLocation2);
-        txtTimeLocation2.setText(formatter.format(currentEvents.get(1)));
+        txtTimeLocation2.setText(formatter.format(events.get(1)));
 
         List<Event> pastEvents = getPastEvents(events);
         TextView pastEvent1Title = homeView.findViewById(R.id.txtPastEvent1);
@@ -65,14 +62,14 @@ public class HomeFragment extends Fragment {
 
         event1.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.home_fragment, new OpenEvent(currentEvents.get(0)));
+            fragmentTransaction.replace(R.id.home_fragment, new OpenEvent(events.get(0)));
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
 
         event2.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.home_fragment, new OpenEvent((currentEvents.get(1))));
+            fragmentTransaction.replace(R.id.home_fragment, new OpenEvent((events.get(1))));
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
@@ -84,7 +81,7 @@ public class HomeFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
-        beaGuest.setOnClickListener(view -> {
+        myEvents.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.home_fragment, new UpcomingEventFragment());
             fragmentTransaction.addToBackStack(null);
@@ -108,24 +105,14 @@ public class HomeFragment extends Fragment {
     }
 
     List<Event> getEvents() {
-        List<Event> events = ApiFacade.getInstance().getEventApi().findAll();
-        System.out.println(events.get(0).toString());
-        System.out.println(events.get(0).getEndDatetime());
-        return events;
-    }
-
-    List<Event> getCurrentEvents(List<Event> events) {
-        List<Event> currEvents = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            currEvents.add(events.get(i));
-        }
-        return currEvents;
+        return ApiFacade.getInstance().getEventApi().findAll();
     }
 
     List<Event> getPastEvents(List<Event> events) {
         List<Event> pastEvents = new ArrayList<>();
-        for (int i = events.size() - 1; i >= events.size() - 2; i--) {
-            pastEvents.add(events.get(i));
+        ListIterator<Event> listIterator = events.listIterator(events.size());
+        while (listIterator.hasPrevious()) {
+            pastEvents.add(listIterator.previous());
         }
         return pastEvents;
     }

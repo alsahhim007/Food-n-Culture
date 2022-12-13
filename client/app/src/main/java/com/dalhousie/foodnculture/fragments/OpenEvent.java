@@ -30,6 +30,8 @@ import com.dalhousie.foodnculture.utilities.EventDateAndVenueFormatter;
 import com.dalhousie.foodnculture.utilities.IFormatter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
@@ -53,6 +55,10 @@ public class OpenEvent extends Fragment {
         Button registerButton = openEventView.findViewById(R.id.btnRegister);
         Button donateButton = openEventView.findViewById(R.id.btnDonate);
         IFormatter formatter = new EventDateAndVenueFormatter();
+        if (isPastEvent()) {
+            registerButton.setVisibility(View.INVISIBLE);
+            donateButton.setVisibility(View.INVISIBLE);
+        }
 
         TextView eventTitle = openEventView.findViewById(R.id.txtEventTitle);
         eventTitle.setText(event.getTitle());
@@ -127,7 +133,9 @@ public class OpenEvent extends Fragment {
         List<Amenities> amenities = ApiFacade.getInstance().getAmenitiesApi().findAll();
         String delimiter = ", ";
         StringJoiner joiner = new StringJoiner(delimiter);
-        amenities.forEach(item -> joiner.add(item.getName()));
+        for (int i = 0; i < 3; i++) {
+            joiner.add(amenities.get(i).getName());
+        }
         return joiner.toString();
     }
 
@@ -159,6 +167,15 @@ public class OpenEvent extends Fragment {
     String getTotalDonation() {
         double totalDonation = ApiFacade.getInstance().getDonationApi().getTotalDonationByEventId(event.getId());
         return "$" + totalDonation;
+    }
+
+    boolean isPastEvent() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(event.getEndDatetime(), formatter);
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            return true;
+        }
+        return false;
     }
 
 }

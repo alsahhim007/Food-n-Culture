@@ -121,20 +121,6 @@
                         android:singleLine="true"
                         android:clickable="true"
                         android:text="@string/msg_personal_detail" />
-                    <TextView
-                        android:id="@+id/pastEvent"
-                        style="@style/txtSolidRounded"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5pxv"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:paddingStart="@dimen/_26pxh"
-                        android:paddingTop="@dimen/_17pxv"
-                        android:paddingBottom="@dimen/_18pxv"
-                        android:singleLine="true"
-                        android:clickable="true"
-                        android:text="@string/lbl_past_events" />
 
                     <TextView
                         android:id="@+id/friends"

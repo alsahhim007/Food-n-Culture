@@ -105,4 +105,16 @@ public class EventMemberApi implements IEventMemberOperation {
         return Arrays.asList(members);
     }
 
+    @Override
+    public List<EventMember> getMembersByUserId(Integer userId) {
+        EventMember[] members = new EventMember[]{};
+        try {
+            StringBuffer buffer = this.request.doGet(baseUrl + "/users/" + userId);
+            members = Mapper.mapFromJson(buffer.toString(), EventMember[].class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return Arrays.asList(members);
+    }
+
 }

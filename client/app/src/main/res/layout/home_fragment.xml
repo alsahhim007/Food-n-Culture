@@ -286,7 +286,7 @@
             app:flow_horizontalAlign="center">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnBeaGuest"
+                android:id="@+id/btnMyEvents"
                 style="@style/btnSolidRounded"
                 android:layout_width="168dp"
                 android:layout_height="wrap_content"
@@ -299,12 +299,12 @@
                 android:paddingEnd="@dimen/_30pxh"
                 android:paddingBottom="@dimen/_17pxv"
                 android:singleLine="true"
-                android:text="@string/lbl_be_a_guest"
+                android:text="@string/lbl_my_events"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnHostEvent"
-                tools:text="@string/lbl_be_a_guest" />
+                tools:text="@string/lbl_my_events" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHostEvent"

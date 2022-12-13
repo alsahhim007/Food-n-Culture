@@ -157,8 +157,9 @@
                     android:layout_weight="0.96" android:layout_width="0dp"
                     android:lineSpacingExtra="@dimen/_1pxh"
                     android:singleLine="true"
-                    android:text="Upcoming Events"
-                    style="@style/txtUrbanistromanbold24" tools:text="Upcoming Events"/>
+                    android:text="@string/lbl_my_past_events"
+                    style="@style/txtUrbanistromanbold24"
+                    tools:text="@string/lbl_my_past_events"/>
                 <ImageView android:id="@+id/imageVectorOne"
                     android:layout_height="@dimen/_6pxh"
                     android:layout_marginBottom="@dimen/_7pxv"

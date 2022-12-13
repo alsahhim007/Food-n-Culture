@@ -28,9 +28,6 @@ import java.util.Optional;
 
 public class UserProfileFragment extends Fragment {
 
-    public UserProfileFragment() {
-    }
-
     SharedPreferences sharedPreferences;
     Optional<User> user;
     String email;
@@ -56,16 +53,12 @@ public class UserProfileFragment extends Fragment {
             userUserName.setText(String.format("@%s", user.get().getUserName()));
         }
 
-
         TextView checkPersonalDetails = v.findViewById(R.id.personaldetails);
-        TextView checkPastEvents = v.findViewById(R.id.pastEvent);
-        TextView checkfriends = v.findViewById(R.id.friends);
-        TextView checkkitchen = v.findViewById(R.id.hostkitchen);
-        TextView logoutoff = v.findViewById(R.id.logoutoff);
-        TextView deleteaccount = v.findViewById(R.id.deleteaccount);
+        TextView checkFriends = v.findViewById(R.id.friends);
+        TextView checkKitchen = v.findViewById(R.id.hostkitchen);
+        TextView logoff = v.findViewById(R.id.logoutoff);
+        TextView deleteAccount = v.findViewById(R.id.deleteaccount);
 
-
-        // Open Profile page
         checkPersonalDetails.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new PersonalDetailsFragment());
@@ -73,38 +66,23 @@ public class UserProfileFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
-        // Open Past Events page
-        checkPastEvents.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.linearColumnairplane, new PastEventFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        });
-
-
-        // Open Friends page
-        checkfriends.setOnClickListener(view -> {
+        checkFriends.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new FriendsFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
 
-        // Open Kitchen page
-        checkkitchen.setOnClickListener(view -> {
+        checkKitchen.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.linearColumnairplane, new HostKitchenFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
 
-        logoutoff.setOnClickListener(view -> logoutDialog());
-
-        // Delete Account
-        deleteaccount.setOnClickListener(view -> deleteAccount());
-
+        logoff.setOnClickListener(view -> logoutDialog());
+        deleteAccount.setOnClickListener(view -> deleteAccount());
         return v;
-
     }
 
     private void deleteAccount() {

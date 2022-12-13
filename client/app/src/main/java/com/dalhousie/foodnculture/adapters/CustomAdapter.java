@@ -47,7 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Friends friend = Friend_all.get(position);
 
         holder.f_name.setText(friend.FriendName);
-        holder.user_name.setText('@'+friend.Uname);
+        holder.user_name.setText(String.format("@%s", friend.Uname));
         holder.user_image.setImageResource(friend.uimage);
 
     }
@@ -78,7 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         @Override
         public void onClick(View view) {
-            Log.d(TAG, "onClick: " + getAdapterPosition());
+            Log.d(TAG, "onClick: " + (getAdapterPosition()));
             onUserListener.onUserClick(getAdapterPosition());
         }
     }

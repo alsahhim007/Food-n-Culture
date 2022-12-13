@@ -34,6 +34,8 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
     private ArrayList<Friends> Friends_all;
     private final List<String> friends_name = new ArrayList<>();
     private final List<String> friends_username = new ArrayList<>();
+    private final List<Integer> friends_id = new ArrayList<>();
+    Optional<User> currentUser;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,8 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
     @Override
     public void onUserClick(int position) {
         Intent intent = new Intent(this.getActivity(), ChatActivity.class);
+        intent.putExtra("friendId", friends_id.get(position));
+        intent.putExtra("userId", currentUser.get().getId());
         startActivity(intent);
     }
 
@@ -91,13 +95,14 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
         List<User> friends;
         try {
             if (email.length() > 0) {
-                Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
-                if (user.isPresent()) {
-                    friends = ApiFacade.getInstance().getFriendApi().getAllFriendsByUserId(user.get().getId());
+                currentUser = ApiFacade.getInstance().getUserApi().getByEmail(email);
+                if (currentUser.isPresent()) {
+                    friends = ApiFacade.getInstance().getFriendApi().getAllFriendsByUserId(currentUser.get().getId());
                     if (friends.size() > 0) {
                         for (User friend : friends) {
                             friends_name.add(friend.getFirstName() + " " + friend.getLastName());
                             friends_username.add(friend.getUserName());
+                            friends_id.add(friend.getId());
                         }
                     }
                 }

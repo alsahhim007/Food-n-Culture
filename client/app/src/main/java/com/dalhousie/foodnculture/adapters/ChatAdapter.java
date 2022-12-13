@@ -10,23 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dalhousie.foodnculture.R;
-import com.dalhousie.foodnculture.models.ChatModel;
+import com.dalhousie.foodnculture.models.Messages;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Myholder> {
 
     private static final int MSG_TYPE_LEFT = 0;
     private static final int MSG_TYPE_RIGHT = 1;
     Context context;
-    ArrayList<ChatModel> chatmodels_list;
+    List<Messages> chatmodels_list;
+    Integer senderUserId;
 
-    // Database connection
-//    FirebaseUser firebaseUser;
 
-    public ChatAdapter(Context context, ArrayList<ChatModel> list) {
+    public ChatAdapter(Context context, List<Messages> list, Integer senderUserId) {
         this.context = context;
         this.chatmodels_list = list;
+        this.senderUserId = senderUserId;
     }
 
     @NonNull
@@ -45,24 +45,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Myholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myholder holder, int position) {
-        String message = chatmodels_list.get(position).getMessage();
-//        String type = chatmodels_list.get(position);
+        String message = chatmodels_list.get(position).getContent();
             holder.message.setText(message);
-
-//        try {
-////            Glide.with(context).load(imageurl).into(holder.image);
-//        } catch (Exception e) {
-//
-//        }
-//        if (type.equals("text")) {
-//            holder.message.setVisibility(View.VISIBLE);
-////            holder.mimage.setVisibility(View.GONE);
-//            holder.message.setText(message);
-//        } else {
-//            holder.message.setVisibility(View.GONE);
-////            holder.mimage.setVisibility(View.VISIBLE);
-////            Glide.with(context).load(message).into(holder.mimage);
-//        }
     }
 
     @Override
@@ -73,9 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Myholder> {
     @Override
     public int getItemViewType(int position) {
 
-//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (chatmodels_list.get(position).getSender().equals(1)){
-            //firebaseUser.getUid())) {
+        if (chatmodels_list.get(position).getUserId() == senderUserId){
             return MSG_TYPE_RIGHT;
         } else {
             return MSG_TYPE_LEFT;

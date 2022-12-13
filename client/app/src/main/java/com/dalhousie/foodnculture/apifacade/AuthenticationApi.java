@@ -58,7 +58,7 @@ public class AuthenticationApi implements IAuthenticationOperation {
     @Override
     public int update(Authentication object) {
         try {
-            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }

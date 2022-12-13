@@ -32,7 +32,7 @@ public class CommunityApi implements ICommunityOperation {
     @Override
     public int save(Community object) throws Exception {
         try {
-            StringBuffer buffer = this.request.doPost(baseUrl + "/", Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPost(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }

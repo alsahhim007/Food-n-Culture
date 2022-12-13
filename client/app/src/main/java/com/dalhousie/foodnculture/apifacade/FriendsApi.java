@@ -46,7 +46,7 @@ public class FriendsApi implements IFriendOperation {
     @Override
     public int update(Friends object) {
         try {
-            StringBuffer buffer = this.request.doPut(baseUrl + "/", Mapper.mapToJson(object));
+            StringBuffer buffer = this.request.doPut(baseUrl + "/" + object.getId(), Mapper.mapToJson(object));
             if (buffer.length() > 0) {
                 return 1;
             }

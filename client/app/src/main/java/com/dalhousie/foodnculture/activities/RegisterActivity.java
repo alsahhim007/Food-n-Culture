@@ -15,6 +15,7 @@ import com.dalhousie.foodnculture.apifacade.ApiFacade;
 import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.AESSecurity;
+import com.dalhousie.foodnculture.utilities.ISecurity;
 import com.dalhousie.foodnculture.utilities.ValidatorHelper;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,6 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etEmailInput;
     EditText etPasswordInput;
     EditText etConfirmPassword;
+
+    ISecurity security = new AESSecurity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setLastName(etLastNameInput.getText().toString());
         user.setUserName(etUsernameInput.getText().toString());
         user.setEmail(etEmailInput.getText().toString());
-        user.setPassword(AESSecurity.encrypt(etPasswordInput.getText().toString()));
+        user.setPassword(security.encrypt(etPasswordInput.getText().toString()));
         user.setVerified(false);
         user.setStatus("Created");
         return ApiFacade.getInstance().getUserApi().save(user);

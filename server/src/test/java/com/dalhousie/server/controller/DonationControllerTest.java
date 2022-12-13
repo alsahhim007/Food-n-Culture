@@ -140,4 +140,14 @@ public class DonationControllerTest extends AbstractTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].note").value("Donate $100.00"));
     }
+
+    @Test
+    void getTotalDonationsByEventIdTest() throws Exception {
+        Mockito.when(donationRepository.getTotalDonationByEventId(99)).thenReturn(1000.0);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/donations/total/{id}", 99)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("1000.0"));
+    }
 }

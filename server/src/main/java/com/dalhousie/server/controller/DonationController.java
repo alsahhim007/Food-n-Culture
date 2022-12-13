@@ -78,4 +78,9 @@ public class DonationController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/total/{id}")
+    public double getTotalDonationByEventId(@PathVariable Integer id) {
+        return donationRepository.getTotalDonationByEventId(id);
+    }
 }

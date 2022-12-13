@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dalhousie.server.AbstractTest;
-import com.dalhousie.server.model.User;
 import com.dalhousie.server.model.Venues;
 import com.dalhousie.server.persistence.VenueRepository;
 

@@ -38,10 +38,10 @@ community and hosts.
 
 # Feature Update
 - [x] User Module
-- [ ] User Dashboard Module
-- [ ] Event Module
-- [ ] Chat Module
-- [ ] Payment Module
+- [x] User Dashboard Module
+- [x] Event Module
+- [x] Chat Module
+- [x] Payment Module
 
 # User Experience - Applicaiton Workflow
 

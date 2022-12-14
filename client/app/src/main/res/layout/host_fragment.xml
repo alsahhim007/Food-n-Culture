@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearHostevent"
+        style="@style/groupStylewhite_A700"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnArrowleft"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/_22pxh"
+            android:layout_marginTop="@dimen/_61pxv"
+            android:layout_marginEnd="@dimen/_22pxh"
+            android:background="@drawable/rectangle_bg_white_a701_border_indigo_50_radius_12"
+            android:paddingHorizontal="@dimen/_13pxh"
+            android:paddingVertical="@dimen/_13pxv"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_arrowleft"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/editEvents"
+            style="@style/txtUrbanistromanbold24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22pxh"
+            android:layout_marginTop="@dimen/_21pxv"
+            android:layout_marginEnd="@dimen/_22pxh"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/_1pxh"
+            android:singleLine="true"
+            tools:text="@string/lbl_host_an_event" />
+
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Event Name"
+            android:textColor="@color/gray_600" />
+
+        <EditText
+            android:id="@+id/editDate"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Start Date"
+            android:textColor="@color/gray_600" />
+
+        <EditText
+            android:id="@+id/editVenue"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Venue"
+            android:textColor="@color/gray_600" />
+
+        <EditText
+            android:id="@+id/editEndDate"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:text="End Date"
+            android:textColor="@color/gray_600" />
+
+        <EditText
+            android:id="@+id/editMaxCapacity"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Max capacity"
+            android:textColor="@color/gray_600" />
+
+        <EditText
+            android:id="@+id/editDescription"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sp"
+            android:layout_marginTop="2dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="Description"
+            android:textColor="@color/gray_600" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreateEvent"
+            style="@style/btnSolidRounded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20pxh"
+            android:layout_marginTop="@dimen/_35pxv"
+            android:layout_marginEnd="@dimen/_20pxh"
+            android:layout_marginBottom="@dimen/_20pxv"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingStart="@dimen/_30pxh"
+            android:paddingTop="@dimen/_17pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingBottom="@dimen/_17pxv"
+            android:singleLine="true"
+            android:text="@string/lbl_create_event"
+            android:textAllCaps="false"
+            tools:text="@string/lbl_create_event" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

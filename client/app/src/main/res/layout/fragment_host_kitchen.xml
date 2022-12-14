@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:gravity="center_horizontal"
+        android:id="@+id/linearhostkitchenlayout"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical" style="@style/groupStylewhite_A700">
+
+        <ScrollView
+            android:id="@+id/scrollViewScrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:gravity="start">
+
+            <LinearLayout
+                android:id="@+id/linearHostKitchen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnArrowleft"
+                    android:layout_width="@dimen/_41pxh"
+                    android:layout_height="@dimen/_41pxh"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/_22pxh"
+                    android:layout_marginEnd="@dimen/_22pxh"
+                    android:background="@drawable/rectangle_bg_white_a701_border_indigo_50_radius_12"
+                    android:paddingHorizontal="@dimen/_12pxh"
+                    android:paddingVertical="@dimen/_12pxv"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_arrowleft"
+                    tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/txtKitchen"
+                    style="@style/txtUrbanistromanbold24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/_28pxh"
+                    android:layout_marginTop="@dimen/_22pxv"
+                    android:layout_marginEnd="@dimen/_28pxh"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="@dimen/_1pxh"
+                    android:singleLine="true"
+                    android:text="@string/lbl_host_kitchen" />
+
+                <LinearLayout
+
+                    android:id="@+id/linearRefri"
+                    style="@style/groupStylewhite_A701cornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_80pxv"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtRefrigerator"
+                        style="@style/txtUrbanistromanmedium18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_26pxh"
+                        android:layout_marginTop="@dimen/_30pxv"
+                        android:layout_marginBottom="@dimen/_26pxv"
+                        android:layout_weight="0.77"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_refrigerator"
+                        tools:text="@string/lbl_refrigerator" />
+
+                    <CheckBox
+                        android:layout_width="@dimen/_28pxh"
+                        android:layout_height="@dimen/_28pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
+                        android:layout_marginEnd="@dimen/_35pxh"
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_refri"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearOven"
+                    style="@style/groupStylewhite_A701cornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtOven"
+                        style="@style/txtUrbanistromanmedium18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_28pxh"
+                        android:layout_marginTop="@dimen/_28pxv"
+                        android:layout_marginBottom="@dimen/_28pxv"
+                        android:layout_weight="0.6"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_oven"
+                        tools:text="@string/lbl_oven" />
+
+                    <CheckBox
+                        android:layout_width="@dimen/_28pxh"
+                        android:layout_height="@dimen/_28pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
+                        android:layout_marginEnd="@dimen/_35pxh"
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_oven"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearStove"
+                    style="@style/groupStylewhite_A701cornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtStove"
+                        style="@style/txtUrbanistromanmedium18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_26pxh"
+                        android:layout_marginTop="@dimen/_28pxv"
+                        android:layout_marginBottom="@dimen/_28pxv"
+                        android:layout_weight="0.62"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_stove"
+                        tools:text="@string/lbl_stove" />
+
+                    <CheckBox
+                        android:layout_width="@dimen/_28pxh"
+                        android:layout_height="@dimen/_28pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
+                        android:layout_marginEnd="@dimen/_35pxh"
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_stove"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearToaster"
+                    style="@style/groupStylewhite_A701cornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtToaster"
+                        style="@style/txtUrbanistromanmedium18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_26pxh"
+                        android:layout_marginTop="@dimen/_28pxv"
+                        android:layout_marginBottom="@dimen/_28pxv"
+                        android:layout_weight="0.68"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_toaster"
+                        tools:text="@string/lbl_toaster" />
+
+                    <CheckBox
+                        android:layout_width="@dimen/_28pxh"
+                        android:layout_height="@dimen/_28pxv"
+                        android:layout_marginStart="@dimen/_174pxh"
+                        android:layout_marginTop="@dimen/_23pxv"
+                        android:layout_marginEnd="@dimen/_35pxh"
+                        android:layout_marginBottom="@dimen/_24pxv"
+                        android:id="@+id/frameCheckmark_toaster"
+                        android:buttonTint="@color/bluegray_600"
+                        android:checked="true"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearItemadd"
+                    style="@style/groupStylewhite_A701cornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8pxv"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtAddanitem"
+                        style="@style/txtUrbanistromanmedium18"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_26pxh"
+                        android:layout_marginTop="@dimen/_28pxv"
+                        android:layout_marginBottom="@dimen/_28pxv"
+                        android:layout_weight="0.78"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_add_an_item"
+                        tools:text="@string/lbl_add_an_item" />
+
+                    <Button
+                        android:id="@+id/ItemAdd"
+                        android:focusable="false"
+                        android:onClick="Increment"
+                        android:text="+"
+                        android:layout_width="@dimen/_28pxh"
+                        android:layout_height="@dimen/_28pxv"
+                        android:layout_marginStart="@dimen/_172pxh"
+                        android:layout_marginTop="@dimen/_24pxv"
+                        android:layout_marginEnd="@dimen/_35pxh"
+                        android:layout_marginBottom="@dimen/_23pxv"
+                        style="@style/groupStylebluegray_600cornerRadius"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

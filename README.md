@@ -1,92 +1,75 @@
-# Group 14
+###
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![License](https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge)
+![Build](https://img.shields.io/badge/Build-Passing-green)
+
+# Group 14 - Food n’ Culture
+
+Home is where the family is, but not everyone is lucky enough to have that bond last long.
+Food and culture are two important aspects that are linked to one’s ideated identity and can
+often be diluted when individuals are exposed to a different culture and cuisine. Food
+Culture incorporates our ethnicity and cultural heritage that builds a trust of
+communication with others both externally and within our families and communities. It is
+the attitudes, beliefs, and bonding over that dining table with someone. Community is built
+on the ideas of inclusion and acceptance and for immigrants/international students to be
+part of an entirely new community is a hurdle while dealing with homesickness and missing
+your home country.
+
+Our idea and application aims to dissolve these situations with the motives of community
+inclusion and cultural involvement. The proposed solution includes two categorical user
+personas of hosts and guests(immigrants/students) or someone who is away from family
+and friends. The hosts can inform the users through a community forum message or
+connect directly to the user through a chat message functionality. Hosts are allowed to
+select either the party/greet meeting to be paid or unpaid as a way of inclusion. For the
+safety of the users and community members, strict community guidelines will be set up
+including the KYC and user verification through a government-issued ID. Guests can show
+their interest in a particular type of cuisine or dish by raising a request in the application,
+once the request is submitted, it will be visible to nearby hosts. Anyone interested can
+accept the guest’s request and connect with them.
+
+Additional community involvement can be done through the community forum page where
+users will be able to communicate and receive in-app messages from various food service
+initiatives. It is important to value the community which supports you and hence a donation
+page is supported to respect the values of inclusion and sustenance for the entire
+community and hosts.
+
+# Feature Update
+- [x] User Module
+- [x] User Dashboard Module
+- [x] Event Module
+- [x] Chat Module
+- [x] Payment Module
+
+# Architecture Diagram
+
+![Architecture Diagram](https://i.imgur.com/VbZCiew.png)
+
+# Database ER Diagram
+
+![ER Diagram](https://i.imgur.com/IDky7VI.png)
+
+# User Experience - Applicaiton Workflow
 
 
+![Login/Sign up](https://i.imgur.com/4dqIGaA.png)
+<div align="center"><i>Splash Screen + User Sign in/Login page<i></div>
 
-## Getting started
+![Homepage](https://i.imgur.com/g556n19.png)
+<div align="center"><i>Homepage and Event Registration<i></div>
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+![Community and Error page](https://i.imgur.com/814qHDT.png)
+<div align="center"><i>Community & Error page<i></div>
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+![User Profile](https://i.imgur.com/XZMxdFk.png)
+<div align="center"><i>User Profile & Sub pages<i></div>
 
-## Add your files
+![Chat functionality](https://i.imgur.com/5GNfgzx.png)
+<div align="center"><i>User chats and function<i></div>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+# Important Links
+[Swagger URL](http://localhost:8080/swagger-ui.html)
 
-```
-cd existing_repo
-git remote add origin https://git.cs.dal.ca/courses/2022-fall/csci-5308/group-14.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.cs.dal.ca/courses/2022-fall/csci-5308/group-14/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+[Test Results](http://localhost:8080/group-14/server/build/reports/tests/test/index.html)

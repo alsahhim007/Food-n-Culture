@@ -43,6 +43,14 @@ community and hosts.
 - [x] Chat Module
 - [x] Payment Module
 
+# Architecture Diagram
+
+![Architecture Diagram](https://i.imgur.com/VbZCiew.png)
+
+# Database ER Diagram
+
+![ER Diagram](https://i.imgur.com/IDky7VI.png)
+
 # User Experience - Applicaiton Workflow
 
 

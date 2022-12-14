@@ -1,13 +1,12 @@
 package com.dalhousie.server.persistence.mapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.springframework.lang.Nullable;
-import org.springframework.jdbc.core.RowMapper;
-
 import com.dalhousie.server.enums.EventType;
 import com.dalhousie.server.model.Event;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.Nullable;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EventRowMapper implements RowMapper<Event> {
     

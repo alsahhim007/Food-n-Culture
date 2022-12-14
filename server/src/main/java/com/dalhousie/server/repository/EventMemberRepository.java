@@ -1,15 +1,14 @@
 package com.dalhousie.server.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.dalhousie.server.contract.IEventMemberRepository;
 import com.dalhousie.server.model.EventMember;
 import com.dalhousie.server.persistence.IConnection;
 import com.dalhousie.server.persistence.mapper.EventMemberRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EventMemberRepository implements IEventMemberRepository {

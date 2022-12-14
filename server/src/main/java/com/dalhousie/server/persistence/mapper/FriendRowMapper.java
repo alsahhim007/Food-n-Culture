@@ -1,12 +1,11 @@
 package com.dalhousie.server.persistence.mapper;
 
+import com.dalhousie.server.model.Friends;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.Nullable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.springframework.lang.Nullable;
-import org.springframework.jdbc.core.RowMapper;
-
-import com.dalhousie.server.model.Friends;
 
 public class FriendRowMapper implements RowMapper<Friends> {
     

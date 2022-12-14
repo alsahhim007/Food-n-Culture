@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FeedbackApi implements IFeedbackOperation {
-    private final IRequest request;
+    private final IRequest<Feedback> request;
     private String baseUrl = "/api/feedbacks";
 
     public FeedbackApi(IRequest<Feedback> request) {

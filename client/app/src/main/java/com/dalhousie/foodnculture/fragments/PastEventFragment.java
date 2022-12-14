@@ -14,7 +14,8 @@ import com.dalhousie.foodnculture.R;
 
 public class PastEventFragment extends Fragment {
 
-    public PastEventFragment(){}
+    public PastEventFragment() {
+    }
 
     @Nullable
     @Override
@@ -22,7 +23,7 @@ public class PastEventFragment extends Fragment {
         View v = inflater.inflate(R.layout.past_event_fragment, container, false);
 
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
         return v;
     }
 }

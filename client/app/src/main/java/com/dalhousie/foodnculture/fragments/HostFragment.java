@@ -28,7 +28,8 @@ public class HostFragment extends Fragment {
     EditText capacity;
     EditText description;
 
-    public HostFragment(){}
+    public HostFragment() {
+    }
 
     @Nullable
     @Override
@@ -36,7 +37,7 @@ public class HostFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_hostevent, container, false);
 
         ImageButton back_button = v.findViewById(R.id.btnArrowleft);
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
 
         Button createEventButton = v.findViewById(R.id.btnCreateEvent);
         createEventButton.setOnClickListener(view -> {
@@ -49,13 +50,12 @@ public class HostFragment extends Fragment {
             description = v.findViewById(R.id.editDescription);
 
 
-            if (validateField(title) || validateField(startDate) || validateField(venue) || validateField(endDate) || validateField(capacity) || validateField(description)){
+            if (validateField(title) || validateField(startDate) || validateField(venue) || validateField(endDate) || validateField(capacity) || validateField(description)) {
                 Snackbar.make(view, "All the fields are required!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-            else {
+            } else {
                 try {
-                    if (saveEvent() == 1){
+                    if (saveEvent() == 1) {
                         clearFields();
                         Toast.makeText(getContext(), "Event has been created successfully", Toast.LENGTH_SHORT).show();
                     } else {
@@ -90,7 +90,7 @@ public class HostFragment extends Fragment {
         return ApiFacade.getInstance().getEventApi().save(event);
     }
 
-    private void clearFields(){
+    private void clearFields() {
         title.getText().clear();
         startDate.getText().clear();
         venue.getText().clear();

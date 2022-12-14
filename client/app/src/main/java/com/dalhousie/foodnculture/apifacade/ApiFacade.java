@@ -1,7 +1,29 @@
 package com.dalhousie.foodnculture.apifacade;
 
-import com.dalhousie.foodnculture.apifacade.api.*;
-import com.dalhousie.foodnculture.apifacade.contract.*;
+import com.dalhousie.foodnculture.apifacade.api.AmenitiesApi;
+import com.dalhousie.foodnculture.apifacade.api.AuthenticationApi;
+import com.dalhousie.foodnculture.apifacade.api.CommunityApi;
+import com.dalhousie.foodnculture.apifacade.api.DonationApi;
+import com.dalhousie.foodnculture.apifacade.api.EventApi;
+import com.dalhousie.foodnculture.apifacade.api.EventMemberApi;
+import com.dalhousie.foodnculture.apifacade.api.FeedbackApi;
+import com.dalhousie.foodnculture.apifacade.api.FriendsApi;
+import com.dalhousie.foodnculture.apifacade.api.HTTPRequest;
+import com.dalhousie.foodnculture.apifacade.api.MessageApi;
+import com.dalhousie.foodnculture.apifacade.api.UsersApi;
+import com.dalhousie.foodnculture.apifacade.api.VenuesApi;
+import com.dalhousie.foodnculture.apifacade.contract.IAmenityOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IAuthenticationOperation;
+import com.dalhousie.foodnculture.apifacade.contract.ICommunityOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IDonationOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IEventMemberOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IEventOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IFeedbackOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IFriendOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IMessagesOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IRequest;
+import com.dalhousie.foodnculture.apifacade.contract.IUserOperation;
+import com.dalhousie.foodnculture.apifacade.contract.IVenueOperation;
 
 public class ApiFacade {
 

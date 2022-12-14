@@ -1,16 +1,16 @@
 package com.dalhousie.server.utilities;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 public class AESSecurity implements ISecurity {
 
-    private static final String SECRET_KEY = "RHAWKEY"; //TODO? please find me a better place
+    private static final String SECRET_KEY = "RHAWKEY";
     private static final String ALGORITHM = "AES";
     private static byte[] key;
     private static SecretKey secret;

@@ -1,12 +1,11 @@
 package com.dalhousie.server.persistence.mapper;
 
+import com.dalhousie.server.model.Donation;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.Nullable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.springframework.lang.Nullable;
-import org.springframework.jdbc.core.RowMapper;
-
-import com.dalhousie.server.model.Donation;
 
 public class DonationRowMapper implements RowMapper<Donation> {
     

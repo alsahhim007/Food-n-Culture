@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class VenuesApi implements IVenueOperation {
-    private final IRequest request;
+    private final IRequest<Venues> request;
     private String baseUrl = "/api/venues";
 
     public VenuesApi(IRequest<Venues> request) {

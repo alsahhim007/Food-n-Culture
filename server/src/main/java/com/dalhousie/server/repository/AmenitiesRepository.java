@@ -1,15 +1,14 @@
 package com.dalhousie.server.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.dalhousie.server.contract.IAmenitiesRepository;
 import com.dalhousie.server.model.Amenities;
 import com.dalhousie.server.persistence.IConnection;
 import com.dalhousie.server.persistence.mapper.AmenitiesRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AmenitiesRepository implements IAmenitiesRepository {

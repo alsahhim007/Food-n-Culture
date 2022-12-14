@@ -1,5 +1,6 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,13 +20,15 @@ import com.dalhousie.foodnculture.fragments.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Objects;
+
 public class HomePage extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
-    SharedPreferences sp;
+    SharedPreferences sharedPreferences;
     int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sp = getSharedPreferences("login", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
@@ -48,6 +51,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
     UserProfileFragment userProfileFragment = new UserProfileFragment();
     CommunityList communityList = new CommunityList();
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -68,7 +72,7 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
 
     @Override
     public void onBackPressed() {
-        if (sp.getBoolean("logged", false)) {
+        if (sharedPreferences.getBoolean("logged", false)) {
             getSupportFragmentManager().popBackStack();
 
             System.out.println(getClass().getSimpleName());
@@ -78,15 +82,13 @@ public class HomePage extends AppCompatActivity implements NavigationBarView.OnI
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment, "HOME_FRAGMENT").commit();
                 count += 1;
-                Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Press back twice to exit", Toast.LENGTH_SHORT).show();
 
             }
             String current_fragment = String.valueOf(getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT"));
-            if (current_fragment.equals("null")) {
-            } else {
-                if (getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT").getTag() == "HOME_FRAGMENT" && count >= 2) {
+            if (!current_fragment.equals("null")) {
+                if (Objects.equals(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag("HOME_FRAGMENT")).getTag(), "HOME_FRAGMENT") && count >= 2) {
                     finishAffinity();
-                } else {
                 }
             }
         } else {

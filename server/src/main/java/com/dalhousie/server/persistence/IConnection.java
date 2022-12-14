@@ -1,8 +1,8 @@
 package com.dalhousie.server.persistence;
 
-import java.util.List;
-
 import org.springframework.jdbc.core.RowMapper;
+
+import java.util.List;
 
 public interface IConnection {
     public <T> List<T> executeProcedure(String procedure, RowMapper<T> rowMapper);

@@ -30,7 +30,6 @@ import java.util.Optional;
 
 public class FriendsFragment extends Fragment implements CustomAdapter.OnUserListener {
 
-    private RecyclerView recyclerView;
     private ArrayList<Friends> Friends_all;
     private final List<String> friends_name = new ArrayList<>();
     private final List<String> friends_username = new ArrayList<>();
@@ -47,7 +46,7 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
                              Bundle savedInstanceState) {
         View viewFriends = inflater.inflate(R.layout.fragment_friends, container, false);
         ImageButton back_button = viewFriends.findViewById(R.id.btnArrowleft);
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
         return viewFriends;
     }
 
@@ -57,7 +56,7 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
         super.onViewCreated(view, savedInstanceState);
         initialize_data();
 
-        recyclerView = view.findViewById(R.id.recyclerFriends);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerFriends);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         CustomAdapter adapter = new CustomAdapter(getContext(), Friends_all, this);
@@ -75,8 +74,8 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
                 R.drawable.img_4,
                 R.drawable.img_1
         };
-        for (int iter = 0; iter < friends_name.size(); iter++) {
-            Friends friend = new Friends(friends_name.get(iter), friends_username.get(iter), imgResource[iter]);
+        for (int item = 0; item < friends_name.size(); item++) {
+            Friends friend = new Friends(friends_name.get(item), friends_username.get(item), imgResource[item]);
             Friends_all.add(friend);
         }
     }
@@ -85,7 +84,7 @@ public class FriendsFragment extends Fragment implements CustomAdapter.OnUserLis
     public void onUserClick(int position) {
         Intent intent = new Intent(this.getActivity(), ChatActivity.class);
         intent.putExtra("friendId", friends_id.get(position));
-        intent.putExtra("userId", currentUser.get().getId());
+        currentUser.ifPresent(user -> intent.putExtra("userId", user.getId()));
         startActivity(intent);
     }
 

@@ -1,8 +1,8 @@
 package com.dalhousie.server.contract;
 
-import java.util.Optional;
-
 import com.dalhousie.server.model.User;
+
+import java.util.Optional;
 
 public interface IUserRepository extends ICrudRepository <User, Integer> {
     public Optional<User> getByUserName(String name);

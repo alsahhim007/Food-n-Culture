@@ -19,7 +19,7 @@ import java.util.Optional;
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Friends;
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.FriendRepository;
+import com.dalhousie.server.repository.FriendRepository;
 
 @SpringBootTest
 @ActiveProfiles("test")

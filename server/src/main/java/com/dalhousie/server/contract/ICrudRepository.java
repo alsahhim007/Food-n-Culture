@@ -1,4 +1,4 @@
-package com.dalhousie.server.persistence;
+package com.dalhousie.server.contract;
 
 import java.util.List;
 import java.util.Optional;

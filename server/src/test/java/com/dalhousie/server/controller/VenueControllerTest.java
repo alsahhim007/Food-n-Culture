@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Venues;
-import com.dalhousie.server.persistence.VenueRepository;
+import com.dalhousie.server.repository.VenueRepository;
 
 @SpringBootTest
 @ActiveProfiles("test")

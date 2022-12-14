@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Messages;
-import com.dalhousie.server.persistence.MessagesRepository;
+import com.dalhousie.server.repository.MessagesRepository;
 
 @SpringBootTest
 @ActiveProfiles("test")

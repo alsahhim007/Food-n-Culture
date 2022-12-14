@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dalhousie.server.contract.ICommunityRepository;
 import com.dalhousie.server.model.Community;
-import com.dalhousie.server.persistence.ICommunityRepository;
 
 @RestController
 @RequestMapping("/api/community")

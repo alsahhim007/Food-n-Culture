@@ -3,7 +3,7 @@ package com.dalhousie.server.controller;
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.enums.EventType;
 import com.dalhousie.server.model.Event;
-import com.dalhousie.server.persistence.EventRepository;
+import com.dalhousie.server.repository.EventRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearHostevent"
@@ -47,7 +47,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtEvents"
+                    android:id="@+id/txtPlannedEventTitle"
                     style="@style/txtUrbanistromanbold24"
                     android:layout_width="264dp"
                     android:layout_height="wrap_content"
@@ -57,21 +57,9 @@
                     android:singleLine="true"
                     android:text="My Planned Events"
                     tools:text="My Planned Events" />
-
-                <ImageView
-                    android:id="@+id/imageVector"
-                    android:layout_width="@dimen/_4pxh"
-                    android:layout_height="@dimen/_6pxh"
-                    android:layout_marginStart="@dimen/_8pxh"
-                    android:layout_marginTop="@dimen/_6pxv"
-                    android:layout_marginBottom="@dimen/_13pxv"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_vector"
-                    tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_vector" />
             </LinearLayout>
             <LinearLayout android:gravity="start"
-                android:id="@+id/linearReminder1"
+                android:id="@+id/linearlayout1"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_20pxh"
                 android:layout_marginStart="@dimen/_20pxh"
@@ -86,7 +74,7 @@
                     android:layout_marginTop="@dimen/_9pxv"
                     android:layout_weight="0.01" android:layout_width="0dp"/>
                 <TextView android:ellipsize="end"
-                    android:id="@+id/txt18thOct"
+                    android:id="@+id/txtDate"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20pxv"
                     android:layout_marginStart="@dimen/_7pxh"
@@ -96,7 +84,44 @@
                     android:text="@string/lbl_18th_oct"
                     style="@style/txtLeagueSpartansemibold16" tools:text="@string/lbl_18th_oct"/>
                 <TextView android:ellipsize="end"
-                    android:id="@+id/txtEatwithSam"
+                    android:id="@+id/txtEvent1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_18pxv"
+                    android:layout_marginEnd="@dimen/_105pxh"
+                    android:layout_marginStart="@dimen/_31pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.64" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_eat_with_sam"
+                    style="@style/txtUrbanistromanmedium18" tools:text="@string/lbl_eat_with_sam"/>
+            </LinearLayout>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearlayout2"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20pxh"
+                android:layout_marginStart="@dimen/_20pxh"
+                android:layout_marginTop="@dimen/_15pxv"
+                android:layout_width="match_parent"
+                android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
+                <View android:background="@color/teal_500"
+                    android:id="@+id/lineLineFour1"
+                    android:layout_height="@dimen/_35pxv"
+                    android:layout_marginBottom="@dimen/_9pxv"
+                    android:layout_marginStart="@dimen/_18pxh"
+                    android:layout_marginTop="@dimen/_9pxv"
+                    android:layout_weight="0.01" android:layout_width="0dp"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtDate2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20pxv"
+                    android:layout_marginStart="@dimen/_7pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.35" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_18th_oct"
+                    style="@style/txtLeagueSpartansemibold16" tools:text="@string/lbl_18th_oct"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtEvent2"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_18pxv"
                     android:layout_marginEnd="@dimen/_105pxh"
@@ -112,41 +137,93 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_22pxh"
                 android:layout_marginStart="@dimen/_22pxh"
-                android:layout_marginTop="@dimen/_45pxv"
+                android:layout_marginTop="@dimen/_35pxv"
                 android:layout_width="wrap_content" android:orientation="horizontal">
                 <TextView android:ellipsize="end"
-                    android:id="@+id/txtEventsOne"
+                    android:id="@+id/txtPastEventTitle"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.96" android:layout_width="0dp"
                     android:lineSpacingExtra="@dimen/_1pxh"
                     android:singleLine="true"
-                    android:text="Upcoming Events"
-                    style="@style/txtUrbanistromanbold24" tools:text="Upcoming Events"/>
-                <ImageView android:id="@+id/imageVectorOne"
-                    android:layout_height="@dimen/_6pxh"
-                    android:layout_marginBottom="@dimen/_7pxv"
-                    android:layout_marginStart="@dimen/_9pxh"
-                    android:layout_marginTop="@dimen/_10pxv"
-                    android:layout_width="@dimen/_4pxh"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_vector"
-                    tools:ignore="ContentDescription" tools:src="@drawable/img_vector"/>
+                    android:text="@string/lbl_my_past_events"
+                    style="@style/txtUrbanistromanbold24"
+                    tools:text="@string/lbl_my_past_events"/>
+            </LinearLayout>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearlayout3"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20pxh"
+                android:layout_marginStart="@dimen/_20pxh"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_width="match_parent"
+                android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
+                <View android:background="@color/teal_500"
+                    android:id="@+id/lineLineFour3"
+                    android:layout_height="@dimen/_35pxv"
+                    android:layout_marginBottom="@dimen/_9pxv"
+                    android:layout_marginStart="@dimen/_18pxh"
+                    android:layout_marginTop="@dimen/_9pxv"
+                    android:layout_weight="0.01" android:layout_width="0dp"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtDate3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20pxv"
+                    android:layout_marginStart="@dimen/_7pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.35" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_18th_oct"
+                    style="@style/txtLeagueSpartansemibold16" tools:text="@string/lbl_18th_oct"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtEvent3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_18pxv"
+                    android:layout_marginEnd="@dimen/_105pxh"
+                    android:layout_marginStart="@dimen/_31pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.64" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_eat_with_sam"
+                    style="@style/txtUrbanistromanmedium18" tools:text="@string/lbl_eat_with_sam"/>
+            </LinearLayout>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearlayout4"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20pxh"
+                android:layout_marginStart="@dimen/_20pxh"
+                android:layout_marginTop="@dimen/_15pxv"
+                android:layout_width="match_parent"
+                android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
+                <View android:background="@color/teal_500"
+                    android:id="@+id/lineLineFour4"
+                    android:layout_height="@dimen/_35pxv"
+                    android:layout_marginBottom="@dimen/_9pxv"
+                    android:layout_marginStart="@dimen/_18pxh"
+                    android:layout_marginTop="@dimen/_9pxv"
+                    android:layout_weight="0.01" android:layout_width="0dp"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtDate4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20pxv"
+                    android:layout_marginStart="@dimen/_7pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.35" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_18th_oct"
+                    style="@style/txtLeagueSpartansemibold16" tools:text="@string/lbl_18th_oct"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtEvent4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_18pxv"
+                    android:layout_marginEnd="@dimen/_105pxh"
+                    android:layout_marginStart="@dimen/_31pxh"
+                    android:layout_marginTop="@dimen/_17pxv"
+                    android:layout_weight="0.64" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/lbl_eat_with_sam"
+                    style="@style/txtUrbanistromanmedium18" tools:text="@string/lbl_eat_with_sam"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerEventPast"
-                itemSpace="@{@dimen/_10pxh}"
-                android:layout_width="376dp"
-                android:layout_height="254dp"
-                android:layout_marginStart="@dimen/_20pxh"
-                android:layout_marginTop="@dimen/_33pxv"
-                android:layout_marginEnd="@dimen/_20pxh"
-                android:layout_marginBottom="@dimen/_354pxv"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="3"
-                tools:listitem="@layout/row_event_upcoming" />
         </LinearLayout>
 
     </LinearLayout>

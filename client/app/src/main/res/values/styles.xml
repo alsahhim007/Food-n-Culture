@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
 
     <style name="txtUrbanistromanbold24">
@@ -148,6 +148,12 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
     </style>
+    <style name="txtPoppinssemibold12">
+        <item name="android:textSize">@dimen/_12pxh</item>
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+    </style>
     <style name="txtUrbanistromanregular16">
         <item name="android:textSize">@dimen/_16pxh</item>
         <item name="android:textColor">@color/bluegray_900</item>
@@ -206,6 +212,20 @@
     <style name="txtUrbanistromanbold25">
         <item name="android:textSize">@dimen/_25pxh</item>
         <item name="android:textColor">@color/gray_500</item>
+        <item name="android:fontFamily">@font/urbanist</item>
+        <item name="android:textFontWeight" tools:targetApi="p">700</item>
+    </style>
+
+    <style name="txtUrbanistromanbold12">
+        <item name="android:textSize">@dimen/_13pxh</item>
+        <item name="android:textColor">@color/black_900</item>
+        <item name="android:fontFamily">@font/urbanist</item>
+        <item name="android:textFontWeight" tools:targetApi="p">700</item>
+    </style>
+
+    <style name="txtUrbanistromanbold15">
+        <item name="android:textSize">@dimen/_17pxh</item>
+        <item name="android:textColor">@color/black_900</item>
         <item name="android:fontFamily">@font/urbanist</item>
         <item name="android:textFontWeight" tools:targetApi="p">700</item>
     </style>

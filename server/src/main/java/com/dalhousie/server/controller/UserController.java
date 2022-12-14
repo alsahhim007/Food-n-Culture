@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,17 +16,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.UserRepository;
+import com.dalhousie.server.persistence.IUserRepository;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     
     @PostMapping("/")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createUser(@RequestBody User user) {
         if (userRepository.save(user) > 0) {
             return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
@@ -68,8 +66,11 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        userRepository.deleteById(id);
-        return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+        if(userRepository.deleteById(id) > 0){
+            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/username/{username}")

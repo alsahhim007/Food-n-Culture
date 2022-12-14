@@ -4,6 +4,7 @@ public class Friends {
     
     private int id;
     private int userId;
+    private int targetUserId;
     private String updatedAt;
     private String createdAt;
 
@@ -21,6 +22,14 @@ public class Friends {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getTargetUserId() {
+        return targetUserId;
+    }
+
+    public void setTargetUserId(int targetUserId) {
+        this.targetUserId = targetUserId;
     }
 
     public String getUpdatedAt() {

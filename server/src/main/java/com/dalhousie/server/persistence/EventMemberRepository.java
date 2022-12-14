@@ -65,4 +65,9 @@ public class EventMemberRepository implements IEventMemberRepository {
         }
     }
 
+    @Override
+    public List<EventMember> getMembersByUserId(Integer userId) {
+        return jdbcTemplate.query("CALL getAllMembersByuserId(?)", BeanPropertyRowMapper.newInstance(EventMember.class), userId);
+    }
+
 }

@@ -32,14 +32,53 @@
             android:singleLine="true"
             android:text="@string/msg_personal_detail"
             style="@style/txtUrbanistromanbold24"/>
+
         <LinearLayout android:id="@+id/linearName"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30pxv"
             android:layout_width="match_parent"
+            android:elevation="2dp"
+            android:translationZ="0dp"
             android:orientation="horizontal" style="@style/groupStylewhite_A701cornerRadius">
 
             <EditText
-                android:id="@+id/txtName"
+                android:id="@+id/txtProfileName"
+                style="@style/txtUrbanistromanmedium18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_28pxh"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_marginBottom="@dimen/_28pxv"
+                android:layout_weight="0.88"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:text="@string/lbl_edward_ford" />
+            <ImageView android:id="@+id/editNameButton"
+                android:layout_height="@dimen/_23pxh"
+                android:clickable="true"
+                android:layout_marginBottom="@dimen/_27pxv"
+                android:layout_marginEnd="@dimen/_40pxh"
+                android:layout_marginStart="@dimen/_178pxh"
+                android:layout_marginTop="@dimen/_34pxv"
+                android:layout_width="@dimen/_23pxh"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_edit"
+                tools:ignore="ContentDescription" tools:src="@drawable/img_edit"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lastName"
+            style="@style/groupStylewhite_A701cornerRadius"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/_8pxv"
+            android:layout_marginBottom="@dimen/_3pxv"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtProfileLastName"
                 style="@style/txtUrbanistromanmedium18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -51,49 +90,14 @@
                 android:ellipsize="end"
                 android:minHeight="48dp"
                 android:singleLine="true"
-                android:text="@string/lbl_edward_ford" />
-            <ImageView android:id="@+id/imageEdit"
-                android:layout_height="@dimen/_13pxh"
-                android:layout_marginBottom="@dimen/_27pxv"
-                android:layout_marginEnd="@dimen/_40pxh"
-                android:layout_marginStart="@dimen/_178pxh"
-                android:layout_marginTop="@dimen/_34pxv"
-                android:layout_width="@dimen/_13pxh"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_edit"
-                tools:ignore="ContentDescription" tools:src="@drawable/img_edit"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearEmail"
-            style="@style/groupStylewhite_A701cornerRadius"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_marginTop="@dimen/_8pxv"
-            android:layout_marginBottom="@dimen/_463pxv"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/txtEmail"
-                style="@style/txtUrbanistromanregular14"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_26pxh"
-                android:layout_marginTop="@dimen/_30pxv"
-                android:layout_marginBottom="@dimen/_26pxv"
-                android:layout_weight="0.88"
-                android:clickable="true"
-                android:ellipsize="end"
-                android:minHeight="48dp"
-                android:singleLine="true"
-                android:text="@string/msg_edward_gmail_co"
+                android:text="Last Name"
                 tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
-
             <ImageView
-                android:id="@+id/imageEditOne"
-                android:layout_width="@dimen/_12pxh"
-                android:layout_height="@dimen/_13pxh"
+                android:id="@+id/editLastNameButton"
+                android:layout_width="@dimen/_23pxh"
+                android:clickable="true"
+                android:layout_height="@dimen/_23pxh"
                 android:layout_marginStart="@dimen/_117pxh"
                 android:layout_marginTop="@dimen/_31pxv"
                 android:layout_marginEnd="@dimen/_42pxh"
@@ -102,7 +106,48 @@
                 android:src="@drawable/img_edit_13x12"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/img_edit_13x12" />
-
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearEmail"
+            style="@style/groupStylewhite_A701cornerRadius"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/_8pxv"
+            android:layout_marginBottom="@dimen/_2pxv"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtProfileEmail"
+                style="@style/txtUrbanistromanmedium18"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_28pxh"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_marginBottom="@dimen/_28pxv"
+                android:layout_weight="0.88"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:text="@string/msg_edward_gmail_co"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/editEmailButton"
+                android:layout_width="@dimen/_23pxh"
+                android:layout_height="@dimen/_23pxh"
+                android:layout_marginStart="@dimen/_117pxh"
+                android:layout_marginTop="@dimen/_31pxv"
+                android:layout_marginEnd="@dimen/_42pxh"
+                android:layout_marginBottom="@dimen/_30pxv"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_edit_13x12"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/img_edit_13x12" />
+        </LinearLayout>
+
+
     </LinearLayout>
 </layout>

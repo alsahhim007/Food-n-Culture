@@ -24,7 +24,7 @@ public class EventRepository implements IEventRepository {
     @Override
     public int save(Event event) {
         return jdbcTemplate.update("CALL createEvent(?, ?, ?, ?, ?, ?, ?, ?, ?)", event.getId(), event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
-        event.getStartDateTime(), event.getEndDateTime(), event.getVenue(), event.getMaxCapacity());
+        event.getStartDatetime(), event.getEndDatetime(), event.getVenue(), event.getMaxCapacity());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class EventRepository implements IEventRepository {
         return jdbcTemplate.update(
                 "CALL updateEvent(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 event.getTitle(), event.getDescription(), event.getEventType().toString(), event.getStatus(),
-                event.getStartDateTime(), event.getEndDateTime(), event.getVenue(), event.getMaxCapacity(), event.getId());
+                event.getStartDatetime(), event.getEndDatetime(), event.getVenue(), event.getMaxCapacity(), event.getId());
     }
 
     @Override

@@ -24,15 +24,15 @@ public class MessagesRepository implements IMessagesRepository {
     @Override
     public int save(Messages msg) {
         return jdbcTemplate.update(
-                "CALL createMessage(?, ?, ?, ?)",
-                msg.getId(), msg.getUserId(), msg.getContent(), msg.isRead());
+                "CALL createMessage(?, ?, ?, ?, ?)",
+                msg.getId(), msg.getUserId(), msg.getContent(), msg.isRead(), msg.getTargetUserId());
     }
 
     @Override
     public int update(Messages msg) {
         return jdbcTemplate.update(
-                "CALL updateMessage(?, ?, ?, ?)",
-                msg.getId(), msg.getUserId(), msg.getContent(), msg.isRead());
+                "CALL updateMessage(?, ?, ?, ?, ?)",
+                msg.getId(), msg.getUserId(), msg.getContent(), msg.isRead(), msg.getTargetUserId());
     }
 
     @Override
@@ -58,6 +58,11 @@ public class MessagesRepository implements IMessagesRepository {
         }catch(Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public List<Messages> getAllMessagesBetweenUsers(Integer user1, Integer user2) {
+        return jdbcTemplate.query("CALL getAllMessagesBetweenUsers(?, ?)", BeanPropertyRowMapper.newInstance(Messages.class), user1, user2);
     }
     
 }

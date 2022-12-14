@@ -1,6 +1,5 @@
 package com.dalhousie.foodnculture.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
@@ -22,23 +21,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sp;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //set app policy to ensure HTTP requests are not blocked by the main thread
+        // set app policy to ensure HTTP requests are not blocked by the main thread
         StrictMode.ThreadPolicy appPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(appPolicy);
 
-        //initialize application configuration
-        try{
+        // initialize application configuration
+        try {
             new ConfigProvider().loadConfiguration(getAssets().open("application.properties"));
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         sp = getSharedPreferences("login", MODE_PRIVATE);
-        if (sp.getBoolean("logged", false)){
+        if (sp.getBoolean("logged", false)) {
             Intent homeIntent = new Intent(this, HomePage.class);
             startActivity(homeIntent);
         }
@@ -46,17 +44,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup_screen);
 
-        Button signUpButton = (Button) findViewById(R.id.signup_button);
+        Button signUpButton = findViewById(R.id.signup_button);
         signUpButton.setOnClickListener(this);
 
-        Button loginButton = (Button) findViewById(R.id.signin_button);
+        Button loginButton = findViewById(R.id.signin_button);
         loginButton.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.signup_button:
                 Intent signup_i = new Intent(this, RegisterActivity.class);
                 startActivity(signup_i);
@@ -65,6 +63,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent signin_i = new Intent(this, LoginActivity.class);
                 startActivity(signin_i);
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (sp.getBoolean("logged", false)) {
+        } else {
+            super.onBackPressed();
+            finish();
         }
     }
 }

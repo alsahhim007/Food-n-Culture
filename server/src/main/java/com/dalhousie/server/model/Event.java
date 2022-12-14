@@ -9,11 +9,11 @@ public class Event {
     private String description;
     private EventType eventType;
     private String status;
-    private String startDateTime;
-    private String endDateTime;
+    private String startDatetime;
+    private String endDatetime;
     private String venue;
     private int maxCapacity;
-    private String updateAt;
+    private String updatedAt;
     private String createdAt;
 
     public int getId() {
@@ -56,20 +56,20 @@ public class Event {
         this.status = status;
     }
 
-    public String getStartDateTime() {
-        return startDateTime;
+    public String getStartDatetime() {
+        return startDatetime;
     }
 
-    public void setStartDateTime(String startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setStartDatetime(String startDateTime) {
+        this.startDatetime = startDateTime;
     }
 
-    public String getEndDateTime() {
-        return endDateTime;
+    public String getEndDatetime() {
+        return endDatetime;
     }
 
-    public void setEndDateTime(String endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setEndDatetime(String endDateTime) {
+        this.endDatetime = endDateTime;
     }
 
     public String getVenue() {
@@ -89,11 +89,11 @@ public class Event {
     }
 
     public String getUpdatedAt() {
-        return updateAt;
+        return updatedAt;
     }
 
     public void setUpdatedAt(String updateAt) {
-        this.updateAt = updateAt;
+        this.updatedAt = updateAt;
     }
     
     public String getCreatedAt() {
@@ -107,8 +107,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event [id=" + id + ", title=" + title + ", description=" + description + ", eventType=" + eventType
-                + ", status=" + status + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
-                + ", venue=" + venue + ", maxCapacity=" + maxCapacity + ", updateAt=" + updateAt + ", createdAt="
+                + ", status=" + status + ", startDateTime=" + startDatetime + ", endDateTime=" + endDatetime
+                + ", venue=" + venue + ", maxCapacity=" + maxCapacity + ", updatedAt=" + updatedAt + ", createdAt="
                 + createdAt + "]";
     }
 

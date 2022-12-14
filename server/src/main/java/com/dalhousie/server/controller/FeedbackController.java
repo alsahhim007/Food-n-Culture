@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.Feedback;
-import com.dalhousie.server.persistence.FeedbackRepository;
+import com.dalhousie.server.persistence.IFeedbackRepository;
 
 @RestController
 @RequestMapping("/api/feedbacks")
 public class FeedbackController {
     
     @Autowired
-    private FeedbackRepository feedbackRepository;
+    private IFeedbackRepository feedbackRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,8 +70,11 @@ public class FeedbackController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        feedbackRepository.deleteById(id);
-        return new ResponseEntity<>("Feedback deleted successfully", HttpStatus.OK);
+        if(feedbackRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Feedback deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

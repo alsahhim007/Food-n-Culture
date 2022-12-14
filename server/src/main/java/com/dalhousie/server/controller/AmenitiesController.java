@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.Amenities;
-import com.dalhousie.server.persistence.AmenitiesRepository;
+import com.dalhousie.server.persistence.IAmenitiesRepository;
 
 @RestController
 @RequestMapping("/api/amenities")
 public class AmenitiesController {
     
     @Autowired
-    private AmenitiesRepository amenitiesRepository;
+    private IAmenitiesRepository amenitiesRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -69,7 +69,10 @@ public class AmenitiesController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        amenitiesRepository.deleteById(id);
-        return new ResponseEntity<>("Amenities deleted successfully", HttpStatus.OK);
+        if(amenitiesRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Amenities deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

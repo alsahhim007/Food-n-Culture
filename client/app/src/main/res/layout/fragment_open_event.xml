@@ -53,12 +53,12 @@
                         android:ellipsize="end"
                         android:lineSpacingExtra="@dimen/_1pxh"
                         android:singleLine="true"
-                        android:text="@string/lbl_utensils"
-                        tools:text="@string/lbl_utensils" />
+                        android:text="@string/lbl_amenities"
+                        tools:text="@string/lbl_amenities" />
 
                     <TextView
-                        android:id="@+id/txtLanguage"
-                        style="@style/txtUrbanistromanregular12"
+                        android:id="@+id/txtAmenities"
+                        style="@style/txtUrbanistromanbold12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_11pxv"
@@ -69,11 +69,64 @@
                         tools:text="@string/msg_oven_stove_bo" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/linearDonation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginStart="@dimen/_180pxh"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="@dimen/_24pxh"
+                    android:layout_marginBottom="@dimen/_4pxv"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtDonation"
+                        style="@style/txtUrbanistromanregular16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10pxh"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="@dimen/_1pxh"
+                        android:singleLine="true"
+                        android:text="@string/lbl_donations"
+                        tools:text="@string/lbl_donations" />
+
+                    <TextView
+                        android:id="@+id/txtTotalDonation"
+                        style="@style/txtUrbanistromanbold12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_11pxv"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="@dimen/_1pxh"
+                        android:singleLine="true"
+                        android:text="@string/total_donation"
+                        tools:text="@string/total_donation" />
+                </LinearLayout>
+
                 <FrameLayout
                     android:id="@+id/framePagecontent"
                     android:layout_width="match_parent"
                     android:layout_height="458dp"
                     android:layout_gravity="top|center">
+
+                    <TextView
+                        android:id="@+id/btnGuestList"
+                        android:textColor="@color/teal_500"
+                        style="@style/txtUrbanistromanbold15"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="100"
+                        android:ellipsize="end"
+                        android:clickable="true"
+                        android:gravity="end"
+                        android:layout_gravity="center|end"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:singleLine="true"
+                        android:text="Guest List"
+                        android:textAllCaps="false"
+                        tools:text="Guest List" />
 
                     <LinearLayout
                         android:id="@+id/linearContent"
@@ -82,10 +135,13 @@
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="@dimen/_15pxh"
                         android:layout_marginTop="65dp"
+                        android:layout_marginLeft="65dp"
                         android:orientation="vertical">
 
+
+
                         <TextView
-                            android:id="@+id/txtGreenApple"
+                            android:id="@+id/txtEventTitle"
                             style="@style/txtUrbanistromansemibold28"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

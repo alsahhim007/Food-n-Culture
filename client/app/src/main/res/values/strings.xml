@@ -38,7 +38,7 @@
     <string name="msg_something_went">Something went wrong</string>
     <string name="lbl_merry_new_year">Merry New Year</string>
     <string name="lbl_past_events">Past Events</string>
-    <string name="lbl_be_a_guest">Be a Guest</string>
+    <string name="lbl_my_events">My Events</string>
     <string name="lbl_events">Events</string>
     <string name="msg_19_00_forg">19 : 00 | Forg Stadium</string>
     <string name="msg_21_00_besha">21 : 00 | Besharam</string>
@@ -71,7 +71,9 @@
     <string name="lbl_my_past_events">My Past Events</string>
     <string name="lbl_10_12">10/12</string>
     <string name="msg_oven_stove_bo">Oven, Stove, Bowls </string>
-    <string name="lbl_utensils">Utensils</string>
+    <string name="total_donation">$1500</string>
+    <string name="lbl_amenities">Amenities</string>
+    <string name="lbl_donations">Donations</string>
     <string name="lbl_berry_dine">Berry Dine</string>
     <string name="lbl_20">20</string>
     <string name="lbl_pay_with_gpay">Pay with GPay</string>
@@ -126,5 +128,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Friends -->
+    <string name="friend1">Logan Nasser</string>
+    <string name="friend2">Logan Naser</string>
+    <string name="friend3">Log Mas</string>
+    <string name="friend4">Mas Log</string>
+    <string name="friend5">Log Max</string>
+    <string name="friend6">Logon Maxon</string>
+
+    <string name="frienduser1">logan</string>
+    <string name="frienduser2">lou</string>
+    <string name="frienduser3">ani</string>
+    <string name="frienduser4">gramas</string>
+    <string name="frienduser5">maxlog</string>
+    <string name="frienduser6">maxonlog</string>
+
+    <!-- Chat name -->
+    <string name="lbl_richard_alves">Richard Alves</string>
 
 </resources>

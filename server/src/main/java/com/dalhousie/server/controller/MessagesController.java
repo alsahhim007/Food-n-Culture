@@ -17,14 +17,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.dalhousie.server.model.Messages;
-import com.dalhousie.server.persistence.MessagesRepository;
+import com.dalhousie.server.persistence.IMessagesRepository;
 
 @RestController
 @RequestMapping("/api/messages")
 public class MessagesController {
     
     @Autowired
-    private MessagesRepository messagesRepository;
+    private IMessagesRepository messagesRepository;
     
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -54,6 +54,7 @@ public class MessagesController {
         .map(savedMessage -> {
             savedMessage.setId(messages.getId());
             savedMessage.setUserId(messages.getUserId());
+            savedMessage.setTargetUserId(messages.getTargetUserId());
             savedMessage.setContent(messages.getContent());
             savedMessage.setRead(messages.isRead());
 
@@ -65,7 +66,15 @@ public class MessagesController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        messagesRepository.deleteById(id);
-        return new ResponseEntity<>("Message deleted successfully", HttpStatus.OK);
+        if(messagesRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Message deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/chats/{user1}/{user2}")
+    public List<Messages> getAllMessagesBetweenUsers(@PathVariable Integer user1, @PathVariable Integer user2){
+        return messagesRepository.getAllMessagesBetweenUsers(user1, user2);
     }
 }

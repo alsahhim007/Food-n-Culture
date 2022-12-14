@@ -67,4 +67,9 @@ public class DonationRepository implements IDonationRepository {
         return jdbcTemplate.query("CALL getDonationsByEventId(?)", BeanPropertyRowMapper.newInstance(Donation.class), eventId);
     }
 
+    @Override
+    public double getTotalDonationByEventId(Integer eventId) {
+        return jdbcTemplate.queryForObject("CALL getTotalDonationByEventId(?)", Double.class, eventId);
+    }
+
 }

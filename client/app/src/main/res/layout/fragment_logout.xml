@@ -57,7 +57,7 @@
                         android:singleLine="true"
                         android:text="@string/lbl_yes"
                         android:textAllCaps="false"
-                        style="@style/btnSolidRounded" tools:text="@string/lbl_yes"/>
+                        style="@style/btnSolidRounded_2" tools:text="@string/lbl_yes"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:ellipsize="end" android:gravity="center"
                         android:id="@+id/btnNo"

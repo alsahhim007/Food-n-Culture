@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dalhousie.server.model.Event;
-import com.dalhousie.server.persistence.EventRepository;
+import com.dalhousie.server.persistence.IEventRepository;
 
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
     
     @Autowired
-    private EventRepository eventRepository;
+    private IEventRepository eventRepository;
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -55,8 +55,8 @@ public class EventController {
             savedEvent.setDescription(event.getDescription());
             savedEvent.setEventType(event.getEventType());
             savedEvent.setStatus(event.getStatus());
-            savedEvent.setStartDateTime(event.getStartDateTime());
-            savedEvent.setEndDateTime(event.getEndDateTime());
+            savedEvent.setStartDatetime(event.getStartDatetime());
+            savedEvent.setEndDatetime(event.getEndDatetime());
             savedEvent.setVenue(event.getVenue());
             savedEvent.setMaxCapacity(event.getMaxCapacity());
             savedEvent.setUpdatedAt(event.getUpdatedAt());
@@ -70,8 +70,11 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        eventRepository.deleteById(id);
-        return new ResponseEntity<>("Event deleted successfully", HttpStatus.OK);
+        if(eventRepository.deleteById(id) > 0) {
+            return new ResponseEntity<>("Event deleted successfully", HttpStatus.OK);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

@@ -59,7 +59,7 @@ public class OpenEvent extends Fragment {
 
         Button registerButton = openEventView.findViewById(R.id.btnRegister);
         Button donateButton = openEventView.findViewById(R.id.btnDonate);
-        IFormatter formatter = new EventDateAndVenueFormatter();
+        IFormatter<Event> formatter = new EventDateAndVenueFormatter();
         if (isPastEvent()) {
             registerButton.setVisibility(View.INVISIBLE);
             donateButton.setVisibility(View.INVISIBLE);
@@ -122,29 +122,34 @@ public class OpenEvent extends Fragment {
             process_d.setContentView(R.layout.fragment_bottom_processing_sheet);
 
             FrameLayout gPay = bsd.findViewById(R.id.btnPayWithGpay);
-            gPay.setOnClickListener(view1 -> {
+            if (gPay != null) {
+                gPay.setOnClickListener(view1 -> {
 
-                EditText donateField = bsd.findViewById(R.id.txtInputDataOne);
-                int amount = Integer.parseInt(donateField.getText().toString());
-                bsd.dismiss();
-                Toast.makeText(getContext(), "Processing...", Toast.LENGTH_SHORT).show();
-                try {
-                    Thread.sleep(1900);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    if (saveDonation(amount) == 1) {
-                        success_d.show();
-                        totalDonation.setText(getTotalDonation());
-                    } else {
-                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    EditText donateField = bsd.findViewById(R.id.txtInputDataOne);
+                    int amount = 0;
+                    if (donateField != null) {
+                        amount = Integer.parseInt(donateField.getText().toString());
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+                    bsd.dismiss();
+                    Toast.makeText(getContext(), "Processing...", Toast.LENGTH_SHORT).show();
+                    try {
+                        Thread.sleep(1900);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        if (saveDonation(amount) == 1) {
+                            success_d.show();
+                            totalDonation.setText(getTotalDonation());
+                        } else {
+                            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         });
 
         back_button.setOnClickListener(view -> requireActivity().onBackPressed());

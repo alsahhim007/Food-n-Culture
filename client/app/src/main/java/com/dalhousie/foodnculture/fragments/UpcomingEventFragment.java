@@ -131,7 +131,7 @@ public class UpcomingEventFragment extends Fragment {
     List<Event> getUpcomingEvents(List<Event> events) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<Event> pastEvents = new ArrayList<>();
-        ListIterator<Event> listIterator = events.listIterator(events.size());
+        ListIterator<Event> listIterator = events.listIterator();
         while (listIterator.hasNext()) {
             Event pastEvent = listIterator.next();
             LocalDateTime dateTime = LocalDateTime.parse(pastEvent.getStartDatetime(), formatter);

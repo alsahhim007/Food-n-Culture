@@ -1,10 +1,10 @@
 package com.dalhousie.foodnculture.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
 
@@ -20,8 +20,6 @@ public class ErrorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                // Todo
-                // Navigate to Home Screen only
             }
         });
     }

@@ -38,7 +38,7 @@ public class ChatActivity extends AppCompatActivity {
     boolean notify = false;
 
     final Handler readMessageHandler = new Handler();
-    final int delay = 2000; // every 2 seconds
+    final int delay = 2000;
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -60,7 +60,6 @@ public class ChatActivity extends AppCompatActivity {
         Optional<User> user = ApiFacade.getInstance().getUserApi().getById(friendUserId);
         readMessageHandler.postDelayed(runnable, delay);
 
-        // initialise the text views and layouts
         name = findViewById(R.id.txtuserchatname);
         msg = findViewById(R.id.messaget);
         send = findViewById(R.id.sendmsg);
@@ -102,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private void readMessages() {
-        // show message after retrieving data
         chatList = new ArrayList<>();
         chatList = ApiFacade.getInstance().getMessagesApi().getAllMessagesBetweenUsers(userId, friendUserId);
 
@@ -122,7 +120,7 @@ public class ChatActivity extends AppCompatActivity {
 
         try {
             ApiFacade.getInstance().getMessagesApi().save(messages);
-            readMessages(); // refresh messages
+            readMessages();
         } catch (Exception ex) {
             ex.printStackTrace();
             Toast.makeText(ChatActivity.this, "Failed to send the message", Toast.LENGTH_LONG).show();

@@ -71,7 +71,7 @@ build-client-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - currentDir=`pwd`
     - cd client
-    # TODO? git runner java version issue
+    # TODO? git runner java version issue (need 11)
     #- ./gradlew build
     - cd $currentDir
   artifacts:

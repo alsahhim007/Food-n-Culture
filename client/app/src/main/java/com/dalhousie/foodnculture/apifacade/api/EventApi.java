@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class EventApi implements IEventOperation {
-    private final IRequest request;
+    private final IRequest<Event> request;
     private String baseUrl = "/api/events";
 
     public EventApi(IRequest<Event> request) {

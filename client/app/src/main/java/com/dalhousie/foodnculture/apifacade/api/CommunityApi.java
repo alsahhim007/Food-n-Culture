@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CommunityApi implements ICommunityOperation {
-    private final IRequest request;
+    private final IRequest<Community> request;
     private String baseUrl = "/api/community";
 
     public CommunityApi(IRequest<Community> request) {

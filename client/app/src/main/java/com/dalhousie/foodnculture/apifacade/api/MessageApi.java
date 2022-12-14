@@ -2,7 +2,6 @@ package com.dalhousie.foodnculture.apifacade.api;
 
 import com.dalhousie.foodnculture.apifacade.contract.IMessagesOperation;
 import com.dalhousie.foodnculture.apifacade.contract.IRequest;
-import com.dalhousie.foodnculture.models.Community;
 import com.dalhousie.foodnculture.models.Messages;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
 import com.dalhousie.foodnculture.utilities.Mapper;
@@ -12,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class MessageApi implements IMessagesOperation {
-    private final IRequest request;
+    private final IRequest<Messages> request;
     private String baseUrl = "/api/messages";
 
-    public MessageApi(IRequest<Community> request) {
+    public MessageApi(IRequest<Messages> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }

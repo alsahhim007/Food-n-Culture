@@ -5,5 +5,5 @@ import com.dalhousie.foodnculture.models.Amenities;
 import java.util.List;
 
 public interface IAmenityOperation extends ICrudOperation<Amenities, Integer> {
-    public List<Amenities> getAllAmenitiesByVenueId(Integer venueId);
+    List<Amenities> getAllAmenitiesByVenueId(Integer venueId);
 }

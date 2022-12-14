@@ -13,7 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BottomSuccessSheet extends BottomSheetDialogFragment {
 
-    public BottomSuccessSheet(){}
+    public BottomSuccessSheet() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +24,6 @@ public class BottomSuccessSheet extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View bottomDonation = inflater.inflate(R.layout.fragment_bottom_success_sheet, container, false);
-        return bottomDonation;
+        return inflater.inflate(R.layout.fragment_bottom_success_sheet, container, false);
     }
 }

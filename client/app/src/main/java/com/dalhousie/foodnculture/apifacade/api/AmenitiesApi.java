@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class AmenitiesApi implements IAmenityOperation {
 
-    private final IRequest request;
+    private final IRequest<Amenities> request;
     private String baseUrl = "/api/amenities";
 
     public AmenitiesApi(IRequest<Amenities> request) {

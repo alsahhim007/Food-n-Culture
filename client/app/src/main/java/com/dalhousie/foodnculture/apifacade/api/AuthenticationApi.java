@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class AuthenticationApi implements IAuthenticationOperation {
 
-    private final IRequest request;
+    private final IRequest<Authentication> request;
     private String baseUrl = "/api/authentication";
 
     public AuthenticationApi(IRequest<Authentication> request) {

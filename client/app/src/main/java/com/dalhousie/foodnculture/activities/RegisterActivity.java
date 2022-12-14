@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
-import com.dalhousie.foodnculture.exceptions.UserAlreadyExist;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.AESSecurity;
 import com.dalhousie.foodnculture.utilities.ISecurity;
@@ -72,8 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), "There is an error creating user", Toast.LENGTH_SHORT).show();
                     }
-                } catch (UserAlreadyExist e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

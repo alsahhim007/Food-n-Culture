@@ -1,5 +1,6 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,24 +20,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.getSharedPreferences(name, mode);
     }
 
-    SharedPreferences sp;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // set app policy to ensure HTTP requests are not blocked by the main thread
         StrictMode.ThreadPolicy appPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(appPolicy);
 
-        // initialize application configuration
         try {
             new ConfigProvider().loadConfiguration(getAssets().open("application.properties"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        sp = getSharedPreferences("login", MODE_PRIVATE);
-        if (sp.getBoolean("logged", false)) {
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("logged", false)) {
             Intent homeIntent = new Intent(this, HomePage.class);
             startActivity(homeIntent);
         }
@@ -49,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button loginButton = findViewById(R.id.signin_button);
         loginButton.setOnClickListener(this);
-
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -68,8 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (sp.getBoolean("logged", false)) {
-        } else {
+        if (!sharedPreferences.getBoolean("logged", false)) {
             super.onBackPressed();
             finish();
         }

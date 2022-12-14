@@ -40,7 +40,7 @@ public class UpcomingEventFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View upcomingEventsView = inflater.inflate(R.layout.upcoming_event_fragment, container, false);
         ImageButton back_button = upcomingEventsView.findViewById(R.id.btnArrowleft);
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
         LinearLayout event1 = upcomingEventsView.findViewById(R.id.linearlayout1);
         LinearLayout event2 = upcomingEventsView.findViewById(R.id.linearlayout2);
         LinearLayout pastEvent1 = upcomingEventsView.findViewById(R.id.linearlayout3);
@@ -131,9 +131,7 @@ public class UpcomingEventFragment extends Fragment {
     List<Event> getUpcomingEvents(List<Event> events) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<Event> pastEvents = new ArrayList<>();
-        ListIterator<Event> listIterator = events.listIterator();
-        while (listIterator.hasNext()) {
-            Event pastEvent = listIterator.next();
+        for (Event pastEvent : events) {
             LocalDateTime dateTime = LocalDateTime.parse(pastEvent.getStartDatetime(), formatter);
             if (dateTime.isAfter(LocalDateTime.now())) {
                 pastEvents.add(pastEvent);

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class UsersApi implements IUserOperation {
 
-    private final IRequest request;
+    private final IRequest<User> request;
     private String baseUrl = "/api/users";
 
     public UsersApi(IRequest<User> request) {

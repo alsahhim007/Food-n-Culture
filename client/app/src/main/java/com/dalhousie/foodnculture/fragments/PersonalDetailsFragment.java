@@ -4,9 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.apifacade.ApiFacade;
@@ -26,10 +26,11 @@ public class PersonalDetailsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     Optional<User> user;
 
-    public PersonalDetailsFragment() {}
+    public PersonalDetailsFragment() {
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
@@ -49,51 +50,48 @@ public class PersonalDetailsFragment extends Fragment {
         ImageView updateLastNameButton = v.findViewById(R.id.editLastNameButton);
         ImageView updateEmailButton = v.findViewById(R.id.editEmailButton);
 
-        if (user.isPresent()){
+        if (user.isPresent()) {
             EditFirstName.setText(String.format("%s", user.get().getFirstName()));
             EditLastName.setText(String.format("%s", user.get().getLastName()));
             EditEmail.setText(String.format("%s", user.get().getEmail()));
         }
 
         updateFirstNameButton.setOnClickListener(view -> {
-            if (user.isPresent()){
+            if (user.isPresent()) {
                 String updatedName = EditFirstName.getText().toString();
                 user.get().setFirstName(updatedName);
-                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
+                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1) {
                     Toast.makeText(getContext(), "First Name updated", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "Failed to update First Name", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         updateLastNameButton.setOnClickListener(view -> {
-            if (user.isPresent()){
+            if (user.isPresent()) {
                 String updatedName = EditLastName.getText().toString();
                 user.get().setLastName(updatedName);
-                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
+                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1) {
                     Toast.makeText(getContext(), "Last Name updated", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "Failed to update Last Name", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         updateEmailButton.setOnClickListener(view -> {
-            if (user.isPresent()){
+            if (user.isPresent()) {
                 String updatedEmail = EditFirstName.getText().toString();
                 user.get().setEmail(updatedEmail);
-                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1){
+                if (ApiFacade.getInstance().getUserApi().update(user.get()) == 1) {
                     Toast.makeText(getContext(), "Email updated", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "Failed to update Email", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        back_button.setOnClickListener(view -> getActivity().onBackPressed());
+        back_button.setOnClickListener(view -> requireActivity().onBackPressed());
         return v;
     }
 }

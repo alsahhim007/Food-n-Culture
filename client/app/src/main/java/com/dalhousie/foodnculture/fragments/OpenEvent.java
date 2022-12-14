@@ -87,7 +87,9 @@ public class OpenEvent extends Fragment {
             bottomSheetBehavior = BottomSheetBehavior.from((View) view1.getParent());
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             LinearLayout layout = gListD.findViewById(R.id.GuestListLayout);
-            layout.setMinimumHeight(1300);
+            if (layout != null) {
+                layout.setMinimumHeight(1300);
+            }
 
             List<User> friends;
             TextView g1Name = view1.findViewById(R.id.Guest1txtGuestName);
@@ -98,15 +100,14 @@ public class OpenEvent extends Fragment {
             SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login", MODE_PRIVATE);
             String email = sharedPreferences.getString("email", "");
             currentUser = ApiFacade.getInstance().getUserApi().getByEmail(email);
-            friends = ApiFacade.getInstance().getFriendApi().getAllFriendsByUserId(currentUser.get().getId());
-
-            g1Name.setText(String.format("%s %s", friends.get(0).getFirstName(), friends.get(0).getLastName()));
-            g2Name.setText(String.format("%s %s", friends.get(1).getFirstName(), friends.get(1).getLastName()));
-            g3Name.setText(String.format("%s %s", friends.get(2).getFirstName(), friends.get(2).getLastName()));
-            g4Name.setText(String.format("%s %s", friends.get(3).getFirstName(), friends.get(3).getLastName()));
-
-            gListD.show();
-
+            if (currentUser.isPresent()) {
+                friends = ApiFacade.getInstance().getFriendApi().getAllFriendsByUserId(currentUser.get().getId());
+                g1Name.setText(String.format("%s %s", friends.get(0).getFirstName(), friends.get(0).getLastName()));
+                g2Name.setText(String.format("%s %s", friends.get(1).getFirstName(), friends.get(1).getLastName()));
+                g3Name.setText(String.format("%s %s", friends.get(2).getFirstName(), friends.get(2).getLastName()));
+                g4Name.setText(String.format("%s %s", friends.get(3).getFirstName(), friends.get(3).getLastName()));
+                gListD.show();
+            }
         });
 
         donateButton.setOnClickListener(view -> {
@@ -189,9 +190,7 @@ public class OpenEvent extends Fragment {
         try {
             if (email.length() > 0) {
                 Optional<User> user = ApiFacade.getInstance().getUserApi().getByEmail(email);
-                if (user.isPresent()) {
-                    member.setUserId(user.get().getId());
-                }
+                user.ifPresent(value -> member.setUserId(value.getId()));
             }
             if (ApiFacade.getInstance().getEventMemberApi().save(member) == 1) {
                 final BottomSheetDialog bsd = new BottomSheetDialog(requireContext());
@@ -213,10 +212,7 @@ public class OpenEvent extends Fragment {
     boolean isPastEvent() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(event.getEndDatetime(), formatter);
-        if (dateTime.isBefore(LocalDateTime.now())) {
-            return true;
-        }
-        return false;
+        return dateTime.isBefore(LocalDateTime.now());
     }
 
 }

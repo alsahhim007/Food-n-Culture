@@ -13,7 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BottomForgetPassword extends BottomSheetDialogFragment {
 
-    public BottomForgetPassword(){}
+    public BottomForgetPassword() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +23,6 @@ public class BottomForgetPassword extends BottomSheetDialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View bottom_forget_password = inflater.inflate(R.layout.bottomsheet_password, container, false);
-        return bottom_forget_password;
+        return inflater.inflate(R.layout.bottomsheet_password, container, false);
     }
 }

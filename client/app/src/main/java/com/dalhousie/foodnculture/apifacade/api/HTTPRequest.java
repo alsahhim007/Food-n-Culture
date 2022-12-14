@@ -3,9 +3,6 @@ package com.dalhousie.foodnculture.apifacade.api;
 import com.dalhousie.foodnculture.apifacade.contract.IRequest;
 import com.dalhousie.foodnculture.utilities.HTTPHelper;
 
-/*
-    Singleton class to handle all HTTP Request
- */
 public class HTTPRequest<T> implements IRequest<T> {
 
     private static HTTPRequest request;
@@ -14,7 +11,7 @@ public class HTTPRequest<T> implements IRequest<T> {
     }
 
     public static HTTPRequest getInstance() {
-        if(request == null) {
+        if (request == null) {
             request = new HTTPRequest();
         }
         return request;

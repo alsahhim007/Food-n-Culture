@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.dalhousie.server.contract.IUserRepository;
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.IUserRepository;
 
 @RestController
 @RequestMapping("/api/users")

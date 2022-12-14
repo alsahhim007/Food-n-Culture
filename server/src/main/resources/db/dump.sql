@@ -29,7 +29,7 @@ CREATE TABLE `amenities` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `amenities` (
 
 LOCK TABLES `amenities` WRITE;
 /*!40000 ALTER TABLE `amenities` DISABLE KEYS */;
-INSERT INTO `amenities` VALUES (2,'Oven','Utensils','2022-12-12 17:27:51','2022-12-12 17:27:51'),(3,'Stove','Utensils','2022-12-12 17:27:59','2022-12-12 17:27:59'),(4,'Bowls','Utensils','2022-12-12 17:28:06','2022-12-12 17:28:06');
+INSERT INTO `amenities` VALUES (2,'Oven','Utensils','2022-12-12 17:27:51','2022-12-12 17:27:51'),(3,'Stove','Utensils','2022-12-12 17:27:59','2022-12-12 17:27:59'),(4,'Bowls','Utensils','2022-12-12 17:28:06','2022-12-12 17:28:06'),(7,'Refrigerator','Utensils','2022-12-13 20:03:14','2022-12-13 20:03:14');
 /*!40000 ALTER TABLE `amenities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,6 @@ CREATE TABLE `authentication` (
 
 LOCK TABLES `authentication` WRITE;
 /*!40000 ALTER TABLE `authentication` DISABLE KEYS */;
-INSERT INTO `authentication` VALUES (1,1,'1234',0,'2022-11-11 00:00:00'),(2,22,'7654',1,'2022-12-11 02:35:41'),(16,10,'5271',0,'2022-12-11 15:43:37');
 /*!40000 ALTER TABLE `authentication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +116,7 @@ CREATE TABLE `donations` (
   PRIMARY KEY (`id`,`event_id`),
   KEY `fk_Donations_Events_idx` (`event_id`),
   CONSTRAINT `fk_Donations_Events` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +125,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (3,1,'string','50.0','string','string','2022-12-12 14:59:44','2022-12-12 14:59:44'),(4,1,'string','50.0',NULL,'string','2022-12-12 14:59:52','2022-12-12 14:59:52'),(5,1,NULL,'50.0',NULL,'string','2022-12-12 14:59:59','2022-12-12 14:59:59'),(6,1,NULL,'50.0',NULL,NULL,'2022-12-12 15:00:11','2022-12-12 15:00:11'),(8,1,NULL,'0.0',NULL,NULL,'2022-12-12 15:00:28','2022-12-12 15:00:28'),(9,1,NULL,'200.0','','Donation','2022-12-12 15:24:35','2022-12-12 15:24:35'),(10,1,NULL,'100.0','','Donation','2022-12-12 15:25:49','2022-12-12 15:25:49'),(11,1,NULL,'150.0','','Donation','2022-12-12 15:26:19','2022-12-12 15:26:19'),(12,1,NULL,'100.0','','Donation','2022-12-12 15:27:49','2022-12-12 15:27:49'),(13,1,NULL,'11.0','','Donation','2022-12-12 15:29:14','2022-12-12 15:29:14'),(14,1,NULL,'2000.0','','Donation','2022-12-12 15:31:09','2022-12-12 15:31:09'),(15,1,NULL,'1.0','','Donation','2022-12-12 15:32:57','2022-12-12 15:32:57'),(16,1,NULL,'11111.0','','Donation','2022-12-12 15:37:38','2022-12-12 15:37:38'),(17,1,NULL,'17.0','','Donation','2022-12-12 15:38:19','2022-12-12 15:38:19'),(18,1,NULL,'113.0','','Donation','2022-12-12 15:38:55','2022-12-12 15:38:55'),(19,1,NULL,'90.0','','Donation','2022-12-12 15:41:53','2022-12-12 15:41:53'),(20,1,NULL,'16.0','','Donation','2022-12-12 15:51:50','2022-12-12 15:51:50'),(21,1,NULL,'19.0','','Donation','2022-12-12 15:55:50','2022-12-12 15:55:50'),(22,1,NULL,'2.0','','Donation','2022-12-12 15:57:47','2022-12-12 15:57:47'),(23,1,NULL,'18.0','','Donation','2022-12-12 15:58:50','2022-12-12 15:58:50'),(24,1,NULL,'45.0','','Donation','2022-12-12 16:03:07','2022-12-12 16:03:07'),(25,1,NULL,'11.0','','Donation','2022-12-12 16:04:13','2022-12-12 16:04:13'),(26,1,NULL,'45.0','','Donation','2022-12-12 16:04:23','2022-12-12 16:04:23'),(27,1,NULL,'109.0','','Donation','2022-12-12 16:48:32','2022-12-12 16:48:32'),(28,1,NULL,'1666.0','','Donation','2022-12-12 16:49:10','2022-12-12 16:49:10'),(29,7,NULL,'100.0','raj.soni@dal.ca','Donation','2022-12-12 19:57:53','2022-12-12 19:57:53'),(30,7,NULL,'100.0','dixit.g@dal.ca','Donation','2022-12-12 21:52:14','2022-12-12 21:52:14');
+INSERT INTO `donations` VALUES (39,12,'Raj','10.0','raj.soni@dal.ca','Donation','2022-12-13 20:56:13','2022-12-13 20:56:13'),(40,12,'Raj','100.0','dixit.g@dal.ca','Donation','2022-12-13 20:56:56','2022-12-13 20:56:56'),(41,13,'Raj','100.0','dixit.g@dal.ca','Donation','2022-12-13 20:57:03','2022-12-13 20:57:03'),(42,16,'Raj','20.0','dixit.g@dal.ca','Donation','2022-12-13 20:57:20','2022-12-13 20:57:20'),(43,17,'Raj','124.0','dixit.g@dal.ca','Donation','2022-12-13 20:57:30','2022-12-13 20:57:30'),(44,14,'Raj','60.0','dixit.g@dal.ca','Donation','2022-12-13 20:57:50','2022-12-13 20:57:50');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +176,7 @@ CREATE TABLE `events` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +185,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'Test','Test','COMMUNITY','Created','2022-11-11 00:00:00','2022-11-11 00:00:00','Halifax','10','2022-12-07 19:05:57','2022-12-07 19:05:57'),(7,'Ttitle','desc','COMMUNITY',NULL,'2022-12-12 00:00:00','2022-12-14 00:00:00','Halifax','5','2022-12-11 21:39:17','2022-12-11 21:39:17'),(8,'D','Description','COMMUNITY',NULL,'2022-12-14 00:00:00','2022-12-12 00:00:00','D','12','2022-12-11 21:42:38','2022-12-11 21:42:38'),(9,'ASdasd','DWdwdw','COMMUNITY',NULL,'2022-12-12 00:00:00','2022-12-12 00:00:00','ASYdtas','11','2022-12-11 21:44:18','2022-12-11 21:44:18'),(10,'Test1','blah blah blah','COMMUNITY',NULL,'2022-12-11 00:00:00','2022-12-18 00:00:00','Halifax','56','2022-12-12 01:32:50','2022-12-12 01:32:50'),(11,'Test','Testing','COMMUNITY',NULL,'2022-12-11 00:00:00','2022-12-11 00:00:00','Halifax','100','2022-12-12 15:22:29','2022-12-12 15:22:29');
+INSERT INTO `events` VALUES (12,'Christmas Unit','Let’s celebrate the best time of the year, commUNITY style! Great Room before service, then we’ll gather after worship to eat, have games and giveaways, tell stories!','COMMUNITY','Upcoming','2022-12-25 04:00:00','2022-12-30 04:00:00','Pleasant Park','120','2022-12-13 21:11:03','2022-12-13 20:15:20'),(13,'Exam Package','Let break your stress by eating some snacks and talking with friends.','INDIVIDUAL','Created','2022-12-12 12:00:00','2022-12-12 04:00:00','Dalhousie Student Union','20','2022-12-13 20:54:27','2022-12-13 20:17:56'),(14,'Cup of Hot Cocoa','Impress your friends and family this Christmas season by making the coolest cake they have ever seen! This class is suitable for all levels of cake decorating and ideal for beginners. Each participant will decorate their own cake and take it home to enjoy!','INDIVIDUAL','Created','2022-12-18 01:00:00','2022-12-18 03:00:00','St. Andrew\'s Community Centre','20','2022-12-13 20:54:03','2022-12-13 20:20:31'),(15,'Bring Your Own','Bring your own food from your home town and let others eat those with the DELICIOUS smell and swag of the item.','INDIVIDUAL','Created','2022-12-11 01:00:00','2022-12-11 03:00:00','Garrison ground','200','2022-12-13 20:54:54','2022-12-13 20:22:39'),(16,'Halifax Jazz Festival','This year\'s concert series has moved to an exciting new location on the Foundation Wharf, next to the Salt Yard and Halifax Beer Market.','COMMUNITY','Created','2022-12-25 00:00:00','2022-12-25 02:00:00','Halifax','10','2022-12-13 20:53:39','2022-12-13 20:38:02'),(17,'Mobile Food Market','The Mobile Food Market offers a wide selection of fresh, affordable fruits and vegetables, dried goods, and Stone Hearth Bakery bread for customers to browse and purchase.','COMMUNITY','Expired','2022-12-06 00:00:00','2022-12-06 02:00:00','Halifax','100','2022-12-13 20:55:06','2022-12-13 20:39:11');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +234,7 @@ CREATE TABLE `friends` (
   PRIMARY KEY (`id`,`user_id`,`target_user_id`),
   KEY `fk_Friends_User1_idx` (`user_id`),
   CONSTRAINT `fk_Friends_User1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +243,7 @@ CREATE TABLE `friends` (
 
 LOCK TABLES `friends` WRITE;
 /*!40000 ALTER TABLE `friends` DISABLE KEYS */;
-INSERT INTO `friends` VALUES (1,1,10,'2022-10-11 00:00:00','2022-10-11 00:00:00'),(2,1,101,'2022-10-11 00:00:00','2022-10-11 00:00:00'),(3,22,100,'2022-10-11 00:00:00','2022-10-11 00:00:00'),(4,22,101,'2022-10-11 00:00:00','2022-10-11 00:00:00');
+INSERT INTO `friends` VALUES (11,106,104,'2022-12-13 20:34:11','2022-12-13 20:34:11'),(12,106,103,'2022-12-13 20:34:18','2022-12-13 20:34:18'),(13,106,105,'2022-12-13 20:34:24','2022-12-13 20:34:24'),(14,106,107,'2022-12-13 20:35:24','2022-12-13 20:35:24'),(15,106,108,'2022-12-13 20:35:30','2022-12-13 20:35:30'),(16,106,109,'2022-12-13 20:37:25','2022-12-13 20:37:25'),(18,104,103,'2022-12-13 20:38:56','2022-12-13 20:38:56'),(19,104,105,'2022-12-13 20:39:00','2022-12-13 20:39:00'),(20,104,106,'2022-12-13 20:39:04','2022-12-13 20:39:04'),(21,104,107,'2022-12-13 20:39:08','2022-12-13 20:39:08'),(22,104,108,'2022-12-13 20:39:11','2022-12-13 20:39:11');
 /*!40000 ALTER TABLE `friends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +266,7 @@ CREATE TABLE `members` (
   KEY `fk_Guests_User1_idx` (`user_id`),
   CONSTRAINT `fk_Guests_Events1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
   CONSTRAINT `fk_Guests_User1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,7 +275,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,8,10,'Requested','2022-12-12 23:33:45','2022-12-12 23:33:45'),(2,8,10,'Requested','2022-12-12 23:34:15','2022-12-12 23:34:15');
+INSERT INTO `members` VALUES (6,12,104,'Requested','2022-12-13 20:56:44','2022-12-13 20:56:44'),(7,17,106,'Registered','2022-12-13 21:00:25','2022-12-13 21:00:25'),(8,15,106,'Registered','2022-12-13 21:00:37','2022-12-13 21:00:37'),(9,14,106,'Registered','2022-12-13 21:00:45','2022-12-13 21:00:45'),(10,14,104,'Registered','2022-12-13 21:00:56','2022-12-13 21:00:56'),(11,12,106,'Registered','2022-12-13 21:01:43','2022-12-13 21:01:43'),(12,13,104,'Registered','2022-12-13 21:02:35','2022-12-13 21:02:35'),(13,17,104,'Registered','2022-12-13 21:02:43','2022-12-13 21:02:43'),(14,16,104,'Requested','2022-12-13 21:08:05','2022-12-13 21:08:05');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +297,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`,`user_id`),
   KEY `fk_Messages_User1_idx` (`user_id`),
   CONSTRAINT `fk_Messages_User1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +306,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,1,10,'Hello','1','2022-10-11 00:00:00','2022-10-11 00:00:00'),(2,1,10,'How are you?','1','2022-10-11 00:00:00','2022-10-11 00:00:00'),(3,10,1,'Hi','1','2022-10-11 00:00:00','2022-10-11 00:00:00'),(4,10,1,'I am Fine, Thank you','1','2022-10-11 00:00:00','2022-10-11 00:00:00');
+INSERT INTO `messages` VALUES (21,104,106,'Hi','0','2022-12-13 20:46:10','2022-12-13 20:46:10'),(22,106,104,'Hello','0','2022-12-13 20:46:35','2022-12-13 20:46:35'),(23,106,104,'Hi Dixit, I\'m going to event','0','2022-12-13 21:13:04','2022-12-13 21:13:04'),(24,104,106,'Thats cool','0','2022-12-13 21:13:11','2022-12-13 21:13:11');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +331,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`user_name`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +340,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'sumit.kuma','sumi.kumar@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Sumi','Kumar','1','Active','2022-12-07 19:43:14','2022-11-11 00:00:00'),(10,'alsahhim','raj.soni@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Raj','Soni','0','Created',NULL,NULL),(19,'alsahhim2','raj.soni@dal.ca1','PjmQhOFQZpVXFhVEv4xuVg==','raj2','soni1','0','Created','2022-12-10 15:21:39','2022-12-10 15:21:39'),(21,'sumit.kumar','sumit.kumar@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Sumit','Kumar','0','Created','2022-12-10 19:05:08','2022-12-10 19:05:08'),(22,'test','test@test.com','Test@123','test','tesy','1','Created','2022-12-12 22:53:01','2022-12-10 23:54:04'),(24,'0xrutvik','rutvirjo27@gmail.com','dblJ8arvrC+EJk/rLCS3nw==','R','J','0','Created','2022-12-11 15:46:54','2022-12-11 15:46:54'),(100,'ramram','ram@dal.ca','ram@123','string','ram','0','created','2022-12-12 18:00:48','2022-12-12 18:00:48'),(101,'dixit.g','dixit.g@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','First','Last','0','Created','2022-12-12 23:20:17','2022-12-12 21:29:28');
+INSERT INTO `user` VALUES (103,'sumit.kumar','sumit.kumar@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Sumit','Kumar','1','Active','2022-12-13 20:24:51','2022-12-13 20:24:51'),(104,'alsahhim','raj.soni@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Raj','Soni','1','Active','2022-12-13 20:29:18','2022-12-13 20:25:23'),(105,'ritvik.j','rutvik.j@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Rutvik','Joshi','1','Active','2022-12-13 20:26:31','2022-12-13 20:26:31'),(106,'dixit.g','dixit.g@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Dixit','Godhadara','1','Active','2022-12-13 20:30:37','2022-12-13 20:30:37'),(107,'viral','viral.siddhapura@dal.ca','PjmQhOFQZpVXFhVEv4xuVg==','Viral','Siddhapura','1','Active','2022-12-13 20:32:12','2022-12-13 20:32:12'),(108,'jigz','jigar.m@gmail.com','PjmQhOFQZpVXFhVEv4xuVg==','Jigar','Makwana','1','Active','2022-12-13 20:32:57','2022-12-13 20:32:57'),(109,'tejvig','tej.vig@gmail.com','PjmQhOFQZpVXFhVEv4xuVg==','Tejashvi','Vij','1','Active','2022-12-13 20:36:47','2022-12-13 20:36:47'),(111,'dixitbmw','diksbmw@gmail.com','PjmQhOFQZpVXFhVEv4xuVg==','Dixit','Ghodadara','0','Created','2022-12-13 20:42:44','2022-12-13 20:42:44'),(112,'rhawkey','random@gmail.com','dblJ8arvrC+EJk/rLCS3nw==','Rob','H','0','Created','2022-12-13 22:22:35','2022-12-13 22:22:35');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +372,6 @@ CREATE TABLE `venues` (
 
 LOCK TABLES `venues` WRITE;
 /*!40000 ALTER TABLE `venues` DISABLE KEYS */;
-INSERT INTO `venues` VALUES (1,10,'Test','Created',NULL,NULL,'2022-12-12 17:51:28','2022-12-12 17:51:28'),(2,10,'Test',NULL,NULL,NULL,'2022-12-12 17:51:33','2022-12-12 17:51:33');
 /*!40000 ALTER TABLE `venues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +512,7 @@ CREATE DEFINER=`CSCI5308_14_DEVINT_USER`@`%` PROCEDURE `createEvent`(IN id int(1
     IN venue varchar(45),
     IN max_capacity varchar(45))
 BEGIN
-	INSERT INTO events(id, titlle, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, updated_at, created_at) VALUES(id, titlle, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, now(), now());
+	INSERT INTO events(id, title, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, updated_at, created_at) VALUES(id, titlle, description, event_type, status, start_datetime, end_datetime, venue, max_capacity, now(), now());
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1070,6 +1068,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getAllMembersByuserId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`CSCI5308_14_DEVINT_USER`@`%` PROCEDURE `getAllMembersByuserId`(IN userId int(11))
+BEGIN
+	SELECT * FROM members WHERE user_id=userId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getAllMessages` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1101,7 +1118,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`CSCI5308_14_DEVINT_USER`@`%` PROCEDURE `getAllMessagesBetweenUsers`(IN user1 int(11), IN user2 int(11))
 BEGIN
-	select * from messages where user_id=user1 and target_user_id=user2;
+	select * from messages where (user_id=user1 and target_user_id=user2) or (user_id=user2 and target_user_id=user1);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1405,7 +1422,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`CSCI5308_14_DEVINT_USER`@`%` PROCEDURE `getTotalDonationByEventId`(IN eventId int(11))
 BEGIN
-	SELECT SUM(amount) as donation from donations where event_id=eventId;
+	SELECT ifnull(sum(amount), 0) as donation from donations where event_id=eventId;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1612,9 +1629,9 @@ CREATE DEFINER=`CSCI5308_14_DEVINT_USER`@`%` PROCEDURE `updateEvent`(IN titlle v
     IN end_datetime datetime,
     IN venue varchar(45),
     IN max_capacity varchar(45),
-    IN id int(11))
+    IN event_id int(11))
 BEGIN
-	UPDATE events SET titlle=titlle, description=description, event_type=event_type, status=status, start_datetime=start_datetime, end_datetime=end_datetime, venue=venue, max_capacity=max_capacity, updated_at=now() WHERE id=id;
+	UPDATE events SET title=titlle, description=description, event_type=event_type, status=status, start_datetime=start_datetime, end_datetime=end_datetime, venue=venue, max_capacity=max_capacity, updated_at=now() WHERE id=event_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1872,4 +1889,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-13 12:22:03
+-- Dump completed on 2022-12-13 22:24:17

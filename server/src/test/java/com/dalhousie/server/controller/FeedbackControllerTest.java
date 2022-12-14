@@ -2,7 +2,7 @@ package com.dalhousie.server.controller;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Feedback;
-import com.dalhousie.server.persistence.FeedbackRepository;
+import com.dalhousie.server.repository.FeedbackRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,8 +2,7 @@ package com.dalhousie.server.controller;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Authentication;
-import com.dalhousie.server.persistence.AuthenticationRepository;
-
+import com.dalhousie.server.repository.AuthenticationRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,12 @@
 package com.dalhousie.server.controller;
 
+import com.dalhousie.server.contract.IAuthenticationRepository;
 import com.dalhousie.server.email.EmailServiceImplementation;
 import com.dalhousie.server.email.IEmail;
 import com.dalhousie.server.model.Authentication;
 import com.dalhousie.server.model.EmailDetails;
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.IAuthenticationRepository;
-import com.dalhousie.server.persistence.UserRepository;
+import com.dalhousie.server.repository.UserRepository;
 import com.dalhousie.server.utilities.RNG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

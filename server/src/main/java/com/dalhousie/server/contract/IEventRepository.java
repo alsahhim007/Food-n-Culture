@@ -1,4 +1,4 @@
-package com.dalhousie.server.persistence;
+package com.dalhousie.server.contract;
 
 import com.dalhousie.server.model.Event;
 

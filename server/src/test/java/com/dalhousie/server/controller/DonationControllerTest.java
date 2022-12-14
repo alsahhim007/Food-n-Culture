@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Donation;
-import com.dalhousie.server.persistence.DonationRepository;
+import com.dalhousie.server.repository.DonationRepository;
 
 @SpringBootTest
 @ActiveProfiles("test")

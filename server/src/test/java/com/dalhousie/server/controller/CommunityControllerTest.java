@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Community;
-import com.dalhousie.server.persistence.CommunityRepository;
+import com.dalhousie.server.repository.CommunityRepository;
 
 
 @SpringBootTest

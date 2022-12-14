@@ -1,49 +1,49 @@
-package com.dalhousie.server.persistence;
+package com.dalhousie.server.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.dalhousie.server.contract.IAmenitiesRepository;
 import com.dalhousie.server.model.Amenities;
+import com.dalhousie.server.persistence.IConnection;
+import com.dalhousie.server.persistence.mapper.AmenitiesRowMapper;
 
 @Component
 public class AmenitiesRepository implements IAmenitiesRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private IConnection dbConnection;
     
     @Override
     public List<Amenities> findAll() {
-        return jdbcTemplate.query("CALL getAllAmenities()", BeanPropertyRowMapper.newInstance(Amenities.class));
+        return dbConnection.executeProcedure("CALL getAllAmenities()", new AmenitiesRowMapper());
     }
 
     @Override
     public int save(Amenities amenities) {
-        System.out.println(amenities.toString());
-        return jdbcTemplate.update(
+        return dbConnection.executeProcedure(
                 "CALL createAmenities(?, ?, ?)",
                 amenities.getId(), amenities.getName(), amenities.getCategory());
     }
 
     @Override
     public int update(Amenities amenities) {
-        return jdbcTemplate.update(
+        return dbConnection.executeProcedure(
                 "CALL updateAmenities(?, ?, ?)",
                 amenities.getId(), amenities.getName(), amenities.getCategory());
     }
 
     @Override
     public int delete(Amenities amenities) {
-        return jdbcTemplate.update("CALL deleteAmenitiesById(?)", amenities.getId());
+        return dbConnection.executeProcedure("CALL deleteAmenitiesById(?)", amenities.getId());
     }
 
     @Override
     public int deleteById(Integer id) {
-        return jdbcTemplate.update("CALL deleteAmenitiesById(?)", id);
+        return dbConnection.executeProcedure("CALL deleteAmenitiesById(?)", id);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AmenitiesRepository implements IAmenitiesRepository {
     @Override
     public Optional<Amenities> getById(Integer id) {
         try {
-            Amenities amenities = jdbcTemplate.queryForObject("CALL getAmenitiesById(?)", BeanPropertyRowMapper.newInstance(Amenities.class), id);
+            Amenities amenities = dbConnection.executeProcedureForObject("CALL getAmenitiesById(?)", new AmenitiesRowMapper(), id);
             return Optional.of(amenities);
         }catch(Exception e) {
             return Optional.empty();
@@ -63,7 +63,7 @@ public class AmenitiesRepository implements IAmenitiesRepository {
 
     @Override
     public List<Amenities> getAllAmenitiesByVenueId(Integer venueId) {
-        return jdbcTemplate.query("CALL getAllAmenitiesByVenueId(?)", BeanPropertyRowMapper.newInstance(Amenities.class), venueId);
+        return dbConnection.executeProcedure("CALL getAllAmenitiesByVenueId(?)", new AmenitiesRowMapper(), venueId);
     }
     
 }

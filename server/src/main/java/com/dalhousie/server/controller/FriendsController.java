@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.dalhousie.server.contract.IFriendRepository;
 import com.dalhousie.server.model.Friends;
 import com.dalhousie.server.model.User;
-import com.dalhousie.server.persistence.IFriendRepository;
 
 @RestController
 @RequestMapping("/api/friends")

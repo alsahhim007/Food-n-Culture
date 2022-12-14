@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.dalhousie.server.contract.IMessagesRepository;
 import com.dalhousie.server.model.Messages;
-import com.dalhousie.server.persistence.IMessagesRepository;
 
 @RestController
 @RequestMapping("/api/messages")

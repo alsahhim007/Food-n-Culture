@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.dalhousie.server.AbstractTest;
 import com.dalhousie.server.model.Amenities;
-import com.dalhousie.server.persistence.AmenitiesRepository;
+import com.dalhousie.server.repository.AmenitiesRepository;
 
 import org.springframework.http.MediaType;
 

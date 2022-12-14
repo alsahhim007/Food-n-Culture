@@ -1,17 +1,16 @@
 package com.dalhousie.server.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.dalhousie.server.contract.IFriendRepository;
 import com.dalhousie.server.model.Friends;
 import com.dalhousie.server.model.User;
 import com.dalhousie.server.persistence.IConnection;
 import com.dalhousie.server.persistence.mapper.FriendRowMapper;
 import com.dalhousie.server.persistence.mapper.UserRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FriendRepository implements IFriendRepository {

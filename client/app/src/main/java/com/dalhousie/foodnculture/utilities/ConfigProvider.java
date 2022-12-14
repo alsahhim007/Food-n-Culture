@@ -10,9 +10,9 @@ public class ConfigProvider {
 
     public void loadConfiguration(InputStream inputStream) throws Exception {
         properties = new Properties();
-        if(inputStream != null){
+        if (inputStream != null) {
             properties.load(inputStream);
-        }else{
+        } else {
             throw new FileNotFoundException("Unable to read property file application.properties");
         }
     }

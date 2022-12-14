@@ -24,17 +24,18 @@ public class CommunityList extends Fragment {
     TextView cDescription2;
     TextView cDescription3;
 
-    public CommunityList() {}
+    public CommunityList() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_community_list, container, false );
+        View v = inflater.inflate(R.layout.fragment_community_list, container, false);
         showCommunity(v);
         return v;
     }
 
-    void showCommunity(View v){
+    void showCommunity(View v) {
         List<Community> community = ApiFacade.getInstance().getCommunityApi().findAll();
         cTitle1 = v.findViewById(R.id.cTitle1);
         cTitle2 = v.findViewById(R.id.cTitle2);

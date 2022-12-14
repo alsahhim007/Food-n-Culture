@@ -1,13 +1,13 @@
 package com.dalhousie.server.model;
 
 public class Authentication {
-    
+
     private int id;
     private int userId;
     private String otp;
     private boolean expired;
     private String createdAt;
-    
+
     public int getId() {
         return id;
     }

@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
             sendOtp.setOnClickListener(view -> {
                 try {
                     Authentication authentication = ApiFacade.getInstance().getAuthenticationApi().getOTPByUserId(user.getId());
-                    if (authentication.getOtp().equals(pinView.getText().toString())) {
+                    if (authentication.getOtp().equals(Objects.requireNonNull(pinView.getText()).toString())) {
                         Intent homeIntent = new Intent(view.getContext(), HomePage.class);
                         startActivity(homeIntent);
                         finish();

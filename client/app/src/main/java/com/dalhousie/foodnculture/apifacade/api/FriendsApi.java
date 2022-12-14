@@ -2,7 +2,6 @@ package com.dalhousie.foodnculture.apifacade.api;
 
 import com.dalhousie.foodnculture.apifacade.contract.IFriendOperation;
 import com.dalhousie.foodnculture.apifacade.contract.IRequest;
-import com.dalhousie.foodnculture.models.Community;
 import com.dalhousie.foodnculture.models.Friends;
 import com.dalhousie.foodnculture.models.User;
 import com.dalhousie.foodnculture.utilities.ConfigProvider;
@@ -13,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class FriendsApi implements IFriendOperation {
-    private final IRequest request;
+    private final IRequest<Friends> request;
     private String baseUrl = "/api/friends";
 
-    public FriendsApi(IRequest<Community> request) {
+    public FriendsApi(IRequest<Friends> request) {
         this.request = request;
         this.baseUrl = ConfigProvider.getApiUrl() + baseUrl;
     }

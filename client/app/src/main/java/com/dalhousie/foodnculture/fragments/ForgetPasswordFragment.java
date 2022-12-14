@@ -32,12 +32,11 @@ public class ForgetPasswordFragment extends Fragment {
             public void onClick(View view) {
                 String forget_text = forgetPassword.getText().toString();
 
-                if (forget_text.matches("")){
+                if (forget_text.matches("")) {
                     forgetPassword.setError("Email required");
                     Snackbar.make(view, "Oops, you forgot to enter email.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                }
-                else {
+                } else {
                     Snackbar.make(view, "Reset link has been sent successfully to registered email.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }

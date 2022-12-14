@@ -2,9 +2,6 @@ package com.dalhousie.server.utilities;
 
 import java.util.Random;
 
-/**
- * This class is responsible for Random number generation
- */
 public class RNG {
 
     public static int getRandomNumber(int length) {

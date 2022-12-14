@@ -1,5 +1,6 @@
 package com.dalhousie.foodnculture.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -63,7 +64,10 @@ public class ChatActivity extends AppCompatActivity {
         name = findViewById(R.id.txtuserchatname);
         msg = findViewById(R.id.messaget);
         send = findViewById(R.id.sendmsg);
-        name.setText(String.format("%s %s", user.get().getFirstName(), user.get().getLastName()));
+        if (user.isPresent()) {
+            String setName = String.format("%s %s", user.get().getFirstName(), user.get().getLastName());
+            name.setText(setName);
+        }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -92,18 +96,16 @@ public class ChatActivity extends AppCompatActivity {
         readMessages();
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
     private void readMessages() {
         chatList = new ArrayList<>();
         chatList = ApiFacade.getInstance().getMessagesApi().getAllMessagesBetweenUsers(userId, friendUserId);
-
 
         chatAdapter = new ChatAdapter(ChatActivity.this, chatList, userId);
         chatAdapter.notifyDataSetChanged();
@@ -117,7 +119,6 @@ public class ChatActivity extends AppCompatActivity {
         messages.setTargetUserId(friendUserId);
         messages.setContent(message);
         messages.setRead(false);
-
         try {
             ApiFacade.getInstance().getMessagesApi().save(messages);
             readMessages();

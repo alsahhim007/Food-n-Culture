@@ -4,7 +4,6 @@ import com.dalhousie.server.contract.IAuthenticationRepository;
 import com.dalhousie.server.model.Authentication;
 import com.dalhousie.server.persistence.IConnection;
 import com.dalhousie.server.persistence.mapper.AuthenticationRowMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

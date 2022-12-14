@@ -1,24 +1,22 @@
 package com.dalhousie.foodnculture.adapters;
 
 import android.content.Context;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dalhousie.foodnculture.R;
 import com.dalhousie.foodnculture.models.Friends;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private static final String TAG = "FriendsRecyclerAdapter";
     Context context;
@@ -36,16 +34,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View friendview = LayoutInflater.from(context).inflate(R.layout.row_friends, parent, false);
-        return new MyViewHolder(friendview, monUserListener);
+        View friendView = LayoutInflater.from(context).inflate(R.layout.row_friends, parent, false);
+        return new MyViewHolder(friendView, monUserListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         Friends friend = Friend_all.get(position);
-
         holder.f_name.setText(friend.FriendName);
         holder.user_name.setText(String.format("@%s", friend.Uname));
         holder.user_image.setImageResource(friend.uimage);
@@ -65,7 +60,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         OnUserListener onUserListener;
 
-
         public MyViewHolder(@NonNull View itemView, OnUserListener onUserListener) {
             super(itemView);
 
@@ -82,9 +76,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             onUserListener.onUserClick(getAdapterPosition());
         }
     }
-    public interface OnUserListener{
 
+    public interface OnUserListener {
         void onUserClick(int position);
-
     }
 }

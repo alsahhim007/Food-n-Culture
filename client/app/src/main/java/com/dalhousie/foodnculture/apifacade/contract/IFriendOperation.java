@@ -6,5 +6,5 @@ import com.dalhousie.foodnculture.models.User;
 import java.util.List;
 
 public interface IFriendOperation extends ICrudOperation<Friends, Integer> {
-    public List<User> getAllFriendsByUserId(Integer userId);
+    List<User> getAllFriendsByUserId(Integer userId);
 }

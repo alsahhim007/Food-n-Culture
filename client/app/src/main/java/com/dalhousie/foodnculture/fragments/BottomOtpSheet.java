@@ -13,7 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BottomOtpSheet extends BottomSheetDialogFragment {
 
-    public BottomOtpSheet(){}
+    public BottomOtpSheet() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +23,6 @@ public class BottomOtpSheet extends BottomSheetDialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View bottom_otp= inflater.inflate(R.layout.bottomsheet_otp_validation, container, false);
-        return bottom_otp;
+        return inflater.inflate(R.layout.bottomsheet_otp_validation, container, false);
     }
 }

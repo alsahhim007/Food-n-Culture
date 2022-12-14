@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DonationApi implements IDonationOperation {
-    private final IRequest request;
+    private final IRequest<Donation> request;
     private String baseUrl = "/api/donations";
 
     public DonationApi(IRequest<Donation> request) {

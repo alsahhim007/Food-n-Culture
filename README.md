@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge)
 ![Build](https://img.shields.io/badge/Build-Passing-green)
 
-# Group 14 - Food n’ Culture
+# **Group 14 - Food n’ Culture**
 
 Home is where the family is, but not everyone is lucky enough to have that bond last long.
 Food and culture are two important aspects that are linked to one’s ideated identity and can
@@ -36,12 +36,14 @@ initiatives. It is important to value the community which supports you and hence
 page is supported to respect the values of inclusion and sustenance for the entire
 community and hosts.
 
-# Feature Update
-- [x] User Module
-- [x] User Dashboard Module
-- [x] Event Module
-- [x] Chat Module
-- [x] Payment Module
+# _**Contributors**_
+
+| Members           | Banner ID 
+| ---------------------- |:---------------------:
+| Dixit Ghodadara   | B00913652
+| Rutvik Joshi       | B00917152      
+| Sumit Kumar      | B00917152 
+| Raj Soni     | B00917152  
 
 # Architecture Diagram
 
@@ -69,7 +71,3 @@ community and hosts.
 ![Chat functionality](https://i.imgur.com/5GNfgzx.png)
 <div align="center"><i>User chats and function<i></div>
 
-# Important Links
-[Swagger URL](http://localhost:8080/swagger-ui.html)
-
-[Test Results](http://localhost:8080/group-14/server/build/reports/tests/test/index.html)
